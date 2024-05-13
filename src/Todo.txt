@@ -1,0 +1,38 @@
+29 04 pour 3 05
+
+-Comprendre l'algo.
+- Pouvoir sampler des points de GMM.
+-Appliquer spectral clustering classique dessus.
+
+Taches finies le 2/05
+
+03 / 05
+
+Eigenboxplots.
+Theoretical GSC understanding
+
+may 06-07:
+
+Better theoretical Lrw understanding. 
+New spectra plots
+
+may 09 :
+Reordering of labels for precision of clustering (still some issues : circular clusters centered on the same point, or symmetrical clusters...)
+Circular gaussians
+
+
+10/05:
+-Vizualize the knn graph on the circular gaussians (done) 
+-Fix the Lrw eigenvalues... (...)
+-Other examples :
+MNIST (done)
+SKLEARN TOY SETS (iris wine breast cancer) (done)
+
+
+13/05:
+- read about GSC and implement it.
+
+RECAP OF WORK :
+Cleanup and comment code 
+write latex about the code and the experiments results
+

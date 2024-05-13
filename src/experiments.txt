@@ -1,0 +1,52 @@
+'''
+
+FOR ANY DATASET, PLOT CLUSTERING :
+labels_spectral=spectral_clustering(data,5,4,'rw','knn','mean',1/2,clusters_fixed=2)
+plot_clustering_vs_gt(data,labels_spectral,labels)
+
+CIRCLES :
+data,labels_spectral,labels=test_spectral_clustering_circles(10,5,'un_norm','f_kernel','mean',1/8)
+plot_clustering_vs_gt(data,labels_spectral,labels)
+
+MOONS :
+data,labels_spectral,labels=test_spectral_clustering_moons(10,5,'un_norm','f_kernel','mean',1/8)
+plot_clustering_vs_gt(data,labels_spectral,labels)
+
+GMM :
+data, labels_spectral, titles=test_spectral_clustering_gmm(10,5,'f_kernel','mean',1/3)
+plot_all_clustering_vs_gt(data,labels_spectral,titles)
+
+EIGENGAPS (GMM):
+values,titles=eigengaps_gmm(10,6,'g_knn','mean',1/3)
+plot_eigenvalues(values,titles)
+
+EIGENBOXPLOTS (GMM):
+settings_title,titles,Y=eigenboxplot_gmm(10,4,'knn','mean',1/2,10)
+multiboxplot(settings_title,Y,titles)
+
+SINGLE SC WITH PRECISION (GMM):
+data, labels_spectral, titles=test_sc_single(10,4,5,"sym",'knn','mean',1/2)
+precision_single_plot(data,labels_spectral,titles)
+
+SPECTRA  : 
+values,title=full_spectra(100,300,10,3,"sym","knn","mean",1/2)
+boxplot(values,title)
+
+CIRCULAR GMM WITH GRAPH:
+
+data,labels=circular_GMM(2,100,1/3,6)
+vals,labels_spectral,matrix=spectral_clustering(data,8,4,'rw','knn','mean',1/3,clusters_fixed=2,return_matrix=True)
+plot_sc_graph(data,labels,labels_spectral,matrix)
+
+-Conclusions of little experiments :
+- for 2 clusters and 200 points , need at least 6nn. 
+
+
+MNIST :
+sc_mnist(100,13,'sym','knn','mean',1/3)
+65.31% acc.
+
+SKLEARN DATASETS :
+    IRIS :      
+    sc_sklearn_datasets('iris',8,5,'rw','knn','mean',1/3) 90%
+'''

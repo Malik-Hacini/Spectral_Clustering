@@ -1,0 +1,3 @@
+
+- Nuance entre la symmétrisation naive et le GSC
+- Comment prédire sans refaire tout le clustering ? avec un nv point.
