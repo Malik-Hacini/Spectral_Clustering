@@ -1,0 +1,258 @@
+%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%% Préambule %%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt]{article}
+\usepackage{etex}
+
+%%%%%Langue%%%%%
+
+%%\usepackage[utf8]{inputenc}
+
+\usepackage[T1]{fontenc}
+\usepackage{babel} 
+%%%%Police%%%%
+
+%% MATHS BELLES : \usepackage{mathpazo}
+%% TIMES NEW ROMAN :
+\usepackage{stmaryrd}
+\usepackage{newtxtext, newtxmath}
+%%%%%Packages%%%%%
+
+\usepackage[dvipsnames]{xcolor}
+
+\usepackage{afterpage,amsfonts,amsmath,amssymb,amsthm,array,cancel,caption,comment,diagbox,dsfont,enumitem,fancybox,fancyhdr,float, framed,graphics,graphicx,hhline,import,latexsym,lscape,mathabx,multicol,multirow,pdfpages, setspace,subcaption,systeme,tikz,url,xcolor,mdframed}
+
+\usepackage[left=2.5cm, right=2.5cm, top=2.5cm, bottom=2.5cm]{geometry}
+\onehalfspacing
+\usepackage[french,boxruled]{algorithm2e}
+\usepackage[colorlinks=true]{hyperref} 
+\usepackage[all]{xy}
+\usepackage{dashundergaps}
+\usepackage{pgfplots}
+\usepackage{pdfpages}
+\pgfplotsset{compat=1.18, width=10cm}
+\dashundergapssetup{gap-extend-minimum=20pt,gap-extend-percent=20, gap-numbers=false,gap-format=dot,gap-widen=true,teacher-gap-format=dot}
+
+\setlength{\columnsep}{0cm}
+
+\usetikzlibrary{shapes.misc}
+\newcommand{\mytimes}{ \tikz[baseline=-.55ex] \node [inner sep=0pt,cross out,draw,line width=1.5pt,minimum size=0.75ex] (a) {};}
+
+\usepackage{tcolorbox}
+\tcbuselibrary{theorems}
+
+%%%%Couleurs%%%%
+
+%Version en ligne
+
+\definecolor{t2_red}{RGB}{210,12,70}
+\definecolor{t2_blue}{RGB}{12,128,210}
+\definecolor{t2_gold}{RGB}{210,180,12}
+\definecolor{wooclap_blue}{RGB}{108,151,243}
+\definecolor{t2}{RGB}{144,93,146}
+
+%Version Imprimable
+
+%\definecolor{t2_red}{RGB}{0,0,0}
+%\definecolor{t2_blue}{RGB}{0,0,0}
+%\definecolor{t2_gold}{RGB}{0,0,0}
+%\definecolor{wooclap_blue}{RGB}{0,0,0}
+%\definecolor{t2}{RGB}{0,0,0}
+
+\hypersetup{urlcolor=t2_red,linkcolor=t2_red,citecolor=t2_red,colorlinks=true}
+
+
+%%%%%Environnements%%%%%
+
+\newtcbtheorem[number within=section]{defi}{Définition\,}{colback=t2_red!0,colframe=t2_blue,fonttitle=\bfseries}{df}
+
+\newtcbtheorem[number within=section]{prop}{Proposition\,}{colback=t2_red!0,colframe=t2_red,fonttitle=\bfseries}{prop}
+
+\newtcbtheorem[number within=section]{cor}{Corollaire\,}{colback=t2_red!0,colframe=t2_red,fonttitle=\bfseries}{cr}
+
+\newtcbtheorem[number within=section]{theo}{Théorème\,}{colback=t2_red!0,colframe=t2_gold,fonttitle=\bfseries}{th}
+
+\theoremstyle{definition}
+%\newtheorem{conv}{Convention}
+\newtheorem*{defin}{Définition}
+\newtheorem*{ex}{Exemple}
+\newtheorem*{exo}{Exercice}
+\newtheorem*{corr}{Correction}
+\newtheorem*{rap}{Rappel}
+\newtheorem*{rem}{Remarque}
+\newtheorem*{que}{Question}
+\newtheorem*{rems}{Remarques}
+\theoremstyle{plain}
+\newtheorem*{conj}{Conjecture}
+\newtheorem*{demo}{Démonstration}
+%\newtheorem{cor}{Corollaire}
+%\newtheorem{princ}{Principe}
+\newtheorem*{lem}{Lemme}
+%\newtheorem{prop}{Proposition}
+%\newtheorem{theo}{Théorème}
+%\newtheorem*{theo_non_numero}{Théorème}
+
+%\declaretheorem[name=Proposition,sibling=prop]{proprep}
+
+%%%%%Macros%%%%%
+
+%%Ensembles%classiques%%
+
+\def\N{\mathbb{N}}%entiers naturels
+\def\Z{\mathbb{Z}}%entiers relatifs
+\def\Q{\mathbb{Q}}%rationnels
+\def\R{\mathbb{R}}%réels
+\def\C{\mathbb{C}}%complexes
+
+%%Algèbre%linéaire%%
+
+\def\codim{\mathrm{codim}}%codimension
+\def\ker{\mathrm{ker}\,}%noyau
+\def\coker{\mathrm{coker}\,}%conoyau
+\def\im{\mathrm{im}\,}%image
+\def\id{\mathrm{id}}%application identité
+\newcommand\scal[2]{\langle #1,#2\rangle}%produit scalaire
+
+%%Géométrie%différentielle%%
+
+\def\grad{\mathrm{grad}}%gradient
+\def\ind{\mathrm{ind}\,}%indice
+\def\modu{\mathcal{M}}%espace de modules
+\def\moduc{\overline{\mathcal{M}}}%espace de modules compactifié
+\def\moducbullet{\overline{\mathcal{M}_\bullet}}%espace de modules avec un point marqué compactifié
+\def\ev{\mathrm{ev}}%applications évaluations dans la base
+\def\Ev{\mathrm{Ev}}%applications évaluations dans l'espace total
+\def\lacet{\ell}%lacet de Morse
+\def\lacets{\mathcal{L}}%lacets de Morse
+\newcommand\ro{roulement}%roulement-crocodile
+\newcommand\Star{{S_\star}}%ensemble du point étoilé et des augmentations
+\newcommand\fibrEv{\underset{\Ev}{\boxtimes}}%produit fibré des évaluations dans l'espace total
+\newcommand\fibrev{\underset{\mathrm{ev}}{\boxtimes}}%produit fibré des évaluations dans la base
+\newcommand\moducmix[1]{\overline{\modu^{#1}}}%espace de modules mixtes
+\newcommand\moducmixbul[1]{\overline{\modu^{#1}_\bullet}}%espace de modules à rebonds
+\newcommand\moducprime{\overline{\mathcal{M}'}}%espace de modules pour un second jeu de données
+\newcommand\rg{\mathfrak{r}}
+\newcommand\qg{\mathfrak{q}}
+\newcommand\Loop{\mathcal{L}}
+\newcommand\push{\Phi}
+\newcommand\drum{drumroll}
+
+%%%%%Commandes%%%%%
+
+\def\;{\,\,;\,\,}%point virgule espacé
+
+\def\tq{\,\,\mathrm{t.q.}\,\,}%tel que
+
+\def\iff{\Longleftrightarrow}%équivaut à, la commande initiale ne marche pas
+
+\def\implies{\Longrightarrow}%implique, la commande initiale ne marche pas
+
+\newcommand\fonction[5]{#1:
+	\begin{array}{ccc}
+		#2&\longrightarrow &#3\\
+		#4&\longmapsto &#5
+\end{array}}%fonction avec ensembles de départ, d'arrivée et transformation
+
+\newcommand\fonctionbira[5]{#1:
+	\begin{array}{ccc}
+		#2&\dashrightarrow &#3\\
+		#4&\longmapsto &#5
+\end{array}}
+
+\newcommand\fonctionnonnommee[4]{\begin{array}{ccc}
+		#1 &\longrightarrow& #2\\
+		#3 &\longmapsto & #4
+\end{array}}%fonction avec ensembles de départ, d'arrivée et transformation, sans nom
+
+
+
+%%%%%Bibliographie%%%%%
+
+\bibliographystyle{alpha-en}
+
+%%%%%Style%%%%%
+
+\pagestyle{empty}
+\pagestyle{fancy}
+
+\setlength{\headheight}{16pt}
+\usepackage{listings}
+
+\definecolor{darkWhite}{rgb}{0.94,0.94,0.94}
+
+\lstset{
+	aboveskip=3mm,
+	belowskip=-2mm,
+	backgroundcolor=\color{darkWhite},
+	basicstyle=\footnotesize,
+	breakatwhitespace=false,
+	breaklines=true,
+	captionpos=b,
+	commentstyle=\color{red},
+	deletekeywords={...},
+	escapeinside={\%*}{*)},
+	extendedchars=true,
+	framexleftmargin=16pt,
+	framextopmargin=3pt,
+	framexbottommargin=6pt,
+	frame=tb,
+	keepspaces=true,
+	keywordstyle=\color{blue},
+	language=C,
+	literate=
+	{²}{{\textsuperscript{2}}}1
+	{⁴}{{\textsuperscript{4}}}1
+	{⁶}{{\textsuperscript{6}}}1
+	{⁸}{{\textsuperscript{8}}}1
+	{€}{{\euro{}}}1
+	{é}{{\'e}}1
+	{è}{{\`{e}}}1
+	{ê}{{\^{e}}}1
+	{ë}{{\¨{e}}}1
+	{É}{{\'{E}}}1
+	{Ê}{{\^{E}}}1
+	{û}{{\^{u}}}1
+	{ù}{{\`{u}}}1
+	{â}{{\^{a}}}1
+	{à}{{\`{a}}}1
+	{á}{{\'{a}}}1
+	{ã}{{\~{a}}}1
+	{Á}{{\'{A}}}1
+	{Â}{{\^{A}}}1
+	{Ã}{{\~{A}}}1
+	{ç}{{\c{c}}}1
+	{Ç}{{\c{C}}}1
+	{õ}{{\~{o}}}1
+	{ó}{{\'{o}}}1
+	{ô}{{\^{o}}}1
+	{Õ}{{\~{O}}}1
+	{Ó}{{\'{O}}}1
+	{Ô}{{\^{O}}}1
+	{î}{{\^{i}}}1
+	{Î}{{\^{I}}}1
+	{í}{{\'{i}}}1
+	{Í}{{\~{Í}}}1,
+	morekeywords={*,...},
+	numbers=left,
+	numbersep=10pt,
+	numberstyle=\tiny\color{black},
+	rulecolor=\color{black},
+	showspaces=false,
+	showstringspaces=false,
+	showtabs=false,
+	stepnumber=1,
+	stringstyle=\color{gray},
+	tabsize=4,
+	title=\lstname,
+}
+
+\title{Evaluation Of Spectral Clustering methods.}
+\author{Malik Hacini}
+\begin{document}
+	\maketitle
+	\tableofcontents
+	
+	\section{Code structure}
+	Blabla
+	
+\end{document}
