@@ -54,16 +54,23 @@ def eigengap(vals):
 def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_method='mean',sigma=None,use_minibatch=False,eigen_only=False,clusters_fixed=False,return_matrix=False,labels_given=np.array([None])):
     """Performs spectral clustering on a dataset of n-dimensional points.
     Inputs :
-        data (ndarray): dataset.
-        k_neighbors (int): Number of neighbors you want to connect for the k-nn graph.
+        data (ndarray): The dataset, a 
+        k_neighbors (int): Number of neighbors you want to connect in the case of a k-nn graph.
         n_eig (int): Number of eigenvectors to calculate. Used to compute the number of clusters
-        laplacian (string) : The laplacian to use between [D - W , I - D^(-1/2)WD^(-1/2) , I - D^(-1)W] 
-        sym_method (string): The method used to symmetrize the graph matrix if knn is used.
-        sigma (float): Standard deviation (only if you use a similarity function with this parameter)
+        laplacian (string) : The laplacian to use between [un_norm , sym , rw] 
+        sym_method (string): The method used to symmetrize the graph matrix in the case of an asymmetric adjacency matrix.
+        sigma (float): Standard deviation for the gaussian kernel.
+        use_minibatch (bool) : Choice of the k-means algorithm. True might lead to better performance on large datasets. Default = False.
+        eigen_only (bool) : If True, the function will only returns the eigenvalues and eigenvectors and not compute the full clustering. Default = False.
+        clusters_fixed (int) : The number of clusters in your data. If unknown, leave by default and the eigengap heuristic will be used. Default = False.
+        return_matrix (bool) : True <=> returns the adjacency matrix alongside the clustering results. Use if you want to visualize the graph. Default = False.
+        labels_given (ndarray) : The correct labels of your data. If given, used to reorder the labels obtained by clustering. Leave empty if unknown. Default = False 
     
     Returns :
-        vals (ndarray): the computed eigenvalues.
-        labels (ndarray) : labels of the points after spectral clustering, ordered in the same way as the dataset."""
+        vals (ndarray): the computed eigenvalues pf the graph laplacian.
+        labels (ndarray) : labels of the points after spectral clustering, ordered in the same way as the dataset.
+        matrix (ndarray) : the adjacency matrix of the graph
+        """
     print("Building dataset graph...")
     graph=Graph(data,k_neighbors,g_method,sym_method,sigma)
     print("Dataset graph built.")

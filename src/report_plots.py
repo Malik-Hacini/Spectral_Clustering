@@ -19,3 +19,19 @@ def test_spectral_clustering_circles(k,n_eig,l,g_method,sym_method,sigma):
     vals,labels_spectral=spectral_clustering(data,k,n_eig,l,g_method,sym_method,sigma,clusters_fixed=2)
     labels_kmeans=kmeans(data,2)
     return data, labels_spectral, labels_kmeans, labels
+
+def test_spectral_clustering_moons(k,n_eig,l,g_method,sym_method,sigma):
+    '''FIG 2 : kmeans vs SC on moons dataset. 
+    Plot :
+    data,labels_spectral,labels_kmeans,labels=test_spectral_clustering_circles(10,5,'sym','knn','mean',1/8)
+    plot_fig1(data,labels_spectral,labels_kmeans)
+    '''
+    noisy_moons = datasets.make_moons(
+    n_samples=500, noise=0.05, random_state=30)
+    data,labels=noisy_moons
+    vals,labels_spectral=spectral_clustering(data,k,n_eig,l,g_method,sym_method,sigma,clusters_fixed=2)
+    labels_kmeans=kmeans(data,2)
+    return data, labels_spectral, labels_kmeans, labels
+
+data,labels_spectral,labels_kmeans,labels=test_spectral_clustering_moons(10,5,'sym','knn','mean',1/8)
+plot_fig1(data,labels_spectral,labels_kmeans)

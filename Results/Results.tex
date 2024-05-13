@@ -251,8 +251,111 @@
 \begin{document}
 	\maketitle
 	\tableofcontents
+	\section{Introduction}
+	This document presents the methods, experiments and results achieved for spectral clustering on synthetic and real world datasets. All of the project was written in Python. You will find the code referenced in this presentation in the "src" folder of the project. For more information on spectral clustering, refer to PH.
+	\section{Code architecture}
+	The code for this project is divided into 2 main Python files :
+	\begin{itemize}
+		\item graphs.py
+		\item spectralclustering.py
+	\end{itemize}
+	The goal of the structure is to be versatile: to perform a new experiment, you do not need to modify the code, as the different parameters give a lot of flexibility.
+	\subsection{graphs.py}
+	This file contains everything needed to the construction of a graph from a dataset. There is a "Graph" Python class meant to create a graph based on a list of data points. 
+	With class attributes and methods, you can then access all of the spectral clustering related objects of the graph : adjacency matrix and laplacians (with all kinds implemented).
 	
-	\section{Code structure}
-	Blabla
+	One key feature of these graphs is the similarity function used. A "Similarity" Python class exists for this purpose. However, in most cases , we use the gaussian kernel similarity function, hence it is the default one in our implementation.
 	
+	Lastly, there is a symmetrizing method parameter. It is the method used for symmetrizing the adjacency matrix in the case of classical spectral clustering. The choices are "mean, or, and". Please refer to the source code for more details.
+	Overall, this file is all you need to construct a graph based on your dataset.
+	\begin{ex}
+		Consider a dataset "data" where we want to build a 10-nn graph G using the gaussian kernel of standard deviation $\frac{1}{2}$ and symmetrizing the adjacency matrix by the 'mean' method, the call would be :
+		\begin{lstlisting}
+			G=Graph(data,10,'knn','mean',1/2)
+		\end{lstlisting}
+		We can then easily access the graph adjacency matrix and laplacians using the Graph class attributes and methods.
+	\end{ex}
+	\subsection{spectralclustering.py}
+	This file contains everything needed to perform spectral clustering on a dataset, it's main function being simply called "spectral clustering".
+	Understanding this functions's parameters is the only real thing you need to conduct experiments using spectral clustering. Here is the docstring associated with it :
+	\begin{lstlisting}
+		def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_method='mean',sigma=None,use_minibatch=False,eigen_only=False,clusters_fixed=False,return_matrix=False,labels_given=np.array([None])):
+		"""Performs spectral clustering on a dataset of n-dimensional points.
+		Inputs :
+		data (ndarray): The dataset, a 
+		k_neighbors (int): Number of neighbors you want to connect in the case of a k-nn graph.
+		n_eig (int): Number of eigenvectors to calculate. Used to compute the number of clusters
+		laplacian (string) : The laplacian to use between [un_norm , sym , rw] 
+		sym_method (string): The method used to symmetrize the graph matrix in the case of an asymmetric adjacency matrix.
+		sigma (float): Standard deviation for the gaussian kernel.
+		use_minibatch (bool) : Choice of the k-means algorithm. True might lead to better performance on large datasets. Default = False.
+		eigen_only (bool) : If True, the function will only returns the eigenvalues and eigenvectors and not compute the full clustering. Default = False.
+		clusters_fixed (int) : The number of clusters in your data. If unknown, leave by default and the eigengap heuristic will be used. Default = False.
+		return_matrix (bool) : True <=> returns the adjacency matrix alongside the clustering results. Use if you want to visualize the graph. Default = False.
+		labels_given (ndarray) : The correct labels of your data. If given, used to reorder the labels obtained by clustering. Leave empty if unknown. Default = False 
+
+		Returns :
+		vals (ndarray): the computed eigenvalues pf the graph laplacian.
+		labels (ndarray) : labels of the points after spectral clustering, ordered in the same way as the dataset.
+		matrix (ndarray) : the adjacency matrix of the graph
+		"""
+	\end{lstlisting}
+
+	
+\section{Experiments}
+This section summarizes the experiments done.
+\subsection{Basic Experiments}
+To assert the good behavior of our algorithms, the first step was to conduct very basic experiments. We are going to use very simple toy datasets and focus on 2 important results : Clustering performance and Eigenvalues of laplacians.
+\subsubsection{Circles and Moons}
+The most basic spectral clustering example are the circles and moons dataset. These datasets fail to be clustered correctly by $k$-means, as the clusters do not lie in disjoint convex sets. However, spectral clustering is powerful enough to correctly cluster these datasets.
+Due to the simplicity of the datasets, practically any choice of settings gives perfect performance.
+\begin{figure}[H]
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Fig1}
+		\caption{Circles}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Fig2}
+		\caption{Moons}
+	\end{subfigure}
+	\caption{Comparison between $k$-means and spectral clustering on toy datasets}
+\end{figure}
+
+While the settings do not affect performance, the spectra can look significantly different depending on the laplacian we use. Here is a comparison on the circles dataset :
+
+TODO  : ALL LAPLACIANS (INCLUDING GSC) EIGENVALUES 0-4
+
+analysis TODO
+
+\subsubsection{Gaussian Mixture Models (GMMs)}
+In the goal of doing qualitative comparison between different methods, using $2$-dimensional gauussian mixture datasets is a good starting point. 
+\paragraph{Multivariate Normal Distribution}
+\subsection{UCI datasets}
+Now that we know our algorithms follow the basic theoretical behaviors we want, we can benchmark them on more interesting datasets.
+We used the same 11 benchmark datasets from the UCI repository \cite{UCI} as (\cite[Jonckheere et.al]{GSC}). These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent metric.
+\subsubsection{Normalized Mutual Information (NMI)}
+The NMI facilitates comparisons between two different ways of partitioning a dataset, yielding a value that ranges from 0 to 1. A higher value indicates a greater degree of similarity between partitions. As an external metric, the NMI necessitates the availability of class labels for computations, implying that the ground truth is required when employing this metric.
+The calculation of the NMI between two partitions A and B is executed according to the following equation :
+$$NMI\left(A,B\right)=\frac{2*I(A,B)}{[H\left(A\right)+H(B)]}$$
+	
+	Where $I(A,B)$ is the mutual information and $H$ the entropy. 
+	In practice, $A$ is the set of predicted labels and $B$ the ground truth labels of the dataset. \\ NMI can fail to correctly assess the performance of the clustering when the number of clusters predicted and the ground truth number of clusters do not match. However, this won't be the case in our experiments, since we will force the clustering to build the right number of clusters.
+	Other evaluation metrics such as the adjusted Rand Index (ARI) exist, but we limited ourselves to NMI for these experiments as it already is very well suited for comparison purposes.
+
+\newpage
+
+\begin{thebibliography}{9}
+	
+	\bibitem{UCI}
+	Dheeru, D. and Karra Taniskidou.UCI repository of machine learning databases \textit{University of California, Irvine, School of
+	Information and Computer Sciences}, 2017.
+	
+	\bibitem{GSC}
+	Harry Sevi, Matthieu Jonckheere, and Argyris Kalogeratos.
+	Generalized spectral clustering for directed and undirected graphs,
+	2022.
+	
+\end{thebibliography}
 \end{document}

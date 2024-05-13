@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  13 MAY 2024 12:07
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  13 MAY 2024 17:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2332,12 +2332,13 @@ language=dflt;-ss05;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;"
 
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 12.0pt on input line 251.
-No file Results.aux.
+(Results.aux)
 \openout1 = `Results.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 251.
 LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line
  251.
+
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
@@ -2435,11 +2436,10 @@ Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 Package hyperref Info: Link coloring ON on input line 251.
+(Results.out) (Results.out)
 \@outlinefile=\write7
 \openout7 = `Results.out'.
 
-
-Package hyperref Warning: Rerun to get /PageLabels entry.
 
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
@@ -2523,13 +2523,57 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 17.28pt on input line 253.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
 (Font)              scaled to size 17.28pt on input line 253.
-No file Results.toc.
+(Results.toc
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 2.
+)
 \tf@toc=\write8
 \openout8 = `Results.toc'.
 
-[1
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 263.
+ [1
 
-] (Results.aux)
+]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 273.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 6.0pt on input line 274.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sl' will be
+(Font)              scaled to size 12.0pt on input line 289.
+ [2]
+Overfull \hbox (2.96794pt too wide) in paragraph at lines 308--309
+\TU/TeXGyreTermesX(0)/m/n/12 To assert the good behavior of our algorithms, the
+ first step was to conduct very basic experiments.
+ []
+
+File: figures/Fig1.png Graphic file (type bmp)
+<figures/Fig1.png>
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 10.95pt on input line 316.
+File: figures/Fig2.png Graphic file (type bmp)
+<figures/Fig2.png>
+
+Overfull \hbox (2.0pt too wide) in paragraph at lines 313--323
+[][] [] 
+ []
+
+[3]
+Overfull \hbox (12.85995pt too wide) in paragraph at lines 336--338
+\TU/TeXGyreTermesX(0)/m/n/12 Now that we know our algorithms follow the basic t
+heoretical behaviors we want, we can benchmark
+ []
+
+
+Overfull \hbox (25.4376pt too wide) in paragraph at lines 339--341
+\TU/TeXGyreTermesX(0)/m/n/12 partitions. As an external metric, the NMI necessi
+tates the availability of class labels for computations,
+ []
+
+[4] [5]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 12.0pt on input line 353.
+ [6] (Results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -2539,22 +2583,16 @@ L3 programming layer <2020/03/25>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.45pt have occurred.
 
-
-Package rerunfilecheck Warning: File `Results.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `Results.out':
-(rerunfilecheck)             Before: <no file>
-(rerunfilecheck)             After:  B47BC6EFE362C05F1BB9E2E56F7DEB18;116.
+Package rerunfilecheck Info: File `Results.out' has not changed.
+(rerunfilecheck)             Checksum: 97A86DEE6699B75F947DB9D293E52CA4;1509.
  ) 
 Here is how much of TeX's memory you used:
- 49985 strings out of 409673
- 1081268 string characters out of 5778967
- 1920630 words of memory out of 5000000
- 71237 multiletter control sequences out of 15000+600000
- 580317 words of font info for 108 fonts, out of 8000000 for 9000
+ 50291 strings out of 409673
+ 1086122 string characters out of 5778967
+ 2133630 words of memory out of 5000000
+ 71516 multiletter control sequences out of 15000+600000
+ 597589 words of font info for 160 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,6n,117p,726b,479s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,11n,117p,726b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Results.pdf (1 page).
+Output written on Results.pdf (6 pages).
