@@ -31,7 +31,7 @@ def knn(k: int, nodes, similarity):
     for i in range(N):
         for j in range(i+1, N):
             distances[i, j] = similarity.gaussian(nodes[i], nodes[j])
-        print(f"Node {i+1}/{N} distances computed. ")
+        #print(f"Node {i+1}/{N} distances computed. ")
     distances=distances+distances.T
 
     print(f"distances computed in {time.time()-start} s. ")
@@ -42,7 +42,7 @@ def knn(k: int, nodes, similarity):
         for j in knn_indices:
             if j != i:
                 matrix[i, j] = 1
-        print(f"Node {i+1}/{N} neighbors computed.")
+        #print(f"Node {i+1}/{N} neighbors computed.")
 
     return matrix
 

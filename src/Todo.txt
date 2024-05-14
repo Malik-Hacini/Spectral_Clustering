@@ -38,4 +38,9 @@ Cleanup and comment code
 Implement NMI and 
 EXPERIMENTS (to report): 
 -The UCI datasets of Matthieu
+(wip)
 
+14/05:
+report GMMs
+fix UCI errors
+report UCI

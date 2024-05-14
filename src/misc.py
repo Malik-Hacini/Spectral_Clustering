@@ -1,6 +1,12 @@
 from sklearn.cluster import KMeans
 import numpy as np
 
+def labels_to_ints(labels):
+    labels_unique=list(set(labels))
+    for i,label in enumerate(labels):
+            labels[i]=labels_unique.index(label)
+    return len(labels_unique),np.array(labels)
+
 def normalize_vec(vector):
     """Normalizes a vector by dividing each term by the norm of the vector
     Inputs :
@@ -43,9 +49,9 @@ def infer_cluster_labels(n_clusters, actual_labels,labels_spectral):
 
         # determine most common label
         if len(labels[0]) == 1:
-            counts = np.bincount(labels[0])
+            counts = np.bincount(np.array(labels[0]).astype(int))
         else:
-            counts = np.bincount(np.squeeze(labels))
+            counts = np.bincount(np.squeeze(np.array(labels).astype(int)))
 
         # assign the cluster to a value in the inferred_labels dictionary
         if np.argmax(counts) in inferred_labels:
@@ -75,4 +81,3 @@ def infer_data_labels(labels_spectral, cluster_labels):
                 predicted_labels[i] = key
                 
     return predicted_labels
-
