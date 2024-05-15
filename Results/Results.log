@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  13 MAY 2024 17:34
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  15 MAY 2024 16:19
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2554,26 +2554,55 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 File: figures/Fig2.png Graphic file (type bmp)
 <figures/Fig2.png>
 
-Overfull \hbox (2.0pt too wide) in paragraph at lines 313--323
+Overfull \hbox (93.05435pt too wide) in paragraph at lines 313--323
 [][] [] 
  []
 
 [3]
-Overfull \hbox (12.85995pt too wide) in paragraph at lines 336--338
+Overfull \hbox (19.61993pt too wide) in paragraph at lines 334--335
+ []\TU/TeXGyreTermesX(0)/b/n/12 Multivariate Normal Distribution[] \TU/TeXGyreT
+ermesX(0)/m/n/12 The multivariate normal distribution, also called ”multivariat
+e
+ []
+
+File: figures/Binorm.png Graphic file (type bmp)
+<figures/Binorm.png>
+[4]
+File: figures/2gm.png Graphic file (type bmp)
+<figures/2gm.png>
+File: figures/fig5_g1.png Graphic file (type bmp)
+<figures/fig5_g1.png>
+File: figures/fig6_g2.png Graphic file (type bmp)
+<figures/fig6_g2.png>
+
+Overfull \hbox (93.05435pt too wide) in paragraph at lines 363--373
+[][] [] 
+ []
+
+[5]
+File: figures/fig7_g3.png Graphic file (type bmp)
+<figures/fig7_g3.png>
+
+Underfull \hbox (badness 10000) in paragraph at lines 375--383
+
+ []
+
+
+Overfull \hbox (12.85995pt too wide) in paragraph at lines 386--388
 \TU/TeXGyreTermesX(0)/m/n/12 Now that we know our algorithms follow the basic t
 heoretical behaviors we want, we can benchmark
  []
 
 
-Overfull \hbox (25.4376pt too wide) in paragraph at lines 339--341
+Overfull \hbox (25.4376pt too wide) in paragraph at lines 389--391
 \TU/TeXGyreTermesX(0)/m/n/12 partitions. As an external metric, the NMI necessi
 tates the availability of class labels for computations,
  []
 
-[4] [5]
+[6] [7]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 353.
- [6] (Results.aux)
+(Font)              scaled to size 12.0pt on input line 403.
+ [8] (Results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -2583,16 +2612,19 @@ L3 programming layer <2020/03/25>
 LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.45pt have occurred.
 
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
 Package rerunfilecheck Info: File `Results.out' has not changed.
 (rerunfilecheck)             Checksum: 97A86DEE6699B75F947DB9D293E52CA4;1509.
  ) 
 Here is how much of TeX's memory you used:
- 50291 strings out of 409673
- 1086122 string characters out of 5778967
+ 50393 strings out of 409673
+ 1088409 string characters out of 5778967
  2133630 words of memory out of 5000000
- 71516 multiletter control sequences out of 15000+600000
+ 71613 multiletter control sequences out of 15000+600000
  597589 words of font info for 160 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,11n,117p,726b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,117p,726b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Results.pdf (6 pages).
+Output written on Results.pdf (8 pages).

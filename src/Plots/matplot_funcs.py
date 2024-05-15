@@ -103,9 +103,9 @@ def precision_single_plot(data,labels_spectral,labels):
 def plot_sc_graph(data,labels,labels_spectral,matrix):
     options = {"with_labels":False,"edgecolors": "tab:gray", "node_size": 50, "width": 0.5,"alpha": 1}
     x,y=data.T
-    precision=round(len([label for i,label in enumerate(labels) if labels_spectral[i]==label])/len(labels),4)
+    #precision=round(len([label for i,label in enumerate(labels) if labels_spectral[i]==label])/len(labels),4)
     fig, (ax1, ax2) = plt.subplots(1, 2)
-    fig.suptitle(f'Clustering performance : {precision*100}%')
+    #fig.suptitle(f'Clustering performance : {precision*100}%')
     ax1.title.set_text('Spectral clustering')
     ax2.title.set_text('Ground Truth')
     ax2.tick_params(left=False, bottom=False, labelleft=False, labelbottom=False)
@@ -140,3 +140,15 @@ def plot_fig1(data,labels_clustering,labels_kmeans):
     ax1.scatter(x,y,c=labels_kmeans)
     plt.show()
 
+def plot_fig3_binorm(data,labels):
+    """Plots the clustering of 2D data based on the given labels.
+    
+    Inputs :
+        data (ndarray): ndarray of the data. Shape : [[x1,y1],[x2,y2]...]
+        labels (ndarray) : ndarray of the labels (integers). Shape : [0,1,2...]"""
+    x,y=data.T
+    labels=np.array([i+1 for i in labels])
+    scatter=plt.scatter(x,y,c=labels)
+    legend1 = plt.legend(*scatter.legend_elements(),
+                    loc="upper left", title="Gaussians")
+    plt.show()

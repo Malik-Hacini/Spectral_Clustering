@@ -9,6 +9,7 @@ TODO : weird convergence errors for (wine,all), (wbdc,all),(parkinson,all)
 
 from spectral_clustering import*
 from sklearn import metrics
+from sklearn import datasets
 import ucimlrepo as uci
 import pandas
 
@@ -18,7 +19,7 @@ def import_dataset(c:str):
         IRIS, GLASS, WINE, WBDC, CONTROL CHART; PARKINSON, VERTEBRAL,
         BREAST TISSUE, SEEDS, IMAGE SEG., YEAST"""
     
-    set_table={'iris': 53, 'glass':42,'wine':109,'wbdc':17,'parkinson':174,'vertebral': 212,'image seg':50,'yeast':110}
+    set_table={'iris': 53, 'glass':42,'wine':109,'parkinson':174,'vertebral': 212,'image seg':50,'yeast':110}
     
     
     if set_table.get(c)!=None:
@@ -30,12 +31,17 @@ def import_dataset(c:str):
         labels=labels.flatten()
         n_clusters,labels=labels_to_ints(labels)
     else:
-        if c=='breast tissue':
-            c='breast_tissue'
-        if c=='control chart':
-            c='control_chart'
-        data=np.loadtxt(f'src/Datasets/{c}_dataset.txt')
-        labels=np.loadtxt(f'src/Datasets/{c}_labels.txt')
+        if c=='wbdc':
+            data,labels=datasets.load_breast_cancer(return_X_y=True)
+        else:
+            if c=='breast tissue':
+                c='breast_tissue'
+            if c=='control chart':
+                c='control_chart'
+            
+            data=np.loadtxt(f'src/Datasets/{c}_dataset.txt')
+            labels=np.loadtxt(f'src/Datasets/{c}_labels.txt')
+
         n_clusters=len(set(labels))
     return n_clusters,data, labels
 
@@ -73,6 +79,7 @@ sym_method='mean'
 sigma=1/2
 avg=1
 
+"""FULL BENCHMARK :
 options_dict={'iris':{'k': 4, 'n_eig': 7, 'graph': g_method, 'sym_method':sym_method,'sigma':sigma},
 
 
@@ -88,11 +95,13 @@ options_dict={'iris':{'k': 4, 'n_eig': 7, 'graph': g_method, 'sym_method':sym_me
                'yeast':{'k': 10, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma}}
 laplacians=['un_norm','sym','rw']
 with open('uci_results.txt','w') as f:
-    f.write(str(full_benchmark(avg,options_dict,laplacians)))
-"""options={'k': 2, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma, 'laplacian':'sym'}
+    f.write(str(full_benchmark(avg,options_dict,laplacians)))"""
+
+
+"""WBCDoptions={'k': 2, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma, 'laplacian':'sym'}
 n_clusters,data,labels=import_dataset('wbdc')
 print(labels)
 print(n_clusters)
-vals,labels_spectral=spectral_clustering(data,options['k'],options['n_eig'],options['laplacian'],options['graph'],options['sym_method'],options['sigma'],labels_given=labels,use_minibatch=True)
+vals,labels_spectral=spectral_clustering(data,options['k'],options['n_eig'],options['laplacian'],options['graph'],options['sym_method'],options['sigma'],labels_given=labels,use_minibatch=True,clusters_fixed=n_clusters)
 print(labels_spectral)
 print(metrics.normalized_mutual_info_score(labels,labels_spectral))"""

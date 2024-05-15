@@ -41,6 +41,10 @@ EXPERIMENTS (to report):
 (wip)
 
 14/05:
-report GMMs
-fix UCI errors
+report GMMs (wip)
+fix UCI errors (wip)
 report UCI
+
+15/05
+report spectra experiments (Basic and GMM)
+

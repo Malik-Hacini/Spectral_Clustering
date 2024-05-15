@@ -79,7 +79,7 @@
 \newtheorem*{exo}{Exercice}
 \newtheorem*{corr}{Correction}
 \newtheorem*{rap}{Rappel}
-\newtheorem*{rem}{Remarque}
+\newtheorem*{rem}{Remark}
 \newtheorem*{que}{Question}
 \newtheorem*{rems}{Remarques}
 \theoremstyle{plain}
@@ -310,12 +310,12 @@ To assert the good behavior of our algorithms, the first step was to conduct ver
 The most basic spectral clustering example are the circles and moons dataset. These datasets fail to be clustered correctly by $k$-means, as the clusters do not lie in disjoint convex sets. However, spectral clustering is powerful enough to correctly cluster these datasets.
 Due to the simplicity of the datasets, practically any choice of settings gives perfect performance.
 \begin{figure}[H]
-	\begin{subfigure}{.5\textwidth}
+	\begin{subfigure}{.6\textwidth}
 		\centering
 		\includegraphics[width=0.9\linewidth]{figures/Fig1}
 		\caption{Circles}
 	\end{subfigure}
-	\begin{subfigure}{.5\textwidth}
+	\begin{subfigure}{.6\textwidth}
 		\centering
 		\includegraphics[width=0.9\linewidth]{figures/Fig2}
 		\caption{Moons}
@@ -331,10 +331,60 @@ analysis TODO
 
 \subsubsection{Gaussian Mixture Models (GMMs)}
 In the goal of doing qualitative comparison between different methods, using $2$-dimensional gauussian mixture datasets is a good starting point. 
-\paragraph{Multivariate Normal Distribution}
+\paragraph{Multivariate Normal Distribution} The multivariate normal distribution, also called "multivariate gaussian" is a generalization of the one-dimensional (univariate) normal distribution to higher dimensions. For any dimension $d$, it can be defined by it's PDF :
+$$\fonctionnonnommee{\R^{d}}{\R_{>0}}{x}{\frac{1}{\sqrt{(2\pi)^2 \lvert \Sigma \rvert}} e^{-\frac{1}{2}(x-\mu) \Sigma^{-1} (x-\mu)^{t}}}$$
+Where:
+\begin{itemize}
+	\item $\mu \in{R^d}$ is the mean of the distribution.
+	\item $\Sigma$ is a $d$ by $d$ square symmetric positive semi-definite matrix called the covariance matrix, because when $x$ is treated as a random vector with each of it's coordinates $x_i$ being a random variable, $\sigma_{i,j}= Cov(x_{i},x_{j})$.
+\end{itemize}
+The multivariate gaussian distribution is centered at $\mu$ and has an ellipsoidal shape defined by $\Sigma$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{figures/Binorm}
+	\caption{Level sets of a bivariate normal distribution centered at the origin. The probability of a sample landing in the blue ellipse is $0.66$.}
+	\label{fig:binorm}
+\end{figure}
+
+A linear combination of $d$-dimensional gaussians is called a gaussian mixture.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/2gm}
+	\caption{$200$ samples from a mixture of two 2-dimensional gaussians.}
+	\label{fig:2gm}
+\end{figure}
+\begin{rem} 
+	In practice, since gaussians PDF decay quickly when driving away from $\mu$, when the means are fairly spaced, the different gaussians do not really interact to form a diffrent PDF and the resulting mixture just looks like a superpostion of the respective gaussians. Thus, we do not perform the sampling with the actual PDF of the mixture, but uniformly choose between the different gaussians for each point.
+\end{rem}
+Gaussian mixtures form great toy datasets on which we can test and visualize our clustering, where a goal cluster is all of the points sampled from a particular gaussian.
+
+\begin{figure}[H]
+	\captionsetup{justification=centering}
+	\begin{subfigure}{.6\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/fig5_g1}
+		\caption{Successful clustering}
+	\end{subfigure}
+	\begin{subfigure}{.6\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/fig6_g2}
+		\caption{Unsuccessful clustering}
+	\end{subfigure}
+	\caption{Visualization of spectral clustering and it's $k$-nn graph on a gaussian mixture. \\ Settings : $L_{rw}$, $k=6$, $\sigma=\frac{1}{3}$ (for gaussian kernel).}
+\end{figure}
+On figure (a) we see that the $k$-nn graph well encodes the cluster structure of the data. It is fully connected but there is only one link between clusters, which makes for great performance of SC using $L_{rw}$. \\ \\
+On figure (b), the means of the two gaussians are closer apart, thus the clustering fails to partition the graph correctly due to the multiple links between the real clusters.
+However, increasing $k$ creates stronger links inside of the clusters, leading to better performance : 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/fig7_g3}
+	\caption{The performance of the clustering is increased with $k=8$}
+	\label{fig:fig7g3}
+\end{figure}
+
 \subsection{UCI datasets}
 Now that we know our algorithms follow the basic theoretical behaviors we want, we can benchmark them on more interesting datasets.
-We used the same 11 benchmark datasets from the UCI repository \cite{UCI} as (\cite[Jonckheere et.al]{GSC}). These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent metric.
+We used the same 11 benchmark datasets from the UCI repository \cite{UCI} as \cite[Jonckheere et.al]{GSC}. These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent quantitative metric.
 \subsubsection{Normalized Mutual Information (NMI)}
 The NMI facilitates comparisons between two different ways of partitioning a dataset, yielding a value that ranges from 0 to 1. A higher value indicates a greater degree of similarity between partitions. As an external metric, the NMI necessitates the availability of class labels for computations, implying that the ground truth is required when employing this metric.
 The calculation of the NMI between two partitions A and B is executed according to the following equation :

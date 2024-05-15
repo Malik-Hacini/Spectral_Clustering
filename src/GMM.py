@@ -55,8 +55,8 @@ def GMM(d,N,means,covs):
         covs (list of ndarrays) : list of the d*d covariance matrices (same length as means)
     
     Returns :
-        samples (ndarray) : the sampled points"""
-    
+        samples (ndarray) : the sampled points
+        labels (ndarray) : the labels of the sampled points"""
     k=len(means)
     gaussians=[]
     samples=[]
