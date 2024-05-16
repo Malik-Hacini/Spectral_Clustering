@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  15 MAY 2024 16:19
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  16 MAY 2024 12:03
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2559,50 +2559,93 @@ Overfull \hbox (93.05435pt too wide) in paragraph at lines 313--323
  []
 
 [3]
-Overfull \hbox (19.61993pt too wide) in paragraph at lines 334--335
+File: figures/Fig_E1_circles.png Graphic file (type bmp)
+<figures/Fig_E1_circles.png>
+
+Overfull \hbox (45.52718pt too wide) in paragraph at lines 333--334
+ [][] 
+ []
+
+
+Overfull \hbox (19.61993pt too wide) in paragraph at lines 343--344
  []\TU/TeXGyreTermesX(0)/b/n/12 Multivariate Normal Distribution[] \TU/TeXGyreT
 ermesX(0)/m/n/12 The multivariate normal distribution, also called ”multivariat
 e
  []
 
+[4]
 File: figures/Binorm.png Graphic file (type bmp)
 <figures/Binorm.png>
-[4]
 File: figures/2gm.png Graphic file (type bmp)
 <figures/2gm.png>
+ [5]
 File: figures/fig5_g1.png Graphic file (type bmp)
 <figures/fig5_g1.png>
 File: figures/fig6_g2.png Graphic file (type bmp)
 <figures/fig6_g2.png>
 
-Overfull \hbox (93.05435pt too wide) in paragraph at lines 363--373
+Overfull \hbox (93.05435pt too wide) in paragraph at lines 372--382
 [][] [] 
  []
 
-[5]
 File: figures/fig7_g3.png Graphic file (type bmp)
 <figures/fig7_g3.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 375--383
+Underfull \hbox (badness 10000) in paragraph at lines 384--393
 
  []
 
+File: figures/Fig_E4_L.png Graphic file (type bmp)
+<figures/Fig_E4_L.png>
 
-Overfull \hbox (12.85995pt too wide) in paragraph at lines 386--388
+Overfull \hbox (13.6583pt too wide) in paragraph at lines 400--401
+ [][] 
+ []
+
+File: figures/Fig_E5_L_sym.png Graphic file (type bmp)
+<figures/Fig_E5_L_sym.png>
+
+Overfull \hbox (13.6583pt too wide) in paragraph at lines 405--406
+ [][] 
+ []
+
+File: figures/Fig_E6_L_rw.png Graphic file (type bmp)
+<figures/Fig_E6_L_rw.png>
+
+Overfull \hbox (13.6583pt too wide) in paragraph at lines 410--411
+ [][] 
+ []
+
+
+Package caption Warning: \label without proper reference on input line 388.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `unsuc' on page 6 undefined on input line 413.
+
+
+Package caption Warning: \label without proper reference on input line 388.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `unsuc' on page 6 undefined on input line 413.
+
+[6]
+Overfull \hbox (12.85995pt too wide) in paragraph at lines 420--422
 \TU/TeXGyreTermesX(0)/m/n/12 Now that we know our algorithms follow the basic t
 heoretical behaviors we want, we can benchmark
  []
 
 
-Overfull \hbox (25.4376pt too wide) in paragraph at lines 389--391
+Overfull \hbox (25.4376pt too wide) in paragraph at lines 423--425
 \TU/TeXGyreTermesX(0)/m/n/12 partitions. As an external metric, the NMI necessi
 tates the availability of class labels for computations,
  []
 
-[6] [7]
+[7] [8]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 403.
- [8] (Results.aux)
+(Font)              scaled to size 12.0pt on input line 437.
+ [9] (Results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -2613,18 +2656,18 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.45pt have occurred.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Results.out' has not changed.
-(rerunfilecheck)             Checksum: 97A86DEE6699B75F947DB9D293E52CA4;1509.
+(rerunfilecheck)             Checksum: C17FDC1BA1D967DA2CFE7B1CE149373A;1615.
  ) 
 Here is how much of TeX's memory you used:
- 50393 strings out of 409673
- 1088409 string characters out of 5778967
+ 50516 strings out of 409673
+ 1091208 string characters out of 5778967
  2133630 words of memory out of 5000000
- 71613 multiletter control sequences out of 15000+600000
- 597589 words of font info for 160 fonts, out of 8000000 for 9000
+ 71727 multiletter control sequences out of 15000+600000
+ 611768 words of font info for 194 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,12n,117p,726b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Results.pdf (8 pages).
+Output written on Results.pdf (9 pages).

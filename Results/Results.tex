@@ -302,7 +302,7 @@
 	\end{lstlisting}
 
 	
-\section{Experiments}
+\section{Spectral Clustering Experiments}
 This section summarizes the experiments done.
 \subsection{Basic Experiments}
 To assert the good behavior of our algorithms, the first step was to conduct very basic experiments. We are going to use very simple toy datasets and focus on 2 important results : Clustering performance and Eigenvalues of laplacians.
@@ -323,11 +323,20 @@ Due to the simplicity of the datasets, practically any choice of settings gives 
 	\caption{Comparison between $k$-means and spectral clustering on toy datasets}
 \end{figure}
 
-While the settings do not affect performance, the spectra can look significantly different depending on the laplacian we use. Here is a comparison on the circles dataset :
 
-TODO  : ALL LAPLACIANS (INCLUDING GSC) EIGENVALUES 0-4
+In this experiment, we know the correct number of clusters because we can visualize the dataset, which isn't always the case for real datasets. To get a hint on the correct number of clusters, sectral clustering offers the eigengap heuristic. For most datasets, the quality of the eigengap will be different depending on the laplacian. However, in very simple cases like circles and moons, the $k$-nn graph is disconnected into the two clusters, which is the ideal theoretical case for the eigengap heuristic, thus every laplacian leads to a good eigengap :
 
-analysis TODO
+
+\begin{figure}[H]
+	\captionsetup{justification=centering}
+	\centering
+	\includegraphics[width=1.1\linewidth]{figures/Fig_E1_circles}
+	\caption{First eigenvalues of laplacians for the clustering of the circles dataset. \\ Left to right : $L$, $L_{sym}$, $L_{rw}$}
+	\label{fig:fige1circles}
+\end{figure}
+
+Every laplacian has a gap in it's eigenvalues after 2 of them, meaning the graph contains exactly 2 connected components, thus 2 clusters.
+In order to show the difference between each laplacian, we need more sophisticated datasets.
 
 \subsubsection{Gaussian Mixture Models (GMMs)}
 In the goal of doing qualitative comparison between different methods, using $2$-dimensional gauussian mixture datasets is a good starting point. 
@@ -375,16 +384,40 @@ Gaussian mixtures form great toy datasets on which we can test and visualize our
 On figure (a) we see that the $k$-nn graph well encodes the cluster structure of the data. It is fully connected but there is only one link between clusters, which makes for great performance of SC using $L_{rw}$. \\ \\
 On figure (b), the means of the two gaussians are closer apart, thus the clustering fails to partition the graph correctly due to the multiple links between the real clusters.
 However, increasing $k$ creates stronger links inside of the clusters, leading to better performance : 
-\begin{figure}[H]
+\begin{figure}[H] 
+	\label{unsuc}
 	\centering
 	\includegraphics[width=0.6\linewidth]{figures/fig7_g3}
 	\caption{The performance of the clustering is increased with $k=8$}
 	\label{fig:fig7g3}
 \end{figure}
+By forcing the algorithm to form $2$ clusters, we get good performance. Again, what if we didn't know the true number of clusters ? In this case, the graph is fully connected, so does the eigengap really indicates $2$ clusters ? 
 
+\begin{figure}[H]
+	\captionsetup{justification=centering}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1.1\linewidth]{figures/Fig_E4_L}
+		\caption{$L$}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1.1\linewidth]{figures/Fig_E5_L_sym}
+		\caption{$L_{sym}$}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1.1\linewidth]{figures/Fig_E6_L_rw}
+		\caption{$L_{rw}$}
+	\end{subfigure}
+	\caption{First eigenvalues of laplacians for the graph of \ref{unsuc}.}
+\end{figure}
+These results clearly show that the connectivity of the graph has great impact of the quality of the eigengap. Both the spectra of $L$ and $L_{rw}$ give no valuable information and while $L_{sym}$ does have a "gap" after the second eigenvalue, it isn't clear enough to conclude on the true number of clusters.
+In conclusion, while the eigengap can be a useful criteria in the case of well separated datasets, when the graph is strongly connected to better the performance on harder datasets, the eigengap becomes meaningles
+Thus, we conclude that the ideal case is to connect the graph enough to ensure good performance, but not too much to the point where the eigengap is useless, otherwise we will be unable to know the correct number of clusters. In practice, this is near impossible most of the time.
 \subsection{UCI datasets}
 Now that we know our algorithms follow the basic theoretical behaviors we want, we can benchmark them on more interesting datasets.
-We used the same 11 benchmark datasets from the UCI repository \cite{UCI} as \cite[Jonckheere et.al]{GSC}. These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent quantitative metric.
+We used the same 11 benchmark datasets from the \cite[UCI ML repository]{UCI} as \cite[Jonckheere et.al]{GSC}. These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent quantitative metric.
 \subsubsection{Normalized Mutual Information (NMI)}
 The NMI facilitates comparisons between two different ways of partitioning a dataset, yielding a value that ranges from 0 to 1. A higher value indicates a greater degree of similarity between partitions. As an external metric, the NMI necessitates the availability of class labels for computations, implying that the ground truth is required when employing this metric.
 The calculation of the NMI between two partitions A and B is executed according to the following equation :

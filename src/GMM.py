@@ -91,6 +91,11 @@ def random_GMM(n_clusters,n_samples_fixed=False):
     return data, labels
     
 
+def interesting_gmm():
+    means=[[0,0],[3,2],[-4,-2],[-2,5]]
+    covs=[1*np.identity(2),1*np.identity(2),1*np.identity(2),1*np.identity(2)]
+    data, labels=GMM(2,350,means,covs)    
+    return data, labels
 
 def circular_GMM(n_clusters,n_samples,sigma,factor):
     means=[(i*factor*sigma,i*factor*sigma) for i in range(n_clusters)]

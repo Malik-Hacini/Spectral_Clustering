@@ -141,18 +141,13 @@ class Graph:
         self.degree_m=np.diag([sum(self.m[i]) for i in range(self.N)])
 
 
-    def laplacian(self):
-        """Constructs the graph laplacian D - W based on the graph matrix W."""
-        return np.subtract(self.degree_m, self.m)
-    
-
-    def laplacian_sym(self):
-        """Constructs the graph laplacian I - D^(-1/2)WD^(-1/2) based on the graph matrix W."""
-        inv_sqrt_d=np.diag([1/np.sqrt(sum(self.m[i])) for i in range(self.N)])
-        return np.subtract(np.identity(self.N),np.matmul(inv_sqrt_d,np.matmul(self.m,inv_sqrt_d)))
-
-    def laplacian_rw(self):
-        """Constructs the graph laplacian I - D^(-1)W based on the graph matrix W. """
-        inv_d=np.diag([1/sum(self.m[i]) for i in range(self.N)])
-        o=np.matmul(inv_d,self.m)
-        return np.subtract(np.identity(self.N),np.matmul(inv_d,self.m))
+    def laplacian(self,choice='un_norm'):
+        """Constructs the chosen graph laplacian based on the graph matrix W."""
+        L=np.subtract(self.degree_m, self.m)
+        if choice=='un_norm':
+            return (L,None)
+        if choice=='sym':
+            inv_sqrt_d=np.diag([1/np.sqrt(sum(self.m[i])) for i in range(self.N)])
+            return (np.matmul(inv_sqrt_d,np.matmul(L,inv_sqrt_d)),None)
+        if choice=='rw':
+            return (L,self.degree_m)

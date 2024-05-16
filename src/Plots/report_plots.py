@@ -63,3 +63,49 @@ def gaussian_mixture_fail_fixed():
     data,labels=np.loadtxt('src/gaussians_data.txt'),np.loadtxt('src/gaussians_labels.txt')
     vals,labels_spectral,matrix=spectral_clustering(data,8,4,'rw','knn','mean',1/3,clusters_fixed=2,return_matrix=True)
     plot_sc_graph(data,labels,labels_spectral,matrix)
+
+def eigengaps_basic(choice,k,n_eig,g_method='knn',sym_method='mean',sigma=1/2):
+    '''FIG E1 and E2
+        
+        titles,values=eigengaps_basic('circles',7,4)
+    plot_eigenvalues(values,titles)'''
+    if choice=='circles':
+        noisy_circles = datasets.make_circles(
+        n_samples=500, factor=0.5, noise=0.05, random_state=30)
+        data,labels=noisy_circles
+    if choice=='moons':
+        noisy_moons = datasets.make_moons(
+        n_samples=500, noise=0.05, random_state=30)
+        data,labels=noisy_moons
+
+    values=[]
+
+    for l in ['un_norm','sym','rw']:
+        values.append(spectral_clustering(data,k,n_eig,l,g_method,sym_method,sigma,eigen_only=True))
+    
+    return values
+
+
+def eigengap_circ_gmm(n_eig):
+    data,labels=circular_GMM(2,100,1/3,3.5)
+    with open('src/gaussians_data.txt','w') as f:
+        data_str=[" ".join(datum) for datum in data.astype(str)]
+        f.write("\n".join(data_str))
+    with open('src/gaussians_labels.txt','w') as f:
+        f.write(" ".join(labels.astype(str)))
+    vals=spectral_clustering(data,8,n_eig,'un_norm','knn','mean',1/3,eigen_only=True)
+    X=np.arange(1,n_eig+1,1)
+    plt.locator_params(axis="x", integer=True, tight=True)
+    plt.locator_params(axis="y", tight=True,nbins=4)
+    plt.scatter(X,vals)
+    plt.show()
+
+
+def clustering_gmm(k):
+    '''FIG 8 '''
+    data,labels=interesting_gmm()
+    titles=["L","L_sym","L_rw"]
+    vals,labels_spectral,matrix=spectral_clustering(data,k,5,'rw','knn','mean',1/2,return_matrix=True)
+    plot_sc_graph(data,labels,labels_spectral,matrix)
+
+

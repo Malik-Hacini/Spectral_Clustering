@@ -27,16 +27,17 @@ def kmeans(data,k,use_minibatch=False):
 
 
 
-def k__eigenvectors(matrix,i):
-    """Computes the first i eigenvals and eigenvecs of a sparse matrix.
+def eigenvectors(i,a,b=None,):
+    """Computes the first i eigenvals and eigenvecs of a symmetric matrix for the generalized problem
+    a*X=lambda*b*X
     Inputs :
-        matrix (ndarray): The matrix. Needs to be sparse.
+        a,(ndarray): Needs to be real symmetric.
         i (int): Number of eigenvals and eigenvecs to compute (in ascending order)
-    
+        b (ndarray) : The second matrix
     Returns :
         vecs (ndarray) : Matrix with the i eigenvecs as columns."""
     
-    vals,vecs=eigh(matrix,subset_by_index=[0, i-1])
+    vals,vecs=eigh(a,b,subset_by_index=[0, i-1])
     vals=vals.real
     vecs=vecs.real
     return vals,vecs
@@ -44,6 +45,8 @@ def k__eigenvectors(matrix,i):
 def eigengap(vals):
     X=np.arange(1,len(vals)+1,1)
     Y=vals
+    plt.locator_params(axis="x", integer=True, tight=True)
+    plt.locator_params(axis="y", tight=True,nbins=4)
     plt.scatter(X,Y)
     plt.show()
     c=input("Number of clusters to construct:\n")
@@ -76,13 +79,11 @@ def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_me
     print("Dataset graph built.")
 
     print("Performing spectral embedding on the data.")
-    if laplacian=='un_norm':
-        vals,u_full=k__eigenvectors(graph.laplacian(),n_eig)
+    vals,u_full=eigenvectors(n_eig,*graph.laplacian(laplacian))
+
+    #In the case of L_sym being used, there is an additional normalization step.
     if laplacian=='sym':
-        vals,u_full=k__eigenvectors(graph.laplacian_sym(),n_eig)
         u_full=np.apply_along_axis(normalize_vec, axis=0, arr=u_full)
-    if laplacian=='rw':
-        vals,u_full=k__eigenvectors(graph.laplacian_rw(),n_eig)
 
     #Use of the eigengap heuristic to get the number of clusters, if it is not given
     if eigen_only:

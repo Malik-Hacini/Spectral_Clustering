@@ -55,12 +55,12 @@ def plot_all_clustering_vs_gt(data,labels,titles):
 
 def plot_eigenvalues(values,titles):
     X=np.arange(1,len(values[0])+1,1)
-    fig, axs=plt.subplots(nrows=len(values),ncols=1)
-    fig.suptitle('Comparison of spectral clustering methods')
+    fig, axs=plt.subplots(nrows=1,ncols=len(values))
     for i,ax in enumerate(axs.flat):
+        ax.locator_params(axis="x", integer=True, tight=True)
+        ax.locator_params(axis="y", tight=True,nbins=4)
         ax.scatter(X,values[i])
-        ax.set_title(titles[i])
-    
+        
     plt.show()
 
 def boxplot(Y,title):

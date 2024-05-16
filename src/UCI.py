@@ -4,7 +4,7 @@
 -NMI score for evaluating performance
 
 
-TODO : weird convergence errors for (wine,all), (wbdc,all),(parkinson,all)
+TODO : weird convergence errors for (wbdc,all),(parkinson,all)
        '''
 
 from spectral_clustering import*
@@ -79,7 +79,7 @@ sym_method='mean'
 sigma=1/2
 avg=1
 
-"""FULL BENCHMARK :
+"""FULL BENCHMARK :"""
 options_dict={'iris':{'k': 4, 'n_eig': 7, 'graph': g_method, 'sym_method':sym_method,'sigma':sigma},
 
 
@@ -95,7 +95,7 @@ options_dict={'iris':{'k': 4, 'n_eig': 7, 'graph': g_method, 'sym_method':sym_me
                'yeast':{'k': 10, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma}}
 laplacians=['un_norm','sym','rw']
 with open('uci_results.txt','w') as f:
-    f.write(str(full_benchmark(avg,options_dict,laplacians)))"""
+    f.write(str(full_benchmark(avg,options_dict,laplacians)))
 
 
 """WBCDoptions={'k': 2, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma, 'laplacian':'sym'}

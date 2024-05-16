@@ -40,7 +40,7 @@ def test_spectral_clustering_gmm(k,n_eig,g_method,sym_method,sigma):
 def eigengaps_gmm(k,n_eig,g_method,sym_method,sigma):
     data,labels=random_GMM(4)#To fix
     values=[]
-    titles=["Unnormalized Laplacian","L_sym","Random walk Laplacian"]
+    titles=["L","L_sym","L_rw"]
 
     for l in ['un_norm','sym','rw']:
         values.append(spectral_clustering(data,k,n_eig,l,g_method,sym_method,sigma)[0])
@@ -107,12 +107,3 @@ def sc_sklearn_datasets(dataset,k,n_eig,l,g_method,sym_method,sigma):
     print(f"Dataset: {dataset} \n Settings : L_{l}, k = {k}, g_method={g_method}, sym_method= {sym_method}, sigma = {sigma} \n Accuracy : {precision*100} %")
 
 
-
-data,labels=circular_GMM(2,100,1/3,3.5)
-with open('gaussians_data.txt','w') as f:
-    data_str=[" ".join(datum) for datum in data.astype(str)]
-    f.write("\n".join(data_str))
-with open('gaussians_labels.txt','w') as f:
-    f.write(" ".join(labels.astype(str)))
-vals,labels_spectral,matrix=spectral_clustering(data,6,4,'rw','knn','mean',1/3,clusters_fixed=2,return_matrix=True)
-plot_sc_graph(data,labels,labels_spectral,matrix)

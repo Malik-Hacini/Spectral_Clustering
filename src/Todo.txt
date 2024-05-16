@@ -29,7 +29,7 @@ MNIST (done)
 SKLEARN TOY SETS (iris wine breast cancer) (done)
 
 
-13/05:
+14/05:
 FIX LRW EIGENVALUES..................
 - read about GSC and implement it.
 
@@ -40,11 +40,18 @@ EXPERIMENTS (to report):
 -The UCI datasets of Matthieu
 (wip)
 
-14/05:
+15/05:
 report GMMs (wip)
 fix UCI errors (wip)
 report UCI
 
-15/05
-report spectra experiments (Basic and GMM)
+16/05
+report spectra experiments (Basic and GMM) (done)
+-Fix the Lrw eigenvalues... (...) (done)
 
+17/05
+
+Fix UCI 
+report UCI
+Jean marc report
+clean results document
