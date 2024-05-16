@@ -414,7 +414,7 @@ By forcing the algorithm to form $2$ clusters, we get good performance. Again, w
 \end{figure}
 These results clearly show that the connectivity of the graph has great impact of the quality of the eigengap. Both the spectra of $L$ and $L_{rw}$ give no valuable information and while $L_{sym}$ does have a "gap" after the second eigenvalue, it isn't clear enough to conclude on the true number of clusters.
 In conclusion, while the eigengap can be a useful criteria in the case of well separated datasets, when the graph is strongly connected to better the performance on harder datasets, the eigengap becomes meaningles
-Thus, we conclude that the ideal case is to connect the graph enough to ensure good performance, but not too much to the point where the eigengap is useless, otherwise we will be unable to know the correct number of clusters. In practice, this is near impossible most of the time.
+Thus, we conclude that to efficiently choose $k$, we need to connect the graph enough to ensure good performance, but not too much to the point where the eigengap is useless, otherwise we will be unable to know the correct number of clusters. In practice, this is near impossible most of the time.
 \subsection{UCI datasets}
 Now that we know our algorithms follow the basic theoretical behaviors we want, we can benchmark them on more interesting datasets.
 We used the same 11 benchmark datasets from the \cite[UCI ML repository]{UCI} as \cite[Jonckheere et.al]{GSC}. These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent quantitative metric.

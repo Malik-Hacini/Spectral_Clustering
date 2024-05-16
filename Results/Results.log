@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  16 MAY 2024 12:03
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  16 MAY 2024 17:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2631,20 +2631,20 @@ See the caption package documentation for explanation.
 LaTeX Warning: Reference `unsuc' on page 6 undefined on input line 413.
 
 [6]
-Overfull \hbox (12.85995pt too wide) in paragraph at lines 420--422
+Overfull \hbox (12.85995pt too wide) in paragraph at lines 419--421
 \TU/TeXGyreTermesX(0)/m/n/12 Now that we know our algorithms follow the basic t
 heoretical behaviors we want, we can benchmark
  []
 
 
-Overfull \hbox (25.4376pt too wide) in paragraph at lines 423--425
+Overfull \hbox (25.4376pt too wide) in paragraph at lines 422--424
 \TU/TeXGyreTermesX(0)/m/n/12 partitions. As an external metric, the NMI necessi
 tates the availability of class labels for computations,
  []
 
 [7] [8]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 437.
+(Font)              scaled to size 12.0pt on input line 436.
  [9] (Results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
