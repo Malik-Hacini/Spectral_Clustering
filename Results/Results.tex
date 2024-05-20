@@ -164,7 +164,9 @@
 		#3 &\longmapsto & #4
 \end{array}}%fonction avec ensembles de départ, d'arrivée et transformation, sans nom
 
-
+%%%%Tables%%%%
+\usepackage{adjustbox}
+\usepackage{booktabs}
 
 %%%%%Bibliographie%%%%%
 
@@ -426,7 +428,48 @@ $$NMI\left(A,B\right)=\frac{2*I(A,B)}{[H\left(A\right)+H(B)]}$$
 	Where $I(A,B)$ is the mutual information and $H$ the entropy. 
 	In practice, $A$ is the set of predicted labels and $B$ the ground truth labels of the dataset. \\ NMI can fail to correctly assess the performance of the clustering when the number of clusters predicted and the ground truth number of clusters do not match. However, this won't be the case in our experiments, since we will force the clustering to build the right number of clusters.
 	Other evaluation metrics such as the adjusted Rand Index (ARI) exist, but we limited ourselves to NMI for these experiments as it already is very well suited for comparison purposes.
+\subsection{Method and results}
+We compare the $3$ standard graph laplacians : $L$, $L_{sym}$ and $L_{rw}$. We construct,via a gaussian kernel similariy function, a $k$-nn graph using the optimal connectivity parameter $k$ computed by \cite[Jonckheere et.al]{GSC} for each clustering. In the following results table, $N$ is the number of samples and $d$ their dimension. We report the results using NMI.
 
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\renewcommand{\arraystretch}{1}
+\setlength{\tabcolsep}{3pt}
+%--
+\begin{table*}[h]
+	\small\centering
+	\vspace{-3mm}
+	\caption{Clustering performance (NMI) on UCI datasets with optimal parameters in brackets.}
+	\label{tab_NMI_one}
+	\vspace{-3mm}
+	\sc
+	\vskip 0.15in
+	\begin{adjustbox}{width=0.6\textwidth,center}
+		\begin{tabular}{L{25mm}R{8mm}R{5mm}R{5mm}||ccc||}
+			\toprule
+			Dataset & $N$ & $d$ & $k$ & $L$ & $L_{sym}$ & $L_{rw}$ \\
+			\midrule
+			\midrule
+			{Iris} & 150 & 3 & 4 &  80.58& 80.58& 74.98\\
+			{Glass} & 214 & 9 & 6 & 38.59& 38.92&  38.95 \\
+			{Wine} & 178 & 13 & 3 & 86.33& 86.33& 83.66\\
+			{WBDC} & 569 & 30 & 2 & 67.73& 69.47& 68.54 \\
+			{Control chart} & 600 & 60 & 6 & 81.17& 81.17& 82.94 \\
+			{Parkinson} & 185 & 22 & 2 & 21.96& 19.13& 28.89 \\
+			{Vertebral} & 310 & 6 & 3 & 39.26& 39.26&  52.06  \\
+			{Breast Tissue} & 106 & 9 & 6 & 54.03& 54.43& 54.04  \\
+			{Seeds} & 210 & 7 & 3 & 73.90& 73.90& 76.29 \\
+			{Image Seg.} & 2310 & 19 & 7 & 67.06& 67.41 & 67.42\\
+			{Yeast} & 1484 & 8 & 10 & 30.58& 31.11& 31.37	\\
+			\midrule
+			Average & -- & -- & -- & 58.29& 58.34& 59.92 \\
+			\bottomrule
+			%
+		\end{tabular}
+	\end{adjustbox}
+	\vskip -0.1in
+\end{table*}
 \newpage
 
 \begin{thebibliography}{9}

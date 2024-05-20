@@ -13,6 +13,14 @@ from sklearn import datasets
 import ucimlrepo as uci
 import pandas
 
+
+def load_eveyrthing():
+    datas=dict()
+    for set in ['iris' ,'glass','wine','wbdc','control chart','parkinson','vertebral','breast tissue','seeds','image seg','yeast']:
+        datas[set]=import_dataset(set)
+        print(set)
+    with open('uci_data.txt','w') as f:
+        f.write(str(datas))
 #n_clusters={'iris': 3 ,'glass': 6,'wine':3,'wbdc':2,'control chart':6,'parkinson':2,'vertebral':3,'breast tissue':6,'seeds':3,'image seg':7,'yeast':3}
 def import_dataset(c:str):
     """Import one of the 11 UCI benchmark datasets :
@@ -79,7 +87,7 @@ sym_method='mean'
 sigma=1/2
 avg=1
 
-"""FULL BENCHMARK :"""
+"""FULL BENCHMARK :
 options_dict={'iris':{'k': 4, 'n_eig': 7, 'graph': g_method, 'sym_method':sym_method,'sigma':sigma},
 
 
@@ -95,10 +103,12 @@ options_dict={'iris':{'k': 4, 'n_eig': 7, 'graph': g_method, 'sym_method':sym_me
                'yeast':{'k': 10, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma}}
 laplacians=['un_norm','sym','rw']
 with open('uci_results.txt','w') as f:
-    f.write(str(full_benchmark(avg,options_dict,laplacians)))
+    f.write(str(full_benchmark(avg,options_dict,laplacians)))"""
 
+load_eveyrthing()
 
-"""WBCDoptions={'k': 2, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma, 'laplacian':'sym'}
+"""
+WBCDoptions={'k': 2, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma, 'laplacian':'rw'}
 n_clusters,data,labels=import_dataset('wbdc')
 print(labels)
 print(n_clusters)

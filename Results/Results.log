@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  16 MAY 2024 17:17
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  20 MAY 2024 18:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2246,25 +2246,84 @@ Package hyperref Info: Option `colorlinks' set `true' on input line 62.
 \c@tcb@cnt@prop=\count411
 \c@tcb@cnt@cor=\count412
 \c@tcb@cnt@theo=\count413
- (C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
-\lst@mode=\count414
-\lst@gtempboxa=\box156
+ (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/adjustbox\adjustbox.sty
+Package: adjustbox 2022/10/17 v1.3a Adjusting TeX boxes (trim, clip, ...)
+
+(C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/adjustbox\adjcalc.sty
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+(C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/adjustbox\trimclip.sty
+Package: trimclip 2020/08/19 v1.2 Trim and clip general TeX material
+
+(C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/collectbox\collectbox.sty
+Package: collectbox 2022/10/17 v0.4c Collect macro arguments as boxes
+\collectedbox=\box156
+)
+\tc@llx=\dimen396
+\tc@lly=\dimen397
+\tc@urx=\dimen398
+\tc@ury=\dimen399
+Package trimclip Info: Using driver 'tc-xetex.def'.
+
+(C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/adjustbox\tc-xetex.def
+File: tc-xetex.def 2019/01/04 v2.2 Clipping driver for xetex
+))
+\adjbox@Width=\dimen400
+\adjbox@Height=\dimen401
+\adjbox@Depth=\dimen402
+\adjbox@Totalheight=\dimen403
+\adjbox@pwidth=\dimen404
+\adjbox@pheight=\dimen405
+\adjbox@pdepth=\dimen406
+\adjbox@ptotalheight=\dimen407
+
+(C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/varwidth\varwidth.sty
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box157
+\sift@deathcycles=\count414
+\@vwid@loff=\dimen408
+\@vwid@roff=\dimen409
+))
+(C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/booktabs\booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen410
+\lightrulewidth=\dimen411
+\cmidrulewidth=\dimen412
+\belowrulesep=\dimen413
+\belowbottomsep=\dimen414
+\aboverulesep=\dimen415
+\abovetopsep=\dimen416
+\cmidrulesep=\dimen417
+\cmidrulekern=\dimen418
+\defaultaddspace=\dimen419
+\@cmidla=\count415
+\@cmidlb=\count416
+\@aboverulesep=\dimen420
+\@belowrulesep=\dimen421
+\@thisruleclass=\count417
+\@lastruleclass=\count418
+\@thisrulewidth=\dimen422
+)
+(C:\Program Files\MiKTeX\tex/latex/listings\listings.sty
+\lst@mode=\count419
+\lst@gtempboxa=\box158
 \lst@token=\toks79
-\lst@length=\count415
-\lst@currlwidth=\dimen396
-\lst@column=\count416
-\lst@pos=\count417
-\lst@lostspace=\dimen397
-\lst@width=\dimen398
-\lst@newlines=\count418
-\lst@lineno=\count419
-\lst@maxwidth=\dimen399
+\lst@length=\count420
+\lst@currlwidth=\dimen423
+\lst@column=\count421
+\lst@pos=\count422
+\lst@lostspace=\dimen424
+\lst@width=\dimen425
+\lst@newlines=\count423
+\lst@lineno=\count424
+\lst@maxwidth=\dimen426
 
 (C:\Program Files\MiKTeX\tex/latex/listings\lstmisc.sty
 File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
-\c@lstnumber=\count420
-\lst@skipnumbers=\count421
-\lst@framebox=\box157
+\c@lstnumber=\count425
+\lst@skipnumbers=\count426
+\lst@framebox=\box159
 )
 (C:\Program Files\MiKTeX\tex/latex/listings\listings.cfg
 File: listings.cfg 2023/02/27 1.9 listings configuration
@@ -2331,60 +2390,60 @@ language=dflt;-ss05;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;"
 ;language=dflt;-ss05;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;"
 
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 251.
+(Font)              scaled to size 12.0pt on input line 253.
 (Results.aux)
 \openout1 = `Results.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 251.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 253.
 LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line
- 251.
+ 253.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 253.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-51.
+53.
 
 (C:\Program Files\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 253.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 251.
+ 253.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 251.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 253.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 251.
+e 253.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 251.
-LaTeX Font Info:    ... okay on input line 251.
-LaTeX Info: Command `\dddot' is already robust on input line 251.
-LaTeX Info: Command `\ddddot' is already robust on input line 251.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 253.
+LaTeX Font Info:    ... okay on input line 253.
+LaTeX Info: Command `\dddot' is already robust on input line 253.
+LaTeX Info: Command `\ddddot' is already robust on input line 253.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -2435,7 +2494,7 @@ Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 251.
+Package hyperref Info: Link coloring ON on input line 253.
 (Results.out) (Results.out)
 \@outlinefile=\write7
 \openout7 = `Results.out'.
@@ -2444,85 +2503,85 @@ Package hyperref Info: Link coloring ON on input line 251.
 Package pgfplots notification 'compat/show suggested version=true': document ha
 s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
-\c@lstlisting=\count422
+\c@lstlisting=\count427
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 20.74pt on input line 253.
+(Font)              scaled to size 20.74pt on input line 255.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 253.
+(Font)              scaled to size 14.4pt on input line 255.
 LaTeX Font Info:    Trying to load font information for OT1+minntx on input lin
-e 253.
+e 255.
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\ot1minntx.fd
 File: ot1minntx.fd 2023/09/09 v1.1 font definition file for OT1/minntx
 )
 LaTeX Font Info:    Trying to load font information for U+stmry on input line 2
-53.
+55.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/stmaryrd\ustmry.fd)
 
 LaTeX Font Warning: Font shape `U/stmry/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 253.
+(Font)              size <10.95> substituted on input line 255.
 
 LaTeX Font Info:    Trying to load font information for U+ntxmia on input line 
-253.
+255.
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\untxmia.fd
 File: untxmia.fd 2018/04/14 Fontinst v1.933 font definitions for U/ntxmia.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsym on input line 
-253.
+255.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\untxsym.fd
 File: untxsym.fd 2023/08/16 Fontinst v1.933 font definitions for U/ntxsym.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxsyc on input line 
-253.
+255.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\untxsyc.fd
 File: untxsyc.fd 2012/04/12 Fontinst v1.933 font definitions for U/ntxsyc.
 )
 LaTeX Font Info:    Trying to load font information for U+ntxexa on input line 
-253.
+255.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\untxexa.fd
 File: untxexa.fd 2012/04/16 Fontinst v1.933 font definitions for U/ntxexa.
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 253
+LaTeX Font Info:    Trying to load font information for U+msa on input line 255
 .
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 253
+LaTeX Font Info:    Trying to load font information for U+msb on input line 255
 .
 
 (C:\Program Files\MiKTeX\tex/latex/amsfonts\umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
 LaTeX Font Info:    Trying to load font information for U+lasy on input line 25
-3.
+5.
 
 (C:\Program Files\MiKTeX\tex/latex/base\ulasy.fd
 File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 )
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 253.
+(Font)              size <10.95> substituted on input line 255.
 
 
 LaTeX Font Warning: Font shape `U/matha/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 253.
+(Font)              size <10.95> substituted on input line 255.
 
 
 LaTeX Font Warning: Font shape `U/mathb/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 253.
+(Font)              size <10.95> substituted on input line 255.
 
 
 LaTeX Font Warning: Font shape `U/mathx/m/n' in size <10.5> not available
-(Font)              size <10.95> substituted on input line 253.
+(Font)              size <10.95> substituted on input line 255.
 
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 253.
+(Font)              scaled to size 17.28pt on input line 255.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 253.
+(Font)              scaled to size 17.28pt on input line 255.
 (Results.toc
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
 (Font)              scaled to size 12.0pt on input line 2.
@@ -2530,19 +2589,19 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
 \tf@toc=\write8
 \openout8 = `Results.toc'.
 
-LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 263.
  [1
 
 ]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
+(Font)              scaled to size 14.4pt on input line 265.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 273.
+(Font)              scaled to size 10.0pt on input line 275.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 274.
+(Font)              scaled to size 6.0pt on input line 276.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sl' will be
 (Font)              scaled to size 12.0pt on input line 289.
  [2]
-Overfull \hbox (2.96794pt too wide) in paragraph at lines 308--309
+Overfull \hbox (2.96794pt too wide) in paragraph at lines 310--311
 \TU/TeXGyreTermesX(0)/m/n/12 To assert the good behavior of our algorithms, the
  first step was to conduct very basic experiments.
  []
@@ -2550,11 +2609,11 @@ Overfull \hbox (2.96794pt too wide) in paragraph at lines 308--309
 File: figures/Fig1.png Graphic file (type bmp)
 <figures/Fig1.png>
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 316.
+(Font)              scaled to size 10.95pt on input line 318.
 File: figures/Fig2.png Graphic file (type bmp)
 <figures/Fig2.png>
 
-Overfull \hbox (93.05435pt too wide) in paragraph at lines 313--323
+Overfull \hbox (93.05435pt too wide) in paragraph at lines 315--325
 [][] [] 
  []
 
@@ -2562,89 +2621,92 @@ Overfull \hbox (93.05435pt too wide) in paragraph at lines 313--323
 File: figures/Fig_E1_circles.png Graphic file (type bmp)
 <figures/Fig_E1_circles.png>
 
-Overfull \hbox (45.52718pt too wide) in paragraph at lines 333--334
+Overfull \hbox (45.52718pt too wide) in paragraph at lines 335--336
  [][] 
  []
 
-
-Overfull \hbox (19.61993pt too wide) in paragraph at lines 343--344
+[4]
+Overfull \hbox (19.61993pt too wide) in paragraph at lines 345--346
  []\TU/TeXGyreTermesX(0)/b/n/12 Multivariate Normal Distribution[] \TU/TeXGyreT
 ermesX(0)/m/n/12 The multivariate normal distribution, also called ”multivariat
 e
  []
 
-[4]
 File: figures/Binorm.png Graphic file (type bmp)
 <figures/Binorm.png>
 File: figures/2gm.png Graphic file (type bmp)
 <figures/2gm.png>
- [5]
+[5]
 File: figures/fig5_g1.png Graphic file (type bmp)
 <figures/fig5_g1.png>
 File: figures/fig6_g2.png Graphic file (type bmp)
 <figures/fig6_g2.png>
 
-Overfull \hbox (93.05435pt too wide) in paragraph at lines 372--382
+Overfull \hbox (93.05435pt too wide) in paragraph at lines 374--384
 [][] [] 
  []
 
 File: figures/fig7_g3.png Graphic file (type bmp)
 <figures/fig7_g3.png>
 
-Underfull \hbox (badness 10000) in paragraph at lines 384--393
+Underfull \hbox (badness 10000) in paragraph at lines 386--395
 
  []
 
+[6]
 File: figures/Fig_E4_L.png Graphic file (type bmp)
 <figures/Fig_E4_L.png>
 
-Overfull \hbox (13.6583pt too wide) in paragraph at lines 400--401
+Overfull \hbox (13.6583pt too wide) in paragraph at lines 402--403
  [][] 
  []
 
 File: figures/Fig_E5_L_sym.png Graphic file (type bmp)
 <figures/Fig_E5_L_sym.png>
 
-Overfull \hbox (13.6583pt too wide) in paragraph at lines 405--406
+Overfull \hbox (13.6583pt too wide) in paragraph at lines 407--408
  [][] 
  []
 
 File: figures/Fig_E6_L_rw.png Graphic file (type bmp)
 <figures/Fig_E6_L_rw.png>
 
-Overfull \hbox (13.6583pt too wide) in paragraph at lines 410--411
+Overfull \hbox (13.6583pt too wide) in paragraph at lines 412--413
  [][] 
  []
 
 
-Package caption Warning: \label without proper reference on input line 388.
+Package caption Warning: \label without proper reference on input line 390.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `unsuc' on page 6 undefined on input line 413.
+LaTeX Warning: Reference `unsuc' on page 7 undefined on input line 415.
 
 
-Package caption Warning: \label without proper reference on input line 388.
+Package caption Warning: \label without proper reference on input line 390.
 See the caption package documentation for explanation.
 
 
-LaTeX Warning: Reference `unsuc' on page 6 undefined on input line 413.
+LaTeX Warning: Reference `unsuc' on page 7 undefined on input line 415.
 
-[6]
-Overfull \hbox (12.85995pt too wide) in paragraph at lines 419--421
+
+Overfull \hbox (12.85995pt too wide) in paragraph at lines 421--423
 \TU/TeXGyreTermesX(0)/m/n/12 Now that we know our algorithms follow the basic t
 heoretical behaviors we want, we can benchmark
  []
 
 
-Overfull \hbox (25.4376pt too wide) in paragraph at lines 422--424
+Overfull \hbox (25.4376pt too wide) in paragraph at lines 424--426
 \TU/TeXGyreTermesX(0)/m/n/12 partitions. As an external metric, the NMI necessi
 tates the availability of class labels for computations,
  []
 
-[7] [8]
+[7]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
+(Font)              scaled to size 10.95pt on input line 446.
+ [8]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 436.
+(Font)              scaled to size 12.0pt on input line 479.
  [9] (Results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
@@ -2659,14 +2721,14 @@ LaTeX Font Warning: Size substitutions with differences
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Results.out' has not changed.
-(rerunfilecheck)             Checksum: C17FDC1BA1D967DA2CFE7B1CE149373A;1615.
+(rerunfilecheck)             Checksum: DF636B83FCC10D48D6AFFA6DDDE4716A;1769.
  ) 
 Here is how much of TeX's memory you used:
- 50516 strings out of 409673
- 1091208 string characters out of 5778967
- 2133630 words of memory out of 5000000
- 71727 multiletter control sequences out of 15000+600000
- 611768 words of font info for 194 fonts, out of 8000000 for 9000
+ 51442 strings out of 409673
+ 1107731 string characters out of 5778967
+ 2165630 words of memory out of 5000000
+ 72630 multiletter control sequences out of 15000+600000
+ 611776 words of font info for 195 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,12n,117p,726b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
 

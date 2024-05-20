@@ -53,5 +53,5 @@ report spectra experiments (Basic and GMM) (done)
 
 Fix UCI 
 report UCI
-Jean marc report
+Jean marc report (done)
 clean results document
