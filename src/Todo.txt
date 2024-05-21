@@ -51,7 +51,11 @@ report spectra experiments (Basic and GMM) (done)
 
 17/05
 
-Fix UCI 
-report UCI
+Fix UCI (reported)
+report UCI (reported)
 Jean marc report (done)
 clean results document
+
+22/05
+Fix gsc laplacians.
+Experiments ! Need to check spectral gap

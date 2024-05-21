@@ -1,6 +1,6 @@
 from graphs import*
 from misc import*
-from scipy.linalg import eigh
+from scipy.linalg import eigh,eig
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans,MiniBatchKMeans
 
@@ -36,7 +36,8 @@ def eigenvectors(i,a,b=None,):
         b (ndarray) : The second matrix
     Returns :
         vecs (ndarray) : Matrix with the i eigenvecs as columns."""
-    
+    if b=='no':
+        vals,vecs=eig(a)
     vals,vecs=eigh(a,b,subset_by_index=[0, i-1])
     vals=vals.real
     vecs=vecs.real
@@ -54,7 +55,7 @@ def eigengap(vals):
     return int(c)
 
 
-def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_method='mean',sigma=None,use_minibatch=False,eigen_only=False,clusters_fixed=False,return_matrix=False,labels_given=np.array([None])):
+def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_method=None,sigma=None,gsc_params=None,use_minibatch=False,eigen_only=False,clusters_fixed=False,return_matrix=False,labels_given=np.array([None])):
     """Performs spectral clustering on a dataset of n-dimensional points.
     Inputs :
         data (ndarray): The dataset, a 
@@ -63,6 +64,7 @@ def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_me
         laplacian (string) : The laplacian to use between [un_norm , sym , rw] 
         sym_method (string): The method used to symmetrize the graph matrix in the case of an asymmetric adjacency matrix.
         sigma (float): Standard deviation for the gaussian kernel.
+        gsc_params (3-uple): (t,alpha,gamma) for the gsc laplacians.
         use_minibatch (bool) : Choice of the k-means algorithm. True might lead to better performance on large datasets. Default = False.
         eigen_only (bool) : If True, the function will only returns the eigenvalues and eigenvectors and not compute the full clustering. Default = False.
         clusters_fixed (int) : The number of clusters in your data. If unknown, leave by default and the eigengap heuristic will be used. Default = False.
@@ -79,7 +81,7 @@ def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_me
     print("Dataset graph built.")
 
     print("Performing spectral embedding on the data.")
-    vals,u_full=eigenvectors(n_eig,*graph.laplacian(laplacian))
+    vals,u_full=eigenvectors(n_eig,*graph.laplacian(laplacian,gsc_params))
 
     #In the case of L_sym being used, there is an additional normalization step.
     if laplacian=='sym':

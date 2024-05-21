@@ -78,7 +78,9 @@ def symmetrize(matrix,method):
             method (string): the method used, must be in ['mean','and','or']
         Returns :
             matrix (ndarray) : The symmetrized matrix."""
-        
+        if method==None:
+            #Do not symmetrize. Used for GSC
+            return matrix
         if method=='mean':
             return (1/2)*(matrix+matrix.T)
         
@@ -119,7 +121,7 @@ class Similarity:
 
 class Graph:
     """Similarity graphs based on a dataset of n-dimensional vectors"""
-    def __init__(self,data,k,g_method,sym_method,sigma=None) -> None:
+    def __init__(self,data,k,g_method,sym_method=None,sigma=None) -> None:
         """
     Inputs :
         data (ndarray): the dataset as an array of n-dimensional points.
@@ -141,13 +143,42 @@ class Graph:
         self.degree_m=np.diag([sum(self.m[i]) for i in range(self.N)])
 
 
-    def laplacian(self,choice='un_norm'):
+    def laplacian(self,choice='un_norm',gsc_params=None):
         """Constructs the chosen graph laplacian based on the graph matrix W."""
         L=np.subtract(self.degree_m, self.m)
+
         if choice=='un_norm':
-            return (L,None)
+            '''Important : We return a tuple of matrices (A,B), we are then going to solve the generalized eigenproblem 
+            AX=lambdaBX. If B=None we consider B=Identity.
+            '''
+            return (L,None) 
         if choice=='sym':
             inv_sqrt_d=np.diag([1/np.sqrt(sum(self.m[i])) for i in range(self.N)])
             return (np.matmul(inv_sqrt_d,np.matmul(L,inv_sqrt_d)),None)
         if choice=='rw':
             return (L,self.degree_m)
+        
+        if choice in ['g','g_rw']:
+                t,alpha,gamma=gsc_params
+                #Basic matrices of GSC
+                P=np.zeros((self.N,self.N))
+                for i in range(self.N):
+                     for j in range(self.N):
+                          P[i,j]=self.m[i,j]/sum(self.m[i,k] for k in range(self.N))
+                P_gamma=gamma*P + ((1-gamma)*1/self.N)*np.ones((self.N,self.N))
+                v=((1/self.N)*np.matmul(np.ones((1,self.N)),np.linalg.matrix_power(P_gamma,t)))**alpha  
+                print(v,v.shape)
+                xi=np.array([sum(v[0,i]*P[i,k] for i in range(self.N)) for k in range(self.N)])
+                print(v[0])
+                #Other matrices used for the generalized laplacians
+                N=np.diag(v[0])
+                O=np.diag(xi)
+                I=np.identity(self.N)
+                print(N)
+                N_inv=np.linalg.inv(N)
+
+                #Computation
+                if choice=='g':
+                     return (N + O - np.matmul(N,P) - np.matmul(P.T,N),None)
+                if choice=='g_rw':
+                     return (I - np.matmul(np.linalg.inv((I+np.matmul(N_inv,O))),P+np.matmul(N_inv,np.matmul(P.T,N))),'no')
