@@ -79,7 +79,7 @@ def symmetrize(matrix,method):
         Returns :
             matrix (ndarray) : The symmetrized matrix."""
         if method==None:
-            #Do not symmetrize. Used for GSC
+            #Do not symmetrize. Used for GSC.
             return matrix
         if method=='mean':
             return (1/2)*(matrix+matrix.T)
@@ -92,6 +92,7 @@ def symmetrize(matrix,method):
                            matrix[i,j]=0
                            matrix[j,i]=0
 
+        '''DEPRECATED 
         if method=='or':
              for i in range(matrix.shape[0]):
                  for j in range(i+1):
@@ -99,7 +100,7 @@ def symmetrize(matrix,method):
                            if matrix[i,j]!=0:
                                 matrix[j,i]=matrix[i,j]
                            elif matrix[j,i]!=0:
-                                matrix[i,j]=matrix[j,i]
+                                matrix[i,j]=matrix[j,i]'''
 
         return matrix
 
@@ -130,11 +131,12 @@ class Graph:
      """
     
         self.dim=len(data[0])
+        self.k=k
         self.N=len(data)
         self.nodes=data
         self.similarity=Similarity(sigma)
         if g_method=='knn':
-             self.m=symmetrize(knn(k,self.nodes,self.similarity),sym_method)
+             self.m=symmetrize(knn(self.k,self.nodes,self.similarity),sym_method)
         if g_method=='g_knn':
             self.m=symmetrize(knn_gaussian(k,self.N,self.nodes,self.similarity),sym_method)
         if g_method=='f_kernel':
@@ -161,24 +163,20 @@ class Graph:
         if choice in ['g','g_rw']:
                 t,alpha,gamma=gsc_params
                 #Basic matrices of GSC
-                P=np.zeros((self.N,self.N))
-                for i in range(self.N):
-                     for j in range(self.N):
-                          P[i,j]=self.m[i,j]/sum(self.m[i,k] for k in range(self.N))
+                P=self.m/self.k #Transition matrix of the natural markov walk on a knn graph.
                 P_gamma=gamma*P + ((1-gamma)*1/self.N)*np.ones((self.N,self.N))
                 v=((1/self.N)*np.matmul(np.ones((1,self.N)),np.linalg.matrix_power(P_gamma,t)))**alpha  
-                print(v,v.shape)
                 xi=np.array([sum(v[0,i]*P[i,k] for i in range(self.N)) for k in range(self.N)])
-                print(v[0])
                 #Other matrices used for the generalized laplacians
                 N=np.diag(v[0])
                 O=np.diag(xi)
                 I=np.identity(self.N)
-                print(N)
                 N_inv=np.linalg.inv(N)
 
                 #Computation
                 if choice=='g':
                      return (N + O - np.matmul(N,P) - np.matmul(P.T,N),None)
                 if choice=='g_rw':
-                     return (I - np.matmul(np.linalg.inv((I+np.matmul(N_inv,O))),P+np.matmul(N_inv,np.matmul(P.T,N))),'no')
+                     """Return not_sym as the generalized L_rw isn't symmetric and isn't related to a generalized eigenproblem
+                     of a symmetric matrix, thus the computation of the eigenvals and vecs is done differently"""
+                     return (I - np.matmul(np.linalg.inv((I+np.matmul(N_inv,O))),P+np.matmul(N_inv,np.matmul(P.T,N))),'not_sym')

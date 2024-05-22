@@ -1,11 +1,19 @@
 from graphs import*
-from misc import*
+from utils.labels_ordering import*
 from scipy.linalg import eigh,eig
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans,MiniBatchKMeans
 
 
-
+def normalize_vec(vector):
+    """Normalizes a vector by dividing each term by the norm of the vector
+    Inputs :
+        vector(ndarray): n-d vector.
+    
+    Returns :
+        vec_normalized (ndarray) : n-d vector with norm 1."""
+    
+    return (1/np.linalg.norm(vector)) * vector
 
 def kmeans(data,k,use_minibatch=False):
     '''Performs the k-means clustering algorithm on a dataset of n-dimensional points. 
@@ -27,20 +35,26 @@ def kmeans(data,k,use_minibatch=False):
 
 
 
-def eigenvectors(i,a,b=None,):
+def eigenvectors(i,a,b=None):
     """Computes the first i eigenvals and eigenvecs of a symmetric matrix for the generalized problem
     a*X=lambda*b*X
     Inputs :
-        a,(ndarray): Needs to be real symmetric.
+        a(ndarray): Needs to be real symmetric.
         i (int): Number of eigenvals and eigenvecs to compute (in ascending order)
-        b (ndarray) : The second matrix
+        b (ndarray/str) : The second matrix / a string.
     Returns :
         vecs (ndarray) : Matrix with the i eigenvecs as columns."""
-    if b=='no':
+    if isinstance(b,str):
         vals,vecs=eig(a)
-    vals,vecs=eigh(a,b,subset_by_index=[0, i-1])
-    vals=vals.real
-    vecs=vecs.real
+        vals,vecs=vals.real,vecs.real
+        idx = vals.argsort()
+        vals = vals[idx]
+        vecs = vecs[:,idx]
+        vals,vecs=vals[:i],vecs[:,:i]
+    else:
+        vals,vecs=eigh(a,b,subset_by_index=[0, i-1])
+        print(vecs)
+        vals,vecs=vals.real,vecs.real
     return vals,vecs
 
 def eigengap(vals):
@@ -55,7 +69,7 @@ def eigengap(vals):
     return int(c)
 
 
-def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='g_knn',sym_method=None,sigma=None,gsc_params=None,use_minibatch=False,eigen_only=False,clusters_fixed=False,return_matrix=False,labels_given=np.array([None])):
+def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='knn',sym_method=None,sigma=None,gsc_params=None,use_minibatch=False,eigen_only=False,clusters_fixed=False,return_matrix=False,labels_given=np.array([None])):
     """Performs spectral clustering on a dataset of n-dimensional points.
     Inputs :
         data (ndarray): The dataset, a 

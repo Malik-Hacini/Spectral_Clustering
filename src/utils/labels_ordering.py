@@ -1,21 +1,12 @@
 from sklearn.cluster import KMeans
 import numpy as np
 
+
 def labels_to_ints(labels):
     labels_unique=list(set(labels))
     for i,label in enumerate(labels):
             labels[i]=labels_unique.index(label)
     return len(labels_unique),np.array(labels)
-
-def normalize_vec(vector):
-    """Normalizes a vector by dividing each term by the norm of the vector
-    Inputs :
-        vector(ndarray): n-d vector.
-    
-    Returns :
-        vec_normalized (ndarray) : n-d vector with norm 1."""
-    
-    return (1/np.linalg.norm(vector)) * vector
 
 def reorder_labels(centers,labels):
     ordered_labels=[]

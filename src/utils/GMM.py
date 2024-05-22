@@ -1,4 +1,4 @@
-from misc import*
+from utils.labels_ordering import*
 from matplotlib import cm
 import numpy as np
 import random

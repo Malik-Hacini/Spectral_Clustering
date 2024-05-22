@@ -1,4 +1,4 @@
-from GMM import*
+from utils.GMM import*
 from spectral_clustering import*
 from Plots.matplot_funcs import*
 from sklearn import datasets

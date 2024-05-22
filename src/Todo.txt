@@ -57,5 +57,11 @@ Jean marc report (done)
 clean results document
 
 22/05
-Fix gsc laplacians.
+Fix gsc laplacians. (done)
+Plot directed graph (wip)
 Experiments ! Need to check spectral gap
+
+
+23/05 
+Plot directed graph
+Experiments !

@@ -1,4 +1,4 @@
-from GMM import*
+from utils.GMM import*
 from spectral_clustering import*
 from Plots.matplot_funcs import*
 from sklearn import datasets
@@ -22,9 +22,9 @@ def test_gsc_circles(k,n_eig,l,g_method,sym_method,sigma,gsc_params):
 def eigengaps_basic(choice,k,n_eig,gsc_params,g_method='knn',sigma=1/2):
     print(sigma)
     '''FIG E1 and E2
-        
-        titles,values=eigengaps_basic('circles',7,4)
-    plot_eigenvalues(values,titles)'''
+        gsc_params=(1,0.7,0.9)
+        values=eigengaps_basic('circles',3,4,gsc_params,g_method='knn',sigma=1/2)
+        plot_eigenvalues(values,[])'''
     if choice=='circles':
         noisy_circles = datasets.make_circles(
         n_samples=500, factor=0.5, noise=0.05, random_state=30)
@@ -40,6 +40,15 @@ def eigengaps_basic(choice,k,n_eig,gsc_params,g_method='knn',sigma=1/2):
         values.append(spectral_clustering(data,k,n_eig,l,g_method,sigma=sigma,gsc_params=gsc_params,eigen_only=True))
     return values
 
-gsc_params=(1,0.7,0.9)
-values=eigengaps_basic('circles',3,4,gsc_params,g_method='knn',sigma=1/2)
-plot_eigenvalues(values,[])
+def gsc_gmm_graph(N,means,covs,l,gsc_params):
+
+    """N=200
+    means=[(0,0),(2,2)]
+    covs=[1/3*np.identity(2),np.array([[1/3, 1/4],
+                                    [1/4,1/3]])]
+    gsc_params=(1,0.7,0.9)
+    gsc_gmm_graph(N,means,covs,'g_rw',gsc_params)"""
+    X,labels=GMM(2,N,means,covs)
+    vals,labels_spectral,matrix=spectral_clustering(X,6,4,l,'knn',sym_method=None,gsc_params=gsc_params,sigma=1/3,clusters_fixed=2,return_matrix=True,labels_given=labels)
+    plot_sc_graph(X,labels,labels_spectral,matrix)
+

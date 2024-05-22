@@ -1,5 +1,5 @@
 import pytest
-from GMM import*
+from utils.GMM import*
 from spectral_clustering import*
 from Plots.matplot_funcs import*
 from sklearn import datasets
@@ -55,7 +55,7 @@ def gaussian_mixture_fail():
         f.write("\n".join(data_str))
     with open('src/gaussians_labels.txt','w') as f:
         f.write(" ".join(labels.astype(str)))
-    vals,labels_spectral,matrix=spectral_clustering(data,6,4,'rw','knn','mean',1/3,clusters_fixed=2,return_matrix=True)
+    vals,labels_spectral,matrix=spectral_clustering(data,6,4,'rw','knn','mean',1/3,clusters_fixed=2,return_matrix=True,labels_given=labels)
     plot_sc_graph(data,labels,labels_spectral,matrix)
 
 def gaussian_mixture_fail_fixed():
