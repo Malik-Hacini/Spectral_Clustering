@@ -25,7 +25,7 @@ def knn(k: int, nodes, similarity):
     N = len(nodes)
     matrix = np.zeros((N, N))
 
-    start=time.time()
+    #start=time.time()
     distances=np.zeros((N,N))
     # Calculate distances
     for i in range(N):
@@ -34,7 +34,7 @@ def knn(k: int, nodes, similarity):
         #print(f"Node {i+1}/{N} distances computed. ")
     distances=distances+distances.T
 
-    print(f"distances computed in {time.time()-start} s. ")
+    #print(f"distances computed in {time.time()-start} s. ")
     
     # Find k-nearest neighbors
     for i in range(N):
@@ -81,7 +81,7 @@ def symmetrize(matrix,method):
         if method==None:
             #Do not symmetrize. Used for GSC.
             return matrix
-        if method=='mean':
+        if method=='mean' or method=='or':
             return (1/2)*(matrix+matrix.T)
         
         "PROBLEM ON AND ???"
@@ -92,15 +92,6 @@ def symmetrize(matrix,method):
                            matrix[i,j]=0
                            matrix[j,i]=0
 
-        '''DEPRECATED 
-        if method=='or':
-             for i in range(matrix.shape[0]):
-                 for j in range(i+1):
-                      if matrix[i,j]!=matrix[j,i]:
-                           if matrix[i,j]!=0:
-                                matrix[j,i]=matrix[i,j]
-                           elif matrix[j,i]!=0:
-                                matrix[i,j]=matrix[j,i]'''
 
         return matrix
 

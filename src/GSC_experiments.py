@@ -1,9 +1,9 @@
 from utils.GMM import*
 from spectral_clustering import*
-from Plots.matplot_funcs import*
+from utils.Plots.matplot_funcs import*
+from utils.data_files_managing import*
 from sklearn import datasets
-import time
-import random
+
 
 
 def test_gsc_circles(k,n_eig,l,g_method,sym_method,sigma,gsc_params):
@@ -40,15 +40,30 @@ def eigengaps_basic(choice,k,n_eig,gsc_params,g_method='knn',sigma=1/2):
         values.append(spectral_clustering(data,k,n_eig,l,g_method,sigma=sigma,gsc_params=gsc_params,eigen_only=True))
     return values
 
-def gsc_gmm_graph(N,means,covs,l,gsc_params):
+def gsc_graph_eigen(data,labels,l,n_clusters,gsc_params=None):
 
-    """N=200
-    means=[(0,0),(2,2)]
-    covs=[1/3*np.identity(2),np.array([[1/3, 1/4],
-                                    [1/4,1/3]])]
-    gsc_params=(1,0.7,0.9)
-    gsc_gmm_graph(N,means,covs,'g_rw',gsc_params)"""
-    X,labels=GMM(2,N,means,covs)
-    vals,labels_spectral,matrix=spectral_clustering(X,6,4,l,'knn',sym_method=None,gsc_params=gsc_params,sigma=1/3,clusters_fixed=2,return_matrix=True,labels_given=labels)
-    plot_sc_graph(X,labels,labels_spectral,matrix)
+    """"""
+    if l in ['g','g_rw']:
+        sym_method=None
+    else:
+        sym_method='mean'
+    vals,labels_spectral,matrix=spectral_clustering(data,4,n_clusters+1,l,'knn',sym_method=sym_method,gsc_params=gsc_params,
+                                                    sigma=1/3,clusters_fixed=n_clusters,return_matrix=True,
+                                                    labels_given=labels)
+    plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,directed=True)
+    save_plot(plt,'test1')
+
+"""l='g'
+gsc_params=(3,0.7,0.9)
+N=30
+means=[(0,0),(1/2,1/2),(1,1)]
+distrib=[0.2,0.35,0.45]
+sigmas_x=[1/6,1/6,1/6]
+sigmas_y=[1/6,1/6,1/6]
+p_list=[0.1,0.1,0.1]
+covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
+
+data,labels=GMM(2,N,means,covs,distrib)
+gsc_graph_eigen(data,labels,l,n_clusters=len(means),gsc_params=gsc_params)
+save_data_n_labels(data,labels,'test')"""
 

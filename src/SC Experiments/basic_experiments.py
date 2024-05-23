@@ -1,6 +1,6 @@
 from utils.GMM import*
 from spectral_clustering import*
-from Plots.matplot_funcs import*
+from utils.Plots.matplot_funcs import*
 from sklearn import datasets
 from keras.src.datasets import mnist
 import matplotlib.colors as mcolors

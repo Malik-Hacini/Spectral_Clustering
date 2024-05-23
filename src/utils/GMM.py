@@ -5,7 +5,6 @@ import random
 import matplotlib.pyplot as plt
 import scipy
 
-
 class Gaussian:
     """Multivariate gaussian distribution."""
     def __init__(self, d : int,mean ,cov) -> None:
@@ -44,8 +43,14 @@ class Gaussian:
         return samples
 
 
-def GMM(d,N,means,covs):
-    """Samples N points from a GMM with dimension d. For each point, the gaussians are uniformly chosen. Also labels points
+#Util functions.
+
+def bivariate_cov_m(sigma_x,sigma_y,p):
+    return np.array([[sigma_x**2,p*sigma_x*sigma_y],
+                    [p*sigma_x*sigma_y,sigma_y**2]])
+
+def GMM(d,N,means,covs,distrib='uniform'):
+    """Samples N points from a GMM with dimension d. For each point, the gaussians are chosen based on the given distribution. Also labels points
     according to the gaussian they come from
     
     Inputs :
@@ -53,7 +58,7 @@ def GMM(d,N,means,covs):
         N : number of samples
         means (list) : list of the d-dimensional means
         covs (list of ndarrays) : list of the d*d covariance matrices (same length as means)
-    
+        distrib (str/list) : list of P(i) where P(i) ois the probability a point is sampled in a gaussian.
     Returns :
         samples (ndarray) : the sampled points
         labels (ndarray) : the labels of the sampled points"""
@@ -65,7 +70,11 @@ def GMM(d,N,means,covs):
         gaussians.append(Gaussian(d,means[i],covs[i]))
 
     for i in range(N):
-        r=np.random.default_rng().integers(k)
+        if distrib=='uniform':
+            r=np.random.default_rng().integers(k)
+        else:
+            r=np.random.choice(np.arange(0, k), p=distrib)
+            
         samples+=list(gaussians[r].sample(1))
         labels.append(r)
 

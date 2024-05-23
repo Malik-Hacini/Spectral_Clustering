@@ -1,6 +1,6 @@
 from graphs import*
 from utils.labels_ordering import*
-from scipy.linalg import eigh,eig
+from scipy.linalg import eigh,eig,issymmetric
 import matplotlib.pyplot as plt
 from sklearn.cluster import KMeans,MiniBatchKMeans
 
@@ -53,7 +53,6 @@ def eigenvectors(i,a,b=None):
         vals,vecs=vals[:i],vecs[:,:i]
     else:
         vals,vecs=eigh(a,b,subset_by_index=[0, i-1])
-        print(vecs)
         vals,vecs=vals.real,vecs.real
     return vals,vecs
 
@@ -92,7 +91,8 @@ def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='knn',sym_meth
         """
     print("Building dataset graph...")
     graph=Graph(data,k_neighbors,g_method,sym_method,sigma)
-    print("Dataset graph built.")
+    dir_status=['directed','undirected'][int(issymmetric(graph.m))]
+    print(f"Dataset's {dir_status} graph built. ")
 
     print("Performing spectral embedding on the data.")
     vals,u_full=eigenvectors(n_eig,*graph.laplacian(laplacian,gsc_params))

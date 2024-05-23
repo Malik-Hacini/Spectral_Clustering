@@ -1,7 +1,7 @@
 import pytest
 from utils.GMM import*
 from spectral_clustering import*
-from Plots.matplot_funcs import*
+from utils.Plots.matplot_funcs import*
 from sklearn import datasets
 import matplotlib.colors as mcolors
 import time

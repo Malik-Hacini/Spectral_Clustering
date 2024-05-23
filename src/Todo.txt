@@ -63,5 +63,16 @@ Experiments ! Need to check spectral gap
 
 
 23/05 
-Plot directed graph
-Experiments !
+Plot directed graph (done)
+Clean gsc plots to save (done)
+save and load data (done)
+Experiments (wip):
+    - Points number and spectral gap 
+    - Cluster asymmetries : geometry, density.
+
+
+24/05 :
+Increase resolution of saved plots
+Experiments (wip):
+    - Points number and spectral gap 
+    - Cluster asymmetries : geometry, density.
