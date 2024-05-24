@@ -1,0 +1,2 @@
+Symmetric density : good eigengap
+Asymmetric : shit eigengap

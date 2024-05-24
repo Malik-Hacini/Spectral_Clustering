@@ -14,4 +14,4 @@ def save_data_n_labels(data,labels,name,path='src/Datasets'):
 
 def load_data_n_labels(name,path='src/Datasets'):
     """Name should be 'set' and not 'set.txt'."""
-    return np.loadtxt(f'{path}/{name}_data.txt'),np.loadtxt(f'{path}/{name}_labels.txt')
+    return np.loadtxt(f'{path}/{name}_data.txt'),np.loadtxt(f'{path}/{name}_labels.txt'),name

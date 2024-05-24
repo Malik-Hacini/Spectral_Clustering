@@ -2,7 +2,7 @@ from utils.GMM import*
 from spectral_clustering import*
 from utils.Plots.matplot_funcs import*
 from utils.data_files_managing import*
-from sklearn import datasets
+from sklearn import datasets,metrics
 
 
 
@@ -40,30 +40,39 @@ def eigengaps_basic(choice,k,n_eig,gsc_params,g_method='knn',sigma=1/2):
         values.append(spectral_clustering(data,k,n_eig,l,g_method,sigma=sigma,gsc_params=gsc_params,eigen_only=True))
     return values
 
-def gsc_graph_eigen(data,labels,l,n_clusters,gsc_params=None):
+def gsc_graph_eigen(data,labels,l,n_clusters,name,gsc_params=None,NMI=False):
 
-    """"""
     if l in ['g','g_rw']:
         sym_method=None
+        directed=True
     else:
         sym_method='mean'
+        directed=False
     vals,labels_spectral,matrix=spectral_clustering(data,4,n_clusters+1,l,'knn',sym_method=sym_method,gsc_params=gsc_params,
                                                     sigma=1/3,clusters_fixed=n_clusters,return_matrix=True,
                                                     labels_given=labels)
-    plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,directed=True)
-    save_plot(plt,'test1')
+    if NMI:
+        nmi_score=round(metrics.normalized_mutual_info_score(labels,labels_spectral)*100,4)
+    else:
+        nmi_score=None
+    plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=directed,nmi_score=nmi_score)
+    save_plot(plt,f'{name}_{l}')
 
-"""l='g'
+
+
 gsc_params=(3,0.7,0.9)
-N=30
-means=[(0,0),(1/2,1/2),(1,1)]
-distrib=[0.2,0.35,0.45]
+N=500
+means=[(1,0),(1/2,1/2),(1,1)]
+distrib=[0.1,0.35,0.55]
 sigmas_x=[1/6,1/6,1/6]
 sigmas_y=[1/6,1/6,1/6]
 p_list=[0.1,0.1,0.1]
 covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
+#data,labels=GMM(2,N,means,covs,distrib)
 
-data,labels=GMM(2,N,means,covs,distrib)
-gsc_graph_eigen(data,labels,l,n_clusters=len(means),gsc_params=gsc_params)
-save_data_n_labels(data,labels,'test')"""
 
+data,labels,name=load_data_n_labels('density_comparison')
+for l in ['un_norm','sym','rw','g','g_rw']:
+    gsc_graph_eigen(data,labels,l,n_clusters=3,name=name,gsc_params=gsc_params,NMI=True)
+
+save_data_n_labels(data,labels,'test1')

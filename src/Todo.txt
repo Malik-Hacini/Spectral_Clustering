@@ -72,7 +72,13 @@ Experiments (wip):
 
 
 24/05 :
-Increase resolution of saved plots
+Increase resolution of saved plots (done)
+Interactive dataset builder (done)
 Experiments (wip):
     - Points number and spectral gap 
     - Cluster asymmetries : geometry, density.
+
+
+27/05:
+Fix n_clusters behavior
+Experiments.

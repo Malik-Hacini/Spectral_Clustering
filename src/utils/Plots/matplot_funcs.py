@@ -5,7 +5,8 @@ import networkx as nx
 
 def save_plot(plt,name,path='Results/Saved_plots',show=True):
     plt.subplots_adjust(wspace = 0)
-    plt.savefig(f"{path}/{name}.png")
+    plt.savefig(f"{path}/{name}.svg")
+    print("Plot saved successfully.")
     plt.show()
 
 def plot_clustering(data,labels):
@@ -152,15 +153,17 @@ def plot_fig3_binorm(data,labels):
                     loc="upper left", title="Gaussians")
     plt.show()
 
-def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,directed=False):
+def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=False,nmi_score=None):
     options = {"with_labels":False,"edgecolors": "tab:gray", "node_size": 50, "width": 0.5,"alpha": 1}
     if directed:
         options['arrowstyle']='-|>'
         options['arrowsize']=10
     x,y=data.T
-    #precision=round(len([label for i,label in enumerate(labels) if labels_spectral[i]==label])/len(labels),4)
     fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
-    #fig.suptitle(f'Clustering performance : {precision*100}%')
+    if nmi_score==None:
+        fig.suptitle(f'Laplacian : {l}.')
+    else:
+        fig.suptitle(f'Laplacian : {l}. NMI : {nmi_score}')
     ax1.title.set_text('Spectral clustering')
     ax2.title.set_text('Ground Truth')
     ax3.title.set_text('First eigenvalues')
@@ -169,14 +172,13 @@ def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,directed=Fals
         G=nx.from_numpy_array(matrix,create_using=nx.DiGraph)
     else:
         G=nx.from_numpy_array(matrix)
-    nodes=[i for i in range(len(data))]
     pos={i: datum for i,datum in enumerate(data)}
     
     nx.draw_networkx(G,pos,node_color=labels_spectral,arrows=directed,**options,ax=ax1)
     ax2.scatter(x,y,c=labels.astype(float),edgecolors='gray')
 
     X=np.arange(1,len(vals)+1,1)
-    ax3.locator_params(axis="x", integer=True, tight=True)
+    ax3.locator_params(axis="x", integer=True)
     ax3.get_yaxis().set_visible(False)
     ax3.scatter(X,vals)
     return plt
