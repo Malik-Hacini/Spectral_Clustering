@@ -4,7 +4,7 @@ import networkx as nx
 
 
 def save_plot(plt,name,path='Results/Saved_plots',show=True):
-    plt.subplots_adjust(wspace = 0)
+    plt.subplots_adjust(left=0.005,bottom=0.323,right=0.995,top=0.683,hspace=0.2,wspace = 0)
     plt.savefig(f"{path}/{name}.svg")
     print("Plot saved successfully.")
     plt.show()
@@ -159,7 +159,7 @@ def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=Fa
         options['arrowstyle']='-|>'
         options['arrowsize']=10
     x,y=data.T
-    fig, (ax1, ax2, ax3) = plt.subplots(1, 3)
+    fig, (ax1, ax2, ax3)= plt.subplots(nrows=1,ncols=3,width_ratios=[1,1/2,1/3])
     if nmi_score==None:
         fig.suptitle(f'Laplacian : {l}.')
     else:

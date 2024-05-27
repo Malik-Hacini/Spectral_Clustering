@@ -82,4 +82,4 @@ Experiments (wip):
 27/05:
 Fix n_clusters behavior
 Experiments : density plots.
-Fully unsupervised SC pipeline (kalinsky)
+Fully unsupervised SC pipeline

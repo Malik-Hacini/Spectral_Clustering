@@ -1,6 +1,6 @@
 import numpy as np
 
-def save_data_n_labels(data,labels,name,path='src/Datasets'):
+def save_data_n_labels(data,labels,name,path='src/utils/Datasets'):
     """Name should be 'set' and not 'set.txt'."""
     data,labels=list(data),list(labels)
     with open(f'{path}/{name}_data.txt', 'w') as file:
@@ -12,6 +12,6 @@ def save_data_n_labels(data,labels,name,path='src/Datasets'):
         file.write(' '.join(map(str,labels)))
     print('Data and labels saved successfully.')
 
-def load_data_n_labels(name,path='src/Datasets'):
+def load_data_n_labels(name,path='src/utils/Datasets'):
     """Name should be 'set' and not 'set.txt'."""
     return np.loadtxt(f'{path}/{name}_data.txt'),np.loadtxt(f'{path}/{name}_labels.txt'),name
