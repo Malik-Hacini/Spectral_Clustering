@@ -48,13 +48,14 @@ def gsc_graph_eigen(data,labels,l,n_clusters,name,gsc_params=None,NMI=False):
     else:
         sym_method='mean'
         directed=False
-    vals,labels_spectral,matrix=spectral_clustering(data,5,n_clusters+1,l,'knn',sym_method=sym_method,gsc_params=gsc_params,
+    vals,labels_spectral,matrix=spectral_clustering(data,4,n_clusters+1,l,'knn',sym_method=sym_method,gsc_params=gsc_params,
                                                     sigma=1,clusters_fixed=n_clusters,return_matrix=True,use_minibatch=True,
-                                                    labels_given=labels)
+                                                    )
     if NMI:
         nmi_score=round(metrics.normalized_mutual_info_score(labels,labels_spectral)*100,4)
     else:
         nmi_score=None
+    print("Plotting results...")
     plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=directed,nmi_score=nmi_score)
     save_plot(plt,f'{name}_{l}')
 
@@ -71,7 +72,7 @@ covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(mean
 
 
 gsc_params=(3,0.7,0.9)
-data,labels,name=load_data_n_labels('sym_blobs')
+data,labels,name=load_data_n_labels('dens_vs_n_blobs_2')
 for l in ['un_norm','sym','rw','g','g_rw']:
     gsc_graph_eigen(data,labels,l,n_clusters=2,name=name,gsc_params=gsc_params,NMI=True)
 

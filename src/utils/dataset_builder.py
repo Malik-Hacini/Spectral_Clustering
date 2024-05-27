@@ -2,7 +2,7 @@ from data_files_managing import save_data_n_labels
 from sys import setrecursionlimit
 import matplotlib.pyplot as plt
 
-setrecursionlimit(100000)
+setrecursionlimit(10000000)
 
 class PointCollector:
     def __init__(self):
@@ -127,6 +127,8 @@ def main():
     collector.ax.set_xticks([])  # Hide x-axis ticks
     collector.ax.set_yticks([])  # Hide y-axis ticks
 
+    mng = plt.get_current_fig_manager()
+    mng.window.state('zoomed')
     plt.show()
 
 if __name__ == "__main__":

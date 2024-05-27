@@ -111,7 +111,6 @@ def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='knn',sym_meth
         n_clusters=clusters_fixed
     
     u=u_full[:,:n_clusters]
-    print(u)
     print("k-means clustering the spectral embedded data...")
     labels_unord=kmeans(u,n_clusters,use_minibatch)
     
@@ -130,9 +129,7 @@ def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='knn',sym_meth
     else:
         #If the true labels are given, we order our clustering labels by inference.
         cluster_labels = infer_cluster_labels(n_clusters, labels_given,labels_unord)
-        #labels_ordered = infer_data_labels(labels_unord,cluster_labels)
-        labels_ordered=labels_unord
-    print(labels_ordered)
+        labels_ordered = infer_data_labels(labels_unord,cluster_labels)
         
     if return_matrix:
         return vals,labels_ordered,graph.m

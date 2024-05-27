@@ -4,10 +4,13 @@ import networkx as nx
 
 
 def save_plot(plt,name,path='Results/Saved_plots',show=True):
+    fig = plt.gcf()
+    fig.set_size_inches(14.40, 8.10)
     plt.subplots_adjust(left=0.005,bottom=0.323,right=0.995,top=0.683,hspace=0.2,wspace = 0)
-    plt.savefig(f"{path}/{name}.svg")
+    plt.savefig(f"{path}/{name}.svg",dpi=100)
     print("Plot saved successfully.")
-    plt.show()
+    if show:
+        plt.show()
 
 def plot_clustering(data,labels):
     """Plots the clustering of 2D data based on the given labels.
@@ -181,5 +184,7 @@ def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=Fa
     ax3.locator_params(axis="x", integer=True)
     ax3.get_yaxis().set_visible(False)
     ax3.scatter(X,vals)
+
+    
     return plt
 
