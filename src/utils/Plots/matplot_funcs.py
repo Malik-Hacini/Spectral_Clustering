@@ -1,10 +1,16 @@
 import matplotlib.pyplot as plt
 import numpy as np
 import networkx as nx
+import os
 
 
-def save_plot(plt,name,path='Results/Saved_plots',show=True):
+def save_plot(plt,name,path='Results/Saved_plots',dataset_name=None,show=True):
     fig = plt.gcf()
+    if dataset_name is not None:
+        path=f'{path}/{dataset_name}'
+        if not os.path.exists(path):
+            os.mkdir(path)
+    
     fig.set_size_inches(14.40, 8.10)
     plt.subplots_adjust(left=0.005,bottom=0.323,right=0.995,top=0.683,hspace=0.2,wspace = 0)
     plt.savefig(f"{path}/{name}.svg",dpi=100)

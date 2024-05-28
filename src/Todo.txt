@@ -80,6 +80,15 @@ Experiments (wip):
 
 
 27/05:
-Fix n_clusters behavior
-Experiments : density plots.
+Fix n_clusters behavior (cause identitified : infer_cluster_labels, not fixed (workaround used : center ordering of labels))
+Experiments : density plots. (wip)
 Fully unsupervised SC pipeline
+
+28/05    
+Experiments : density plots. (done)
+Recap w/ mat and ernesto
+
+29/05
+
+Report on density plots
+

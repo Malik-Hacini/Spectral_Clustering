@@ -4,7 +4,7 @@
 -NMI score for evaluating performance
 
 
-TODO : weird convergence errors for (wbdc,all),(parkinson,all)
+TODO : weird convergence errors for (wbdc,all),(parkinson,all) #PROBABLY INFER CLUSTER LABELS AT FAULT.
        '''
 
 from spectral_clustering import*

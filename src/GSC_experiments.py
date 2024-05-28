@@ -57,7 +57,7 @@ def gsc_graph_eigen(data,labels,l,n_clusters,name,gsc_params=None,NMI=False):
         nmi_score=None
     print("Plotting results...")
     plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=directed,nmi_score=nmi_score)
-    save_plot(plt,f'{name}_{l}')
+    save_plot(plt,f'{name}_{l}',dataset_name=name)
 
 
 
@@ -72,8 +72,8 @@ covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(mean
 
 
 gsc_params=(3,0.7,0.9)
-data,labels,name=load_data_n_labels('dens_vs_n_blobs_2')
+data,labels,name=load_data_n_labels('3mix_asym_blobs')
 for l in ['un_norm','sym','rw','g','g_rw']:
-    gsc_graph_eigen(data,labels,l,n_clusters=2,name=name,gsc_params=gsc_params,NMI=True)
+    gsc_graph_eigen(data,labels,l,n_clusters=3,name=name,gsc_params=gsc_params,NMI=True)
 
 save_data_n_labels(data,labels,'test1')
