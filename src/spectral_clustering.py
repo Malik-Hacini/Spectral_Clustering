@@ -6,7 +6,7 @@ from sklearn.cluster import KMeans,MiniBatchKMeans
 
 
 def normalize_vec(vector):
-    """Normalizes a vector by dividing each term by the norm of the vector
+    """Normalizes a vector
     Inputs :
         vector(ndarray): n-d vector.
     
