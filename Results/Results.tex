@@ -415,8 +415,43 @@ By forcing the algorithm to form $2$ clusters, we get good performance. Again, w
 	\caption{First eigenvalues of laplacians for the graph of \ref{unsuc}.}
 \end{figure}
 These results clearly show that the connectivity of the graph has great impact of the quality of the eigengap. Both the spectra of $L$ and $L_{rw}$ give no valuable information and while $L_{sym}$ does have a "gap" after the second eigenvalue, it isn't clear enough to conclude on the true number of clusters.
-In conclusion, while the eigengap can be a useful criteria in the case of well separated datasets, when the graph is strongly connected to better the performance on harder datasets, the eigengap becomes meaningles
-Thus, we conclude that to efficiently choose $k$, we need to connect the graph enough to ensure good performance, but not too much to the point where the eigengap is useless, otherwise we will be unable to know the correct number of clusters. In practice, this is near impossible most of the time.
+In conclusion, while the eigengap can be a useful criteria in the case of well separated datasets, when the graph is strongly connected to better the performance on harder datasets, the eigengap becomes meaningles as noise is too big.
+Thus, we conclude that to efficiently choose $k$, we need to connect the graph enough to ensure good performance, but not too much to the point where the eigengap is useless, otherwise we will be unable to know the correct number of clusters.
+\subsection{Extensive study of the eigengap}
+\subsubsection{Method}
+$k$ is not the only parameter with an impact on the eigengap. In this section we investigate characteristics of synthetic $2$-d datasets to assess their impact on the eigengap. For this study, we also consider the generalized spectral clustering (GSC) framework proposed by \cite[Jonckheere et.al]{GSC}. In theory, this framework involves new parameters $(t,\gamma,\alpha)$ and two new laplacians $L_{G}$ and $L_{G_{rw}}$. In practice, we fix $(t,\gamma,\alpha)$=$(3,0.7,0.9)$ for every dataset. To simplify the study, we first consider the case of $2$ clusters. We investigate $3$ features of the datasets:
+\begin{itemize}
+	\item Geometry of clusters (shape and $D$-symmetry)
+	\item $N$-symmetry
+	\item Total number of points.
+\end{itemize}
+The big idea is to detect if clusters that "look alike" lead to better eigengaps. 
+"Geometry of clusters" refers to the shape of the clusters. $2$ clusters are $N$-symmetric if they have the same number of points, and $D$-symmetric if they have the same (geometrical) density of points in the space they lie in.
+To test these criteria, we generate multiple datasets and cluster them using every standard laplacian ($L$,$L_{sym}$,$L_{rw}$) and the generalized laplacians $L_G$ and $L_{G_{rw}}$. We make sure to separate these clusters well, to isolate the effect of our criteria on the eigengap. We are then able to choose $k$ efficiently as the datasets are on the easier side. The choice of $k$ is detailed in TOREF In practice, the standard laplacians return nearly identical results regarding performance of clustering and eigengap, thus we choose to only report $L_{rw}$ results and compare them to the generalized laplacians.
+\subsubsection{Results}
+\paragraph{Geometry of clusters.}
+To correctly isolate the effect of the geometry of clusters, we build $N$-symmetric and $D$-symmeytric datasets. We start by a dataset with $2$ circular clusters to serve as reference.
+We get the best results with $L_{G_{rw}}$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/base_circles_g_rw}
+	\label{fig:base_circles}
+	\caption{$k$ = 4, $L_{G_{rw}}$. A great eigengap is observed.}
+\end{figure}
+As shown by the next experiment, changing the shape of one cluster doesn't change these results :
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/uneven_blobs_g_rw}
+	\label{fig:uneven_blobs}
+	\caption{$k$ = 4, $L_{G_{rw}}$. An eigengap of the same quality is observed.}
+\end{figure}
+
+Other experiments allow us to conclude that the shape of the clusters has no significant impact on the performance of the clustering and the quality of the eigengap.
+These results were to be excpected : spectral clustering looks for the connected components of a $k$-nn graph. This graph does not contain the information of the shape of the clusters : in the adjacency matrix, a circular cluster will appear the same as an highly complex non-convex one. The underlying geometry of the subset of $\R^N$ a cluster belongs to is not taken into account when forming the graph, as only it's $k$- nearest neighbors are considered connected to him. This is an advantage spectral clustering has over $k$-means, which looks for convex clusters in $\R^N$. It is the main concept that makes up for the great performance of spectral clustering. \\
+For the sake of simplicty and without loss of generality, we thus only consider circular clusters for our experiments on $N$-symmetry and $D$-symmetry.
+\paragraph{$N$-symmetry}
+To isolate the impact of $N$-symmetry, we consider datasets with a fixed number of points.
+
 \subsection{UCI datasets}
 Now that we know our algorithms follow the basic theoretical behaviors we want, we can benchmark them on more interesting datasets.
 We used the same 11 benchmark datasets from the \cite[UCI ML repository]{UCI} as \cite[Jonckheere et.al]{GSC}. These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent quantitative metric.

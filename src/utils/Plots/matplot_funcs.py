@@ -11,9 +11,9 @@ def save_plot(plt,name,path='Results/Saved_plots',dataset_name=None,show=True):
         if not os.path.exists(path):
             os.mkdir(path)
     
-    fig.set_size_inches(14.40, 8.10)
+    #fig.set_size_inches(14.40, 8.10)
     plt.subplots_adjust(left=0.005,bottom=0.323,right=0.995,top=0.683,hspace=0.2,wspace = 0)
-    plt.savefig(f"{path}/{name}.svg",dpi=100)
+    plt.savefig(f"{path}/{name}.png",dpi=300)
     print("Plot saved successfully.")
     if show:
         plt.show()
@@ -169,10 +169,10 @@ def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=Fa
         options['arrowsize']=10
     x,y=data.T
     fig, (ax1, ax2, ax3)= plt.subplots(nrows=1,ncols=3,width_ratios=[1,1/2,1/3])
-    if nmi_score==None:
+    '''if nmi_score==None:
         fig.suptitle(f'Laplacian : {l}.')
     else:
-        fig.suptitle(f'Laplacian : {l}. NMI : {nmi_score}')
+        fig.suptitle(f'Laplacian : {l}. NMI : {nmi_score}')'''
     ax1.title.set_text('Spectral clustering')
     ax2.title.set_text('Ground Truth')
     ax3.title.set_text('First eigenvalues')

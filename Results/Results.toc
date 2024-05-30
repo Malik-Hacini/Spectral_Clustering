@@ -4,10 +4,15 @@
 \contentsline {subsection}{\numberline {2.1}graphs.py}{2}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}spectralclustering.py}{2}{subsection.2.2}%
 \contentsline {section}{\numberline {3}Spectral Clustering Experiments}{3}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Basic Experiments}{3}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.1}Basic Experiments}{4}{subsection.3.1}%
 \contentsline {subsubsection}{\numberline {3.1.1}Circles and Moons}{4}{subsubsection.3.1.1}%
 \contentsline {subsubsection}{\numberline {3.1.2}Gaussian Mixture Models (GMMs)}{5}{subsubsection.3.1.2}%
 \contentsline {paragraph}{Multivariate Normal Distribution}{5}{section*.4}%
-\contentsline {subsection}{\numberline {3.2}UCI datasets}{7}{subsection.3.2}%
-\contentsline {subsubsection}{\numberline {3.2.1}Normalized Mutual Information (NMI)}{8}{subsubsection.3.2.1}%
-\contentsline {subsection}{\numberline {3.3}Method and results}{8}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.2}Extensive study of the eigengap}{7}{subsection.3.2}%
+\contentsline {subsubsection}{\numberline {3.2.1}Method}{7}{subsubsection.3.2.1}%
+\contentsline {subsubsection}{\numberline {3.2.2}Results}{8}{subsubsection.3.2.2}%
+\contentsline {paragraph}{Geometry of clusters.}{8}{section*.10}%
+\contentsline {paragraph}{$N$-symmetry}{9}{section*.13}%
+\contentsline {subsection}{\numberline {3.3}UCI datasets}{9}{subsection.3.3}%
+\contentsline {subsubsection}{\numberline {3.3.1}Normalized Mutual Information (NMI)}{9}{subsubsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.4}Method and results}{10}{subsection.3.4}%

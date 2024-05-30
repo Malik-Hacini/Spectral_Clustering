@@ -90,5 +90,9 @@ Recap w/ mat and ernesto
 
 29/05
 
-Report on density plots
+Report on density plots (wip)
 
+30/05
+
+Experiments on total number of points.
+Report them.

@@ -72,8 +72,8 @@ covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(mean
 
 
 gsc_params=(3,0.7,0.9)
-data,labels,name=load_data_n_labels('circles')
+data,labels,name=load_data_n_labels('low_high_asym2_blobs')
 for l in ['un_norm','sym','rw','g','g_rw']:
-    gsc_graph_eigen(data,labels,l,n_clusters=3,name=name,gsc_params=gsc_params,NMI=True)
+    gsc_graph_eigen(data,labels,l,n_clusters=2,name=name,gsc_params=gsc_params,NMI=True)
 
 save_data_n_labels(data,labels,'test1')

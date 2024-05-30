@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  20 MAY 2024 18:01
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  30 MAY 2024 16:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2599,13 +2599,14 @@ LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
 (Font)              scaled to size 6.0pt on input line 276.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sl' will be
-(Font)              scaled to size 12.0pt on input line 289.
+(Font)              scaled to size 12.0pt on input line 286.
  [2]
 Overfull \hbox (2.96794pt too wide) in paragraph at lines 310--311
 \TU/TeXGyreTermesX(0)/m/n/12 To assert the good behavior of our algorithms, the
  first step was to conduct very basic experiments.
  []
 
+[3]
 File: figures/Fig1.png Graphic file (type bmp)
 <figures/Fig1.png>
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
@@ -2617,7 +2618,6 @@ Overfull \hbox (93.05435pt too wide) in paragraph at lines 315--325
 [][] [] 
  []
 
-[3]
 File: figures/Fig_E1_circles.png Graphic file (type bmp)
 <figures/Fig_E1_circles.png>
 
@@ -2689,25 +2689,30 @@ See the caption package documentation for explanation.
 
 LaTeX Warning: Reference `unsuc' on page 7 undefined on input line 415.
 
-
-Overfull \hbox (12.85995pt too wide) in paragraph at lines 421--423
+[7]
+File: figures/base_circles_g_rw.png Graphic file (type bmp)
+<figures/base_circles_g_rw.png>
+File: figures/uneven_blobs_g_rw.png Graphic file (type bmp)
+<figures/uneven_blobs_g_rw.png>
+ [8]
+Overfull \hbox (12.85995pt too wide) in paragraph at lines 456--458
 \TU/TeXGyreTermesX(0)/m/n/12 Now that we know our algorithms follow the basic t
 heoretical behaviors we want, we can benchmark
  []
 
 
-Overfull \hbox (25.4376pt too wide) in paragraph at lines 424--426
+Overfull \hbox (25.4376pt too wide) in paragraph at lines 459--461
 \TU/TeXGyreTermesX(0)/m/n/12 partitions. As an external metric, the NMI necessi
 tates the availability of class labels for computations,
  []
 
-[7]
+[9]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sc' will be
-(Font)              scaled to size 10.95pt on input line 446.
- [8]
+(Font)              scaled to size 10.95pt on input line 481.
+ [10]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 479.
- [9] (Results.aux)
+(Font)              scaled to size 12.0pt on input line 514.
+ [11] (Results.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -2721,15 +2726,15 @@ LaTeX Font Warning: Size substitutions with differences
 LaTeX Warning: There were undefined references.
 
 Package rerunfilecheck Info: File `Results.out' has not changed.
-(rerunfilecheck)             Checksum: DF636B83FCC10D48D6AFFA6DDDE4716A;1769.
+(rerunfilecheck)             Checksum: 18C5D4DB618BE993D69CBE7982E28F2A;2195.
  ) 
 Here is how much of TeX's memory you used:
- 51442 strings out of 409673
- 1107731 string characters out of 5778967
- 2165630 words of memory out of 5000000
- 72630 multiletter control sequences out of 15000+600000
+ 51483 strings out of 409673
+ 1109061 string characters out of 5778967
+ 2184630 words of memory out of 5000000
+ 72669 multiletter control sequences out of 15000+600000
  611776 words of font info for 195 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 84i,12n,117p,726b,1844s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 84i,12n,117p,726b,1818s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Results.pdf (9 pages).
+Output written on Results.pdf (11 pages).

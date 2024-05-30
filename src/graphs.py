@@ -59,18 +59,29 @@ def knn_gaussian(k: int, N, nodes, similarity):
     Returns :
         matrix (ndarray) : k-nearest neighbors weighted similarity matrix."""
     
-        matrix=np.zeros((N,N))
-        for i in range(N):
-            neighbors_similarities=[]
-            for neighbor in nodes:
-                #Change similariy function here after adding it to the similarity class.
-                neighbors_similarities.append(similarity.gaussian(nodes[i],neighbor))
-            knn_ind=np.argpartition(neighbors_similarities,-k)[-k:]   
-            for ind in knn_ind:
-                if ind!=i: #No node is connected to itself (no impact on clustering)
-                    matrix[i, ind]= neighbors_similarities[ind]
-        return matrix
+        N = len(nodes)
+        matrix = np.zeros((N, N))
 
+        #start=time.time()
+        distances=np.zeros((N,N))
+        # Calculate distances
+        for i in range(N):
+            for j in range(i+1, N):
+                distances[i, j] = similarity.gaussian(nodes[i], nodes[j])
+            #print(f"Node {i+1}/{N} distances computed. ")
+        distances=distances+distances.T
+
+    #print(f"distances computed in {time.time()-start} s. ")
+        
+        # Find k-nearest neighbors
+        for i in range(N):
+            knn_indices = np.argpartition(distances[i], -k)[-k:]
+            for j in knn_indices:
+                if j != i:
+                    matrix[i, j] = distances[i,j]
+            #print(f"Node {i+1}/{N} neighbors computed.")
+
+        return matrix
 def symmetrize(matrix,method):
         """Symmetrizes knn matrix using different methods.
         Inputs :
