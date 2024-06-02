@@ -41,14 +41,31 @@ def eigengaps_basic(choice,k,n_eig,gsc_params,g_method='knn',sigma=1/2):
     return values
 
 def gsc_graph_eigen(data,labels,l,n_clusters,name,gsc_params=None,NMI=False):
+    '''N=100
+    means=[(0,0),(1.15,1.15)]
+    n_clusters=len(means)
+    distrib=[0.5,0.5]
+    sigmas_x=[1/3,1/3]
+    sigmas_y=[1/3,1/3]
+    p_list=[0,0]
+    covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
+    gsc_params=(3,0.7,0.9)
 
+    data,labels=GMM(n_clusters,N,means,covs,distrib)     
+
+    #data,labels,name=load_data_n_labels('low_high_asym2_blobs')
+    name=f"circ_{N}_sym"
+    for l in ['rw','g_rw']:
+        gsc_graph_eigen(data,labels,l,n_clusters=2,name=name,gsc_params=gsc_params,NMI=True)
+
+    save_data_n_labels(data,labels,name)'''
     if l in ['g','g_rw']:
         sym_method=None
         directed=True
     else:
         sym_method='mean'
         directed=False
-    vals,labels_spectral,matrix=spectral_clustering(data,4,n_clusters+1,l,'knn',sym_method=sym_method,gsc_params=gsc_params,
+    vals,labels_spectral,matrix=spectral_clustering(data,6,n_clusters+1,l,'knn',sym_method=sym_method,gsc_params=gsc_params,
                                                     sigma=1,clusters_fixed=n_clusters,return_matrix=True,use_minibatch=True,
                                                     )
     if NMI:
@@ -59,21 +76,40 @@ def gsc_graph_eigen(data,labels,l,n_clusters,name,gsc_params=None,NMI=False):
     plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=directed,nmi_score=nmi_score)
     save_plot(plt,f'{name}_{l}',dataset_name=name)
 
+def eigengap_total_curve(steps,gsc_params):
+    '''gsc_params=(3,0.7,0.9)
+    steps=[100,200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2500,3000,3500,4000,4500,5000]
+
+    eigengap_total_curve(steps,gsc_params)'''
+    means=[(0,0),(1.15,1.15)]
+    n_clusters=len(means)
+    distrib=[0.5,0.5]
+    sigmas_x=[1/3,1/3]
+    sigmas_y=[1/3,1/3]
+    p_list=[0,0]
+    covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
+
+    gaps={"rw":[],"g_rw":[]}
+    for l in ('rw','g_rw'):
+        if l=='rw':
+            sym_method='mean'
+        else:
+            sym_method=None
+        for step in steps:
+            data,labels=GMM(n_clusters,step,means,covs,distrib)            
+            vals=spectral_clustering(data,6,n_clusters+1,l,'knn',sym_method=sym_method,gsc_params=gsc_params,
+                                                    sigma=1,clusters_fixed=n_clusters,use_minibatch=True,
+                                                    eigen_only=True)
+            gap=vals[-2]
+            gaps[l].append(gap)
+    plt=plot_gapcurve(steps,gaps,[r'$L_{rw}$',r'$L_{G_{rw}}$'])
+    save_plot(plt,'circ_eigencurve')
+
+def test_unsupervised_gsc(l,name):
+    data,labels,namee=load_data_n_labels(name)
+    vals,labels_spectral,matrix=spectral_clustering(data,clusters_fixed=2,unsupervised_gsc=True,return_matrix=True)
+    plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=True)
+    save_plot(plt,f'{name}_{l}',dataset_name=name)
 
 
-'''N=500
-means=[(1,0),(1/2,1/2),(1,1)]
-distrib=[0.1,0.35,0.55]
-sigmas_x=[1/6,1/6,1/6]
-sigmas_y=[1/6,1/6,1/6]
-p_list=[0.1,0.1,0.1]
-covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
-#data,labels=GMM(2,N,means,covs,distrib)'''
-
-
-gsc_params=(3,0.7,0.9)
-data,labels,name=load_data_n_labels('low_high_asym2_blobs')
-for l in ['un_norm','sym','rw','g','g_rw']:
-    gsc_graph_eigen(data,labels,l,n_clusters=2,name=name,gsc_params=gsc_params,NMI=True)
-
-save_data_n_labels(data,labels,'test1')
+test_unsupervised_gsc('g_rw','unsupervised_test')

@@ -96,3 +96,10 @@ Report on density plots (wip)
 
 Experiments on total number of points.
 Report them.
+
+03/06
+
+Fully unsupervised pipeline questions :
+Should we determine k ? n/log(n) ?
+What gsc param to ignore ?
+Code ch and dch.

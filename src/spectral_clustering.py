@@ -15,6 +15,11 @@ def normalize_vec(vector):
     
     return (1/np.linalg.norm(vector)) * vector
 
+def compute_centers(data,labels):
+    clusters=[[datum for j,datum in enumerate(data) if labels[j]==i] for i in range(len(set(labels)))]
+    centers=[[sum(i)//len(cluster) for i in zip(*cluster)] for cluster in clusters]
+    return centers
+
 def kmeans(data,k,use_minibatch=False):
     '''Performs the k-means clustering algorithm on a dataset of n-dimensional points. 
     Use LLoyd's algorithm to compute the clustering.
@@ -33,6 +38,17 @@ def kmeans(data,k,use_minibatch=False):
 
     return est.labels_
 
+def cluster(n_clusters,n_eig,laplacian_matrix,use_minibatch):
+    vals,u_full=eigenvectors(n_eig,*laplacian_matrix)
+    
+    #In the case of L_sym being used, there is an additional normalization step.
+    if laplacian_matrix=='sym':
+        u_full=np.apply_along_axis(normalize_vec, axis=0, arr=u_full)
+    u=u_full[:,:n_clusters]
+    print("k-means clustering the spectral embedded data...")
+    labels_unord=kmeans(u,n_clusters,use_minibatch)
+
+    return vals,labels_unord
 
 
 def eigenvectors(i,a,b=None):
@@ -56,20 +72,37 @@ def eigenvectors(i,a,b=None):
         vals,vecs=vals.real,vecs.real
     return vals,vecs
 
-def eigengap(vals):
-    X=np.arange(1,len(vals)+1,1)
-    Y=vals
-    plt.locator_params(axis="x", integer=True, tight=True)
-    plt.locator_params(axis="y", tight=True,nbins=4)
-    plt.scatter(X,Y)
-    plt.show()
-    c=input("Number of clusters to construct:\n")
+def ch_index(data,clustering_labels):
+    labels_unique=list(set(clustering_labels))
+    N=len(data)
+    k=len(labels_unique)
+    cluster_centers=np.array(compute_centers(data,clustering_labels))
+    set_center=np.array([sum(i) for i in zip(*data)])/N
+    vols_dist=[len([i for i in clustering_labels if i==cluster])*np.linalg.norm(cluster_centers[j]-set_center) for j,cluster in enumerate(labels_unique)]
+    intra_dist=[sum([np.linalg.norm(datum-cluster_centers[j]) for i,datum in enumerate(data) if clustering_labels[i]==j]) for j in labels_unique]
+    ch=(N-k)/(k-1)*(sum(vols_dist))/sum(intra_dist)
     
-    return int(c)
+    return ch
 
+def compute_unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch):
+   ch_list,vals_list,labels_list=[],[],[]
 
-def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='knn',sym_method=None,sigma=None,gsc_params=None,use_minibatch=False,eigen_only=False,clusters_fixed=False,return_matrix=False,labels_given=np.array([None])):
+   for j in range(max_it):
+       gsc_params=(2**j,1,1)
+       vals,labels_unord=cluster(n_clusters,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch)
+       vals_list.append(vals)
+       labels_list.append(labels_unord)
+       ch_list.append(ch_index(data,labels_unord))
+   argmax=np.argmax(ch_list)
+   print(argmax)
+   return vals_list[argmax],labels_list[argmax]
+       
+def spectral_clustering(data,k_neighbors=None,n_eig=None,laplacian='rw',
+                        g_method='knn',sym_method=None,sigma=1,gsc_params=None,unsupervised_gsc=False,
+                        use_minibatch=True,eigen_only=False,clusters_fixed=False,return_matrix=False,
+                        max_it=5,labels_given=np.array([None])):
     """Performs spectral clustering on a dataset of n-dimensional points.
+
     Inputs :
         data (ndarray): The dataset, a 
         k_neighbors (int): Number of neighbors you want to connect in the case of a k-nn graph.
@@ -89,46 +122,39 @@ def spectral_clustering(data,k_neighbors,n_eig,laplacian,g_method='knn',sym_meth
         labels (ndarray) : labels of the points after spectral clustering, ordered in the same way as the dataset.
         matrix (ndarray) : the adjacency matrix of the graph
         """
+    
+    #Choosing the optimal  base parameters
+    N=len(data)
+    if n_eig==None:
+        n_eig=N
+    if k_neighbors==None:
+        k_neighbors=int(np.floor(np.log(N)))
     print("Building dataset graph...")
     graph=Graph(data,k_neighbors,g_method,sym_method,sigma)
     dir_status=['directed','undirected'][int(issymmetric(graph.m))]
     print(f"Dataset's {dir_status} graph built. ")
-
+    
     print("Performing spectral embedding on the data.")
-    vals,u_full=eigenvectors(n_eig,*graph.laplacian(laplacian,gsc_params))
-
-    #In the case of L_sym being used, there is an additional normalization step.
-    if laplacian=='sym':
-        u_full=np.apply_along_axis(normalize_vec, axis=0, arr=u_full)
-
-    #Use of the eigengap heuristic to get the number of clusters, if it is not given
-    if eigen_only:
-        return vals
-    
-    if not clusters_fixed:
-        n_clusters=eigengap(vals)
+    if not unsupervised_gsc:
+        if eigen_only:
+            vals,u_full=eigenvectors(n_eig,*graph.laplacian(laplacian,gsc_params))
+            return vals
+        vals,labels_unord=cluster(clusters_fixed,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch)
     else:
-        n_clusters=clusters_fixed
+        #Choosing the optimal gsc parameters and clustering.
+        if laplacian=='rw':
+            laplacian='g_rw'
+        vals,labels_unord=compute_unsupervised_gsc(data,n_eig,graph,laplacian,max_it,clusters_fixed,use_minibatch)
     
-    u=u_full[:,:n_clusters]
-    print("k-means clustering the spectral embedded data...")
-    labels_unord=kmeans(u,n_clusters,use_minibatch)
-    
-    clusters=[[datum for j,datum in enumerate(data) if labels_unord[j]==i] for i in range(n_clusters)]
     if np.all(labels_given)==None:
         #If the labels aren't given, we order labels based on cluster centroids.
         #We do not use the KMeans clusters_centers attribute because we 
         #need to compute them on the original dataset, not in the spectral embedding.
-        centers=[]
-        for i in range(n_clusters):
-            avg=[]
-            for j in range(2):
-                avg.append(sum([t[j] for t in clusters[i]])/len(clusters[i]))
-            centers.append(avg)
+        centers=compute_centers(data,labels_unord)
         labels_ordered = reorder_labels(centers,labels_unord)
     else:
         #If the true labels are given, we order our clustering labels by inference.
-        cluster_labels = infer_cluster_labels(n_clusters, labels_given,labels_unord)
+        cluster_labels = infer_cluster_labels(clusters_fixed, labels_given,labels_unord)
         labels_ordered = infer_data_labels(labels_unord,cluster_labels)
         
     if return_matrix:

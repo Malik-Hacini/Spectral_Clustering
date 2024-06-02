@@ -163,6 +163,8 @@ class Graph:
             return (L,self.degree_m)
         
         if choice in ['g','g_rw']:
+                if gsc_params==None:
+                    gsc_params=(1,1,1)
                 t,alpha,gamma=gsc_params
                 #Basic matrices of GSC
                 P=self.m/self.k #Transition matrix of the natural markov walk on a knn graph.

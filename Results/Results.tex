@@ -448,7 +448,7 @@ As shown by the next experiment, changing the shape of one cluster doesn't chang
 
 Other experiments allow us to conclude that the shape of the clusters has no significant impact on the performance of the clustering and the quality of the eigengap.
 These results were to be excpected : spectral clustering looks for the connected components of a $k$-nn graph. This graph does not contain the information of the shape of the clusters : in the adjacency matrix, a circular cluster will appear the same as an highly complex non-convex one. The underlying geometry of the subset of $\R^N$ a cluster belongs to is not taken into account when forming the graph, as only it's $k$- nearest neighbors are considered connected to him. This is an advantage spectral clustering has over $k$-means, which looks for convex clusters in $\R^N$. It is the main concept that makes up for the great performance of spectral clustering. \\
-For the sake of simplicty and without loss of generality, we thus only consider circular clusters for our experiments on $N$-symmetry and $D$-symmetry.
+For the sake of simplicty and without loss of generality, we thus only consider circular clusters for our experiments on $N$-symmetry and the total number of points.
 \paragraph{$N$-symmetry}
 To isolate the impact of $N$-symmetry, we consider datasets with a fixed number of points.
 

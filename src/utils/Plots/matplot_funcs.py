@@ -194,3 +194,10 @@ def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=Fa
     
     return plt
 
+def plot_gapcurve(steps,gaps,titles):
+    
+    for i,(l, vals) in enumerate(gaps.items()):
+        plt.plot(steps,vals,label=titles[i])
+    plt.yticks()
+    plt.legend()
+    return plt
