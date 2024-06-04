@@ -4,7 +4,7 @@
 -NMI score for evaluating performance
 
 
-TODO : weird convergence errors for (wbdc,all),(parkinson,all) #PROBABLY INFER CLUSTER LABELS AT FAULT.
+TODO : weird convergence errors for (wbdc,all),(parkinson,all) #PROBABLY INFER CLUSTER LABELS AT FAULT ? idk
        '''
 
 from spectral_clustering import*
@@ -79,7 +79,7 @@ def cluster_average(c:str,options:dict,avg:int,laplacian):
 def benchmark(avg:int,options_dict:dict[dict],laplacian:str):
     averages=dict()
     #['iris' ,'glass','wine','wbdc','parkinson','vertebral','breast tissue','seeds','image seg','yeast']
-    for dataset in ['iris' ,'glass']:
+    for dataset in ['iris' ,'glass','wine','wbdc','parkinson','vertebral','breast tissue','seeds','image seg','yeast']:
         print(dataset)
         averages[dataset]=cluster_average(dataset,options_dict,avg,laplacian)*100
     return averages

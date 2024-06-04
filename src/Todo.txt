@@ -116,6 +116,5 @@ N not invertible ??? For g_rw (ISSUE WITH v, 0s popping up)
 
 05/06
 Report 
-UCI
-N not invertible ??? For g_rw (ISSUE WITH v, 0s popping up)
-
+UCI (done ? shit results mostly.)
+N not invertible ??? For g_rw (ISSUE WITH v, 0s popping up) (done IG (weirdass fix tho))

@@ -17,7 +17,7 @@ def normalize_vec(vector):
 
 def compute_centers(data,labels):
     clusters=[[datum for j,datum in enumerate(data) if labels[j]==i] for i in range(len(set(labels)))]
-    centers=[[sum(i)//len(cluster) for i in zip(*cluster)] for cluster in clusters]
+    centers=[[sum(i)/len(cluster) for i in zip(*cluster)] for cluster in clusters]
     return centers
 
 def kmeans(data,k,use_minibatch=False):
@@ -88,8 +88,7 @@ def unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch)
    ch_list,vals_list,labels_list=[],[],[]
 
    for j in range(max_it):
-       gsc_params=(2**j,1,1)
-       print(gsc_params)
+       gsc_params=(2**j,1,0.99)
        vals,labels_unord=cluster(n_clusters,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch,print_progress=False)
        vals_list.append(vals)
        labels_list.append(labels_unord)

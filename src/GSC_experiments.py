@@ -113,7 +113,19 @@ def test_unsupervised_gsc(l,name):
     save_plot(plt,f'{name}_{l}',dataset_name=name)
 
 
-steps=[100]
-gsc_params=(1,1,1)
-#steps=[100,200,300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2500,3000,3500,4000,4500,5000]
-eigengap_total_curve(steps,gsc_params)
+'''
+means=[(0,0),(1.15,1.15)]
+n_clusters=len(means)
+distrib=[0.5,0.5]
+sigmas_x=[1/3,1/3]
+sigmas_y=[1/3,1/3]
+p_list=[0,0]
+covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
+data,labels=GMM(2,100,means,covs,distrib)'''
+gsc_params=(1,1,0.99)
+data,labels,name=load_data_n_labels('gsc_test')
+
+
+labels_spectral,vals=spectral_clustering(data,k_neighbors=6,n_eig=3,laplacian='g_rw',gsc_params=gsc_params,
+                                                    sigma=1,n_clusters=2
+                                                    )
