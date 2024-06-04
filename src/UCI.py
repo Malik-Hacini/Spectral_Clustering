@@ -10,17 +10,26 @@ TODO : weird convergence errors for (wbdc,all),(parkinson,all) #PROBABLY INFER C
 from spectral_clustering import*
 from sklearn import metrics
 from sklearn import datasets
+from json import loads
 import ucimlrepo as uci
 import pandas
 
 
-def load_eveyrthing():
+def download_everything():
     datas=dict()
-    for set in ['iris' ,'glass','wine','wbdc','control chart','parkinson','vertebral','breast tissue','seeds','image seg','yeast']:
+    for set in ['iris' ,'glass','wine','wbdc','parkinson','vertebral','breast tissue','seeds','image seg','yeast']:
         datas[set]=import_dataset(set)
         print(set)
     with open('uci_data.txt','w') as f:
         f.write(str(datas))
+
+def load_everything():
+    with open('src/utils/Datasets/uci_data.txt','r') as f:
+        data=f.read()
+    data_dict=loads(data)
+    return data_dict
+
+
 #n_clusters={'iris': 3 ,'glass': 6,'wine':3,'wbdc':2,'control chart':6,'parkinson':2,'vertebral':3,'breast tissue':6,'seeds':3,'image seg':7,'yeast':3}
 def import_dataset(c:str):
     """Import one of the 11 UCI benchmark datasets :
@@ -47,34 +56,32 @@ def import_dataset(c:str):
             if c=='control chart':
                 c='control_chart'
             
-            data=np.loadtxt(f'src/Datasets/{c}_dataset.txt')
-            labels=np.loadtxt(f'src/Datasets/{c}_labels.txt')
+            data=np.loadtxt(f'src/utils/Datasets/{c}_dataset.txt')
+            labels=np.loadtxt(f'src/utils/Datasets/{c}_labels.txt')
 
         n_clusters=len(set(labels))
     return n_clusters,data, labels
 
 
-def nmi_clustering(c:str,options:dict):
-
+def nmi_clustering(c:str,options:dict,laplacian):
     n_clusters,data,labels=import_dataset(c)
-    vals,labels_spectral=spectral_clustering(data,options['k'],options['n_eig'],options['laplacian'],options['graph'],options['sym_method'],options['sigma'],labels_given=labels,clusters_fixed=n_clusters,use_minibatch=True)
+    labels_spectral,vals=spectral_clustering(data,n_clusters=n_clusters,k_neighbors=options[c],laplacian=laplacian)
     nmi=metrics.normalized_mutual_info_score(labels,labels_spectral)
     
     return nmi
 
-def cluster_average(c:str,options:dict,avg:int):
+def cluster_average(c:str,options:dict,avg:int,laplacian):
     nmi=0
     for i in range(avg):
-        nmi+=nmi_clustering(c,options)
+        nmi+=nmi_clustering(c,options,laplacian)
     return nmi/avg
 
-options={'k': 10, 'n_eig': 12, 'laplacian': 'rw', 'graph': 'knn', 'sym_method':'mean','sigma':1/2}
 def benchmark(avg:int,options_dict:dict[dict],laplacian:str):
     averages=dict()
-    for dataset in ['iris' ,'glass','wine','wbdc','control chart','parkinson','vertebral','breast tissue','seeds','image seg','yeast']:
+    #['iris' ,'glass','wine','wbdc','parkinson','vertebral','breast tissue','seeds','image seg','yeast']
+    for dataset in ['iris' ,'glass']:
         print(dataset)
-        options_dict[dataset]['laplacian']=laplacian
-        averages[dataset]=cluster_average(dataset,options_dict[dataset],avg)*100
+        averages[dataset]=cluster_average(dataset,options_dict,avg,laplacian)*100
     return averages
 
 def full_benchmark(avg:int,options_dict:dict[dict],laplacians:list):
@@ -82,36 +89,23 @@ def full_benchmark(avg:int,options_dict:dict[dict],laplacians:list):
     for laplacian in laplacians:
         results[laplacian]=benchmark(avg,options_dict,laplacian)
     return results
-g_method='knn'
-sym_method='mean'
-sigma=1/2
+
 avg=1
 
-"""FULL BENCHMARK :
-options_dict={'iris':{'k': 4, 'n_eig': 7, 'graph': g_method, 'sym_method':sym_method,'sigma':sigma},
-
-
-              'glass':{'k': 6, 'n_eig': 8, 'graph': g_method, 'sym_method':sym_method,'sigma':sigma},
-               'wine': {'k': 3, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'wbdc':{'k': 2, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'control chart':{'k': 6, 'n_eig': 8, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'parkinson':{'k': 2, 'n_eig': 3, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'vertebral':{'k': 3, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'breast tissue':{'k': 6, 'n_eig': 8, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'seeds':{'k': 3, 'n_eig': 5, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'image seg':{'k': 7, 'n_eig': 9, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma},
-               'yeast':{'k': 10, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma}}
-laplacians=['un_norm','sym','rw']
+"""FULL BENCHMARK :"""
+k_dict={'iris':4,
+              'glass':6,
+               'wine': 3,
+               'wbdc':2,
+               'control chart':6,
+               'parkinson':2,
+               'vertebral':3,
+               'breast tissue':6,
+               'seeds':3,
+               'image seg':7,
+               'yeast':10}
+laplacians=['un_norm','sym','rw','g','g_rw']
 with open('uci_results.txt','w') as f:
-    f.write(str(full_benchmark(avg,options_dict,laplacians)))"""
+    f.write(str(full_benchmark(avg,k_dict,laplacians)))
 
-load_eveyrthing()
 
-"""
-WBCDoptions={'k': 2, 'n_eig': 4, 'graph': g_method , 'sym_method':sym_method,'sigma':sigma, 'laplacian':'rw'}
-n_clusters,data,labels=import_dataset('wbdc')
-print(labels)
-print(n_clusters)
-vals,labels_spectral=spectral_clustering(data,options['k'],options['n_eig'],options['laplacian'],options['graph'],options['sym_method'],options['sigma'],labels_given=labels,use_minibatch=True,clusters_fixed=n_clusters)
-print(labels_spectral)
-print(metrics.normalized_mutual_info_score(labels,labels_spectral))"""

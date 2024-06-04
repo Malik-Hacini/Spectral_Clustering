@@ -163,20 +163,20 @@ class Graph:
             return (L,self.degree_m)
         
         if choice in ['g','g_rw']:
-                if gsc_params==None:
-                    gsc_params=(1,1,1)
+                print('in', gsc_params)
                 t,alpha,gamma=gsc_params
                 #Basic matrices of GSC
-                P=self.m/self.k #Transition matrix of the natural markov walk on a knn graph.
+                P=self.m/self.k #Transition matrix of the natural random walk on a knn graph.
                 P_gamma=gamma*P + ((1-gamma)*1/self.N)*np.ones((self.N,self.N))
                 v=((1/self.N)*np.matmul(np.ones((1,self.N)),np.linalg.matrix_power(P_gamma,t)))**alpha  
                 xi=np.array([sum(v[0,i]*P[i,k] for i in range(self.N)) for k in range(self.N)])
                 #Other matrices used for the generalized laplacians
+                print(v)
                 N=np.diag(v[0])
                 O=np.diag(xi)
                 I=np.identity(self.N)
                 N_inv=np.linalg.inv(N)
-
+               
                 #Computation
                 if choice=='g':
                      return (N + O - np.matmul(N,P) - np.matmul(P.T,N),None)

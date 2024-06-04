@@ -100,6 +100,22 @@ Report them.
 03/06
 
 Fully unsupervised pipeline questions :
-Should we determine k ? n/log(n) ?
+Should we determine k ? n/log(n) ? (exp to do)
 What gsc param to ignore ?
-Code ch and dch.
+
+Refactor spectral_clustering structure (done)
+
+UCI questions : 
+-Keep eigenvals ?
+-Optimal k parameter ?
+
+04/06
+
+Report...
+N not invertible ??? For g_rw (ISSUE WITH v, 0s popping up)
+
+05/06
+Report 
+UCI
+N not invertible ??? For g_rw (ISSUE WITH v, 0s popping up)
+

@@ -38,18 +38,18 @@ def kmeans(data,k,use_minibatch=False):
 
     return est.labels_
 
-def cluster(n_clusters,n_eig,laplacian_matrix,use_minibatch):
+def cluster(n_clusters,n_eig,laplacian_matrix,use_minibatch,print_progress=True):
     vals,u_full=eigenvectors(n_eig,*laplacian_matrix)
     
     #In the case of L_sym being used, there is an additional normalization step.
     if laplacian_matrix=='sym':
         u_full=np.apply_along_axis(normalize_vec, axis=0, arr=u_full)
     u=u_full[:,:n_clusters]
-    print("k-means clustering the spectral embedded data...")
+    if print_progress:
+        print("k-means clustering the spectral embedded data...")
     labels_unord=kmeans(u,n_clusters,use_minibatch)
 
     return vals,labels_unord
-
 
 def eigenvectors(i,a,b=None):
     """Computes the first i eigenvals and eigenvecs of a symmetric matrix for the generalized problem
@@ -84,22 +84,22 @@ def ch_index(data,clustering_labels):
     
     return ch
 
-def compute_unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch):
+def unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch):
    ch_list,vals_list,labels_list=[],[],[]
 
    for j in range(max_it):
        gsc_params=(2**j,1,1)
-       vals,labels_unord=cluster(n_clusters,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch)
+       print(gsc_params)
+       vals,labels_unord=cluster(n_clusters,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch,print_progress=False)
        vals_list.append(vals)
        labels_list.append(labels_unord)
        ch_list.append(ch_index(data,labels_unord))
    argmax=np.argmax(ch_list)
-   print(argmax)
    return vals_list[argmax],labels_list[argmax]
        
-def spectral_clustering(data,k_neighbors=None,n_eig=None,laplacian='rw',
-                        g_method='knn',sym_method=None,sigma=1,gsc_params=None,unsupervised_gsc=False,
-                        use_minibatch=True,eigen_only=False,clusters_fixed=False,return_matrix=False,
+def spectral_clustering(data,n_clusters,k_neighbors=None,n_eig=None,laplacian='rw',
+                        g_method='knn',sym_method=None,sigma=1,gsc_params=None,
+                        use_minibatch=True,return_labels=True,return_eigvals=True,return_matrix=False,
                         max_it=5,labels_given=np.array([None])):
     """Performs spectral clustering on a dataset of n-dimensional points.
 
@@ -125,26 +125,22 @@ def spectral_clustering(data,k_neighbors=None,n_eig=None,laplacian='rw',
     
     #Choosing the optimal  base parameters
     N=len(data)
-    if n_eig==None:
-        n_eig=N
-    if k_neighbors==None:
-        k_neighbors=int(np.floor(np.log(N)))
+    if n_eig==None: n_eig=N
+    if k_neighbors==None: k_neighbors=int(np.floor(np.log(N)))
+    if sym_method is None and laplacian not in ['g','g_rw']: sym_method='mean'
     print("Building dataset graph...")
     graph=Graph(data,k_neighbors,g_method,sym_method,sigma)
     dir_status=['directed','undirected'][int(issymmetric(graph.m))]
     print(f"Dataset's {dir_status} graph built. ")
     
     print("Performing spectral embedding on the data.")
-    if not unsupervised_gsc:
-        if eigen_only:
-            vals,u_full=eigenvectors(n_eig,*graph.laplacian(laplacian,gsc_params))
-            return vals
-        vals,labels_unord=cluster(clusters_fixed,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch)
+
+
+    if laplacian in ['g','g_rw'] and gsc_params is None:
+            vals,labels_unord=unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch)
     else:
-        #Choosing the optimal gsc parameters and clustering.
-        if laplacian=='rw':
-            laplacian='g_rw'
-        vals,labels_unord=compute_unsupervised_gsc(data,n_eig,graph,laplacian,max_it,clusters_fixed,use_minibatch)
+        vals,labels_unord=cluster(n_clusters,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch)
+ 
     
     if np.all(labels_given)==None:
         #If the labels aren't given, we order labels based on cluster centroids.
@@ -154,11 +150,18 @@ def spectral_clustering(data,k_neighbors=None,n_eig=None,laplacian='rw',
         labels_ordered = reorder_labels(centers,labels_unord)
     else:
         #If the true labels are given, we order our clustering labels by inference.
-        cluster_labels = infer_cluster_labels(clusters_fixed, labels_given,labels_unord)
+        cluster_labels = infer_cluster_labels(n_clusters, labels_given,labels_unord)
         labels_ordered = infer_data_labels(labels_unord,cluster_labels)
         
+    results = []
+    if return_labels:
+        results.append(labels_ordered)
+    if return_eigvals:
+        results.append(vals)
     if return_matrix:
-        return vals,labels_ordered,graph.m
-
-    return vals,labels_ordered
+        results.append(graph.m)
+    
+    return tuple(results)
+    
+    
 

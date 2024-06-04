@@ -7,7 +7,7 @@ import matplotlib.colors as mcolors
 import time
 import random
 
-
+'''NOTE : everything here is broken, as the way the calls to spectral_clustering works have changed. '''
 
 
 def test_spectral_clustering_circles(k,n_eig,l,g_method,sym_method,sigma):
