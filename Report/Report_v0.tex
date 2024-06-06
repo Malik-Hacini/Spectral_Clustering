@@ -105,7 +105,7 @@
 \def\C{\mathbb{C}}%complexes
 
 %%Algèbre%linéaire%%
-
+\def\1char{\mathbb{1}}
 \def\codim{\mathrm{codim}}%codimension
 \def\ker{\mathrm{ker}\,}%noyau
 \def\coker{\mathrm{coker}\,}%conoyau
@@ -328,5 +328,103 @@ All departments combined, over 800 people work at LAAS, including 200 permanent 
 \end{figure}
 The lab has a history of strong relationships with industry and works in a large number of collaborative projects with international, national and regional industries of all size. LAAS was one of the 20 first “Carnot Institutes” labeled in 2006, a label given to labs putting an emphasis on industry partnership.
 LAAS also takes great advantage of it's pluridisciplinary nature : teams from different departments often collaborate to build projects. LAAS promotes transdisciplinary research through 4 strategic axes: Ambient intelligence, Living (biology, environment, medicine), Space and Energy. Examples include LAAS' mathematicians teaming up with robotics researchers to provide efficient Machine Learning (ML) algorithms for their projects.
-\subsection{Daily life}
+
+\subsection{SARA}
+During my internship, I was integrated in the SARA research team, short for "Services and Architectures for Advanced Networks". The SARA team works on new-generation networks and communication systems. The team is mostly made up of experts in networks and communication, and mathematicians focused on ML and applied probability. I was mostly working with Director of Research Matthieu Jonckheere and P.h.D students Ernesto Garcia and Vittorio Puricelli, as they are involved in the subject of the internship.
+
+\section{Internship's details }
+I worked daily in the office of Ernesto Garcia, where I could easily communicate with the him and Vittorio. The goal was to evaluate different Spectral Clustering methods, specifically the GSC framework developed by the team, by conducting experiments of the behavior of these methods for synthetic and real datasets. For this, I had to implement an unsupervised SC / GSC pipeline in Python. This theoretical framework was built on ideas that the team thought could potentially improve clustering in certain scenarios, and we wanted to test these ideas in practice.
+This work can be broken down in $3$ big steps : 
+\begin{itemize}
+	\item Theoretical Understanding of SC and GSC
+	\item Implementation of the algorithms in Python
+	\item Conduct of experiments on synthetic and real datasets
+\end{itemize}
+In practice, these $3$ steps intertwined a lot : I understood the algorithms more and more as I was implementing them, while conducting experiments every step of the way.
+
+\section{The theory of Spectral Clustering}
+The first task I was given was to understand the theory of classical spectral clustering by reading \cite[A tutorial on Spectral Clustering]{tutorial}, the most famous introductory article on the subject. SC has been heavily studied for the past $3$ decades, and this article does a great job at introducing the theory and giving practical advice on the algorithm. Later on, I would have to establish specific experiments myself, thus a superficial understanding would not be enough and I had to deeply understand the mechanisms of the algorithm. The theory of SC is mostly built using graph theory and linear algebra. It is then interpreted by the theory of Markov processes on graphs. I was already familiar most of the mathematical material required, up to some advanced linear algebra results like the Perron-Frobenius theorem. I also had to deepen my understanding of the Markov chain approach to random walks to get a better feel for the inner mechanisms of GSC.
+It took me $4$ days to understand the basics and start working on my first implementation of SC, but I refined my understanding day by day afterwards.
+\subsection{Technical explanation}
+Since I will later present the results of my experiments, a technical explanation on the basics of spectral clustering will be useful
+Consider a set of $N$ data points $x_1,x_2, \ldots ,x_N$ in $\R^n$
+\subsubsection{Similarity graphs}
+The main idea of spectral clustering is to represent the data points as the nodes (or vertices) of a "similarity graph". The first step is choosing a distance/similarity symmetric function $d: \R^n \mapsto \R$ that defines pairwise distances $d_{ij} = d(x_i,x_j)$ between every point of the set .
+
+\begin{itemize}
+	\item $k$-nearest neighbors graph
+	\item $\varepsilon$-neighborhood graph
+	\item Fully connected graph
+\end{itemize}
+The $k$-nearest neighbors graph connects (via edges) every point to it's $k$ nearest neighbors in the dataset relative to $f$. It is an unweighted directed graph. \\
+The $\varepsilon$ graph connects two points $(p_1,p_2)$ if and only if $d_{ij} < \varepsilon$ where $\varepsilon > 0$  is a treshold. It is an unweighted undirected graph. \\
+The fully connected graph simply connects every point with every other one, weighing all edges by $d_{ij}$. Thus, it is a weighted undirected graph. \\
+
+The end goal is to detect clusters in the set, so the graph should represent the local neighborhood relationships between points. Thus, the fully connected construction is only useful if $d$ models the local neighborhoods. An example for such a similarity function is the Gaussian similarity function $d(x_i,x_j)=exp(\frac{-\lVert x_i - x_j \rVert)^2}{é\sigma^2})$, where the parameter σ controls the width of the neighborhoods. This parameter plays a similar role as the parameter $\varepsilon$ in the case of the $\varepsilon$-neighborhood graph.
+For $k$-nn and $\varepsilon$-neighboorhood graphs, the classical euclidean distance can also be used.\\
+
+There are very few theoretical results on the question of how the choice of the similarity function/graph influences the spectral clustering result. However, the SARA team studies clustering with $k$-nn graphs and they are easier to work with in practice, thus I will only consider this type of graph in the rest of this work.
+Here is an example of the $k$-nn gaph of a $2$ dimensional dataset :
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/simgraph_example}
+	\caption{$4$-nearest neighboirs similarity graph of a toy dataset;}
+	\label{fig:sg_example}
+\end{figure}
+\begin{rem}
+	In this specific example, the graph is undirected. This is not the case in general : a point $x_i$ can be in the $k$-nearest neighbors of another point $x_j$, but $x_j$ might not be one of the $k$-nearest neighbors of $x_i$. This is actually a problem, and it is adressed in the next section.
+\end{rem}
+\subsubsection{Graph laplacians}
+The main tool used for spectral clustering is the "graph laplacian". It is a matrix traditionally defined using the adjacency matrix $W=(d_{ij})_{i,j=1,\ldots,N}$ of the set's graph, called the similarity matrix, and the degree matrix $D=(d_i)_{i \in {1,\ldots N}}$ where $d_i=\sum_{j=1}^{N}d_{ij}$ is the degree of the vertex $x_i$.
+
+There exists no unique "graph laplacian". Instead, multiple matrices are referred to as "graph laplacians" in the litterature.The most common ones are :
+\begin{itemize}
+	\item The unnormalized laplacian $L = D - W$
+	\item The first normalized laplacian $L_{sym}=D^{-1/2}LD^{-1/2}$
+	\item The second normalized laplacian, also called random walk laplacian $L_{rw}= I - D^{-1}W$
+\end{itemize}
+
+If we were asked to cluster the data from the previous example, we would create $2$ obvious clusters : the points on the left and the points on the right. A point in one of these clusters is very close to other points of the cluster, compared to points on the other side. Thus, it is only connected to points of the same cluster : the $2$ clusters are disconnected.
+The similarity graph has $2$ connected components, each of them being a cluster. 
+In general, we can define a cluster as an isolated subset of points that are close to each other, but relatively far to the rest of the set. Thus, in the ideal case of completely separated clusters, detecting clusters is the same thing as detecting the connected components of the similarity graph. \\
+This is the main idea of spectral clustering, and graph laplacians are built for this task.
+\begin{theo*}{Number of connected components and spectra of the graph laplacians}
+	Let $G$ be an undirected graph with
+	non-negative weights. Then the multiplicity $k$ of the eigenvalue
+	$0$ of $L$, $L_{rw}$ and $L_{sym}$ equals the number of connected
+	components $A_1, \hdots, A_k$ in the graph. The eigenspace of $0$ is
+	spanned \footnote{for $L_{sym}$ it is actually spanned by $D^{1/2} \1char_{A_i}$, but the consequences are the same.} by the indicator vectors $\1char_{A_i}$ of those
+	components.
+\end{theo*}
+
+\begin{proof}
+	See \cite{tutorial}
+\end{proof}
+This theorem implies that computing the eigenspace of $0$ of the graph laplacian gives us all the information about the connected components of the similarity graph : their number (by the multiplicity), and the nodes in them (by the eigenvectors). We can build an algorithm that use this information to cluster the data based on this and apply it to the previous example.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/clustering_example}
+	\caption{Spectral clustering of a toy dataset with an undirected similarity graph with $2$ disconnected components}
+	\label{fig:c_example}
+\end{figure}
+
+\paragraph{The importance of symmetry}
+
+\newpage
+\begin{thebibliography}{9}
+\bibitem{tutorial}Von Luxburg, U. A tutorial on spectral clustering. Statistics and
+computing, 17(4):395–416, 2007.
+
+\bibitem{UCI}
+Dheeru, D. and Karra Taniskidou.UCI repository of machine learning databases \textit{University of California, Irvine, School of
+	Information and Computer Sciences}, 2017.
+
+\bibitem{GSC}
+Harry Sevi, Matthieu Jonckheere, and Argyris Kalogeratos.
+Generalized spectral clustering for directed and undirected graphs,
+2022.
+\end{thebibliography}
+
 \end{document}
+

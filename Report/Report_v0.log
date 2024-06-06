@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  12 MAY 2024 23:18
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  6 JUN 2024 15:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2564,7 +2564,7 @@ a into $\OML/ntxmi/m/it/12 k$ \TU/TeXGyreTermesX(0)/m/n/12 predefined
  []
 
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sl' will be
-(Font)              scaled to size 12.0pt on input line 301.
+(Font)              scaled to size 12.0pt on input line 300.
 [1]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
 (Font)              scaled to size 12.0pt on input line 307.
@@ -2613,28 +2613,101 @@ Overfull \hbox (8.6176pt too wide) in paragraph at lines 329--331
 cians teaming up with robotics researchers
  []
 
-[3] (Report_v0.aux)
+
+Overfull \hbox (0.22258pt too wide) in paragraph at lines 333--334
+\TU/TeXGyreTermesX(0)/m/n/12 communication systems. The team is mostly made up 
+of experts in networks and communication,
+ []
+
+[3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 359--362
+
+ []
+
+
+Overfull \hbox (9.82791pt too wide) in paragraph at lines 363--365
+[]\TU/TeXGyreTermesX(0)/m/n/12 The end goal is to detect clusters in the set, s
+o the graph should represent the local neighborhood
+ []
+
+
+Overfull \hbox (21.01622pt too wide) in paragraph at lines 363--365
+\TU/TeXGyreTermesX(0)/m/n/12 function $\OML/ntxmi/m/it/12 d\U/matha/m/n/12 p\OM
+L/ntxmi/m/it/12 x[]; x[]\U/matha/m/n/12 q ^^P \OML/ntxmi/m/it/12 exp\U/matha/m/
+n/12 p[]q$\TU/TeXGyreTermesX(0)/m/n/12 , where the parameter σ controls the wid
+th of the neighborhoods.
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 363--365
+
+ []
+
+
+Overfull \hbox (12.21361pt too wide) in paragraph at lines 366--368
+\TU/TeXGyreTermesX(0)/m/n/12 function/graph influences the spectral clustering 
+result. However, the SARA team studies clustering
+ []
+
+File: figures/simgraph_example.png Graphic file (type bmp)
+<figures/simgraph_example.png>
+[5]
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 8.8pt on input line 397.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 8.8pt on input line 397.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 397.
+
+
+LaTeX Font Warning: Font shape `U/stmry/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 397.
+
+
+LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 397.
+
+
+LaTeX Font Warning: Font shape `U/matha/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 397.
+
+
+LaTeX Font Warning: Font shape `U/mathb/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 397.
+
+
+LaTeX Font Warning: Font shape `U/mathx/m/n' in size <5.5> not available
+(Font)              size <5> substituted on input line 397.
+
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
+(Font)              scaled to size 7.3pt on input line 397.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 7.3pt on input line 397.
+File: figures/clustering_example.png Graphic file (type bmp)
+<figures/clustering_example.png>
+[6] [7] [8] (Report_v0.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
  ***********
 
 
-Package rerunfilecheck Warning: File `Report_v0.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 0.5pt have occurred.
 
-Package rerunfilecheck Info: Checksums for `Report_v0.out':
-(rerunfilecheck)             Before: 02FFFEB58B1D26B94F8B2A535E811706;522
-(rerunfilecheck)             After:  9B2EB617760AE6ADED90DCF66CDC6120;713.
+
+LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+
+Package rerunfilecheck Info: File `Report_v0.out' has not changed.
+(rerunfilecheck)             Checksum: 01F18C88D1977266E19C1D9BE5CEB901;1525.
  ) 
 Here is how much of TeX's memory you used:
- 50280 strings out of 409673
- 1088418 string characters out of 5778967
- 1928630 words of memory out of 5000000
- 71502 multiletter control sequences out of 15000+600000
- 580375 words of font info for 115 fonts, out of 8000000 for 9000
+ 50428 strings out of 409673
+ 1092049 string characters out of 5778967
+ 1933630 words of memory out of 5000000
+ 71633 multiletter control sequences out of 15000+600000
+ 596064 words of font info for 160 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,12n,117p,1098b,804s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Report_v0.pdf (4 pages).
+Output written on Report_v0.pdf (9 pages).

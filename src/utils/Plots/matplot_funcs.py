@@ -108,6 +108,16 @@ def precision_single_plot(data,labels_spectral,labels):
     ax2.scatter(x,y,c=labels.astype(float))
     plt.show()
 
+def plot_simgraph(data,matrix,labels=None):
+    options = {"with_labels":False,"edgecolors": "tab:gray", "node_size": 50, "width": 0.5,"alpha": 1,'arrowstyle':'-|>','arrowsize':10}
+    G=nx.from_numpy_array(matrix,create_using=nx.DiGraph)
+    nodes=[i for i in range(len(data))]
+    pos={i: datum for i,datum in enumerate(data)}
+    if labels is None:
+        nx.draw_networkx(G,pos,arrows=False,**options)
+    else:
+        nx.draw_networkx(G,pos,arrows=False,node_color=labels,**options)
+    plt.show()
 
 def plot_sc_graph(data,labels,labels_spectral,matrix):
     options = {"with_labels":False,"edgecolors": "tab:gray", "node_size": 50, "width": 0.5,"alpha": 1}

@@ -1,5 +1,6 @@
 import pytest
 from utils.GMM import*
+from utils.data_files_managing import*
 from spectral_clustering import*
 from utils.Plots.matplot_funcs import*
 from sklearn import datasets
@@ -109,3 +110,15 @@ def clustering_gmm(k):
     plot_sc_graph(data,labels,labels_spectral,matrix)
 
 
+def simgraph_example():
+    data,labels,name=load_data_n_labels('simgraph_example')
+    matrix=spectral_clustering(data,n_clusters=2,k_neighbors=4,return_labels=False,return_eigvals=False,return_matrix=True)[0]
+    plot_simgraph(data,matrix)
+
+def clustering_example():
+    data,labels,name=load_data_n_labels('simgraph_example')
+    labels_spectral,matrix=spectral_clustering(data,n_clusters=2,k_neighbors=4,return_eigvals=False,return_matrix=True)
+    plot_simgraph(data,matrix,labels=labels)
+
+
+clustering_example()
