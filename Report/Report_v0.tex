@@ -92,6 +92,25 @@
 %\newtheorem{theo}{Théorème}
 %\newtheorem*{theo_non_numero}{Théorème}
 
+%%%%%%Algorithmes%%%%%
+\newcommand{\ulesalgorithm}[2]{%
+	\vspace{1cm}
+	\fbox{\parbox{\textwidth}{%
+			{\bf #1}\\[2mm]
+			{\tt #2 }
+	}}
+	\vspace{1cm}
+}
+
+
+\newcommand{\blobb}[1]{%
+	\begin{list}{$\bullet$}{%
+			\setlength{\topsep}{0cm}
+			\setlength{\partopsep}{-\parskip}
+			\setlength{\leftmargin}{0.5cm}
+		}{\item #1}%
+	\end{list}
+}
 %\declaretheorem[name=Proposition,sibling=prop]{proprep}
 
 %%%%%Macros%%%%%
@@ -346,10 +365,10 @@ In practice, these $3$ steps intertwined a lot : I understood the algorithms mor
 The first task I was given was to understand the theory of classical spectral clustering by reading \cite[A tutorial on Spectral Clustering]{tutorial}, the most famous introductory article on the subject. SC has been heavily studied for the past $3$ decades, and this article does a great job at introducing the theory and giving practical advice on the algorithm. Later on, I would have to establish specific experiments myself, thus a superficial understanding would not be enough and I had to deeply understand the mechanisms of the algorithm. The theory of SC is mostly built using graph theory and linear algebra. It is then interpreted by the theory of Markov processes on graphs. I was already familiar most of the mathematical material required, up to some advanced linear algebra results like the Perron-Frobenius theorem. I also had to deepen my understanding of the Markov chain approach to random walks to get a better feel for the inner mechanisms of GSC.
 It took me $4$ days to understand the basics and start working on my first implementation of SC, but I refined my understanding day by day afterwards.
 \subsection{Technical explanation}
-Since I will later present the results of my experiments, a technical explanation on the basics of spectral clustering will be useful
-Consider a set of $N$ data points $x_1,x_2, \ldots ,x_N$ in $\R^n$
+Since I will later present the results of my experiments, a technical explanation on the basics of spectral clustering will be useful. For more details, see \cite{tutorial}.
+Let $S$ be a set of $N$ data points $x_1,x_2, \ldots ,x_N$ in $\R^n$.
 \subsubsection{Similarity graphs}
-The main idea of spectral clustering is to represent the data points as the nodes (or vertices) of a "similarity graph". The first step is choosing a distance/similarity symmetric function $d: \R^n \mapsto \R$ that defines pairwise distances $d_{ij} = d(x_i,x_j)$ between every point of the set .
+The main idea of spectral clustering is to represent the data points as the nodes (or vertices) of a "similarity graph". The first step is choosing a distance/similarity symmetric function $d: \R^n \mapsto \R$ that defines pairwise distances $w_{ij} = d(x_i,x_j)$ between every point of the set .
 
 \begin{itemize}
 	\item $k$-nearest neighbors graph
@@ -357,8 +376,8 @@ The main idea of spectral clustering is to represent the data points as the node
 	\item Fully connected graph
 \end{itemize}
 The $k$-nearest neighbors graph connects (via edges) every point to it's $k$ nearest neighbors in the dataset relative to $f$. It is an unweighted directed graph. \\
-The $\varepsilon$ graph connects two points $(p_1,p_2)$ if and only if $d_{ij} < \varepsilon$ where $\varepsilon > 0$  is a treshold. It is an unweighted undirected graph. \\
-The fully connected graph simply connects every point with every other one, weighing all edges by $d_{ij}$. Thus, it is a weighted undirected graph. \\
+The $\varepsilon$ graph connects two points $(p_1,p_2)$ if and only if $w_{ij} < \varepsilon$ where $\varepsilon > 0$  is a treshold. It is an unweighted undirected graph. \\
+The fully connected graph simply connects every point with every other one, weighing all edges by $w_{ij}$. Thus, it is a weighted undirected graph. \\
 
 The end goal is to detect clusters in the set, so the graph should represent the local neighborhood relationships between points. Thus, the fully connected construction is only useful if $d$ models the local neighborhoods. An example for such a similarity function is the Gaussian similarity function $d(x_i,x_j)=exp(\frac{-\lVert x_i - x_j \rVert)^2}{é\sigma^2})$, where the parameter σ controls the width of the neighborhoods. This parameter plays a similar role as the parameter $\varepsilon$ in the case of the $\varepsilon$-neighborhood graph.
 For $k$-nn and $\varepsilon$-neighboorhood graphs, the classical euclidean distance can also be used.\\
@@ -376,7 +395,7 @@ Here is an example of the $k$-nn gaph of a $2$ dimensional dataset :
 	In this specific example, the graph is undirected. This is not the case in general : a point $x_i$ can be in the $k$-nearest neighbors of another point $x_j$, but $x_j$ might not be one of the $k$-nearest neighbors of $x_i$. This is actually a problem, and it is adressed in the next section.
 \end{rem}
 \subsubsection{Graph laplacians}
-The main tool used for spectral clustering is the "graph laplacian". It is a matrix traditionally defined using the adjacency matrix $W=(d_{ij})_{i,j=1,\ldots,N}$ of the set's graph, called the similarity matrix, and the degree matrix $D=(d_i)_{i \in {1,\ldots N}}$ where $d_i=\sum_{j=1}^{N}d_{ij}$ is the degree of the vertex $x_i$.
+The main tool used for spectral clustering is the "graph laplacian". It is a matrix traditionally defined using the adjacency matrix $W=(w_{ij})_{i,j=1,\ldots,N}$ \footnote{In the case of an unweighted graph, $w_{ij}=1$ if the edge $(x_i,x_j)$ exists and $0$ if it doesn't.} of the set's graph, called the similarity matrix, and the degree matrix $D=(d_i)_{i \in {1,\ldots N}}$ where $d_i=\sum_{j=1}^{N}w_{ij}$ is the degree of the vertex $x_i$.
 
 There exists no unique "graph laplacian". Instead, multiple matrices are referred to as "graph laplacians" in the litterature.The most common ones are :
 \begin{itemize}
@@ -389,7 +408,7 @@ If we were asked to cluster the data from the previous example, we would create 
 The similarity graph has $2$ connected components, each of them being a cluster. 
 In general, we can define a cluster as an isolated subset of points that are close to each other, but relatively far to the rest of the set. Thus, in the ideal case of completely separated clusters, detecting clusters is the same thing as detecting the connected components of the similarity graph. \\
 This is the main idea of spectral clustering, and graph laplacians are built for this task.
-\begin{theo*}{Number of connected components and spectra of the graph laplacians}
+\begin{theo*}{Number of connected components and spectra of the graph laplacians} \label{con_theo}
 	Let $G$ be an undirected graph with
 	non-negative weights. Then the multiplicity $k$ of the eigenvalue
 	$0$ of $L$, $L_{rw}$ and $L_{sym}$ equals the number of connected
@@ -399,17 +418,83 @@ This is the main idea of spectral clustering, and graph laplacians are built for
 \end{theo*}
 
 \begin{proof}
-	See \cite{tutorial}
+	See \cite{tutorial}.
 \end{proof}
-This theorem implies that computing the eigenspace of $0$ of the graph laplacian gives us all the information about the connected components of the similarity graph : their number (by the multiplicity), and the nodes in them (by the eigenvectors). We can build an algorithm that use this information to cluster the data based on this and apply it to the previous example.
+This theorem implies that computing the eigenspace of $0$ of the graph laplacian gives us all the information about the connected components of the similarity graph : their number (by the multiplicity), and the nodes in them (by the eigenvectors). We can then build an algorithm to cluster the data based on this information. We give this algorithm with the unnormalized laplacian $L$.
+
+\ulesalgorithm{Unnormalized spectral clustering}{
+	Input: Similarity matrix $W \in \R^{n \times n}$, number $k$ of clusters to con\-struct. 
+	\blobb{ Construct a similarity graph. Let $W$ be its weighted adjacency matrix. }
+	\blobb{Compute the unnormalized Laplacian $\Lun$. }
+	\blobb{{\bf Compute the first  $\boldsymbol k$ eigenvectors $\boldsymbol{u_1,\hdots,u_{k}}$ of $\boldsymbol{L}$.} }
+	\blobb{ Let $U \in \R^{n \times k}$ be the matrix containing the vectors $u_1,\hdots,u_k$ as
+		columns. }
+	\blobb{ For $i=1,\hdots,n$, let $y_i \in \R^{k}$ be the vector corresponding to the $i$-th
+		row of $U$. }
+	\blobb{ Cluster the points $(y_i)_{i=1,\hdots,n}$ in $\R^k$ with the $k$-means
+		algorithm into clusters $C_1,\hdots,C_k$. }
+	Output: Clusters $A_1,\hdots,A_k$ with  $A_i = \{j | \; y_j \in C_i\}$.}
+	
+Applied to the previous example, we get exactly what we wanted :
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=0.6\linewidth]{figures/clustering_example}
-	\caption{Spectral clustering of a toy dataset with an undirected similarity graph with $2$ disconnected components}
+	\caption{Spectral clustering of a toy dataset with an undirected similarity graph with $2$ disconnected components.}
 	\label{fig:c_example}
 \end{figure}
 
-\paragraph{The importance of symmetry}
+The previous theorem is very powerful, but relies on $2$ major hypothesis that flaws the perfection of this theoretical spectral clustering.
+\paragraph{The importance of directionality} 
+The connectivity theorem holds only for undirected graphs. Why ? \\
+An undirected graph is defined by $w_{ij}=w_{ji}$, thus $W$ is a real symmetric matrix. This leads to the graph laplacians being real symmetric positive semi-definite matrices which ensure they have non-negative real eigenvalues. This is crucial for establishing the theorem. \\ However, we have stated $k$-nn to be the most intersting construction of a similarity graph, but it can lead to directed graphs, which would break the theory apart. The classical naive way to deal with this problem is to artificially symmetrize $W$ using $\frac{1}{2}(W + W^{T})$. This simply ignores the directions of the edges, that is we connect $v_i$ and $v_j$ with an undirected edge if $v_i$
+is among the k-nearest neighbors of $v_j$ or if $v_j$ is among the k-nearest neighbors of $v_i$. \\
+However, this may discard valuable information regarding the directionality of the graph. This is the problem that led the SARA team to work on a renewed SC theory, detailed in \cite{GSC}.
+
+\paragraph{The case of disconnected clusters} 
+The first example given is the "ideal case". For most real datasets, clusters will not be as well separated, and there will be links between clusters. 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/connected_example}
+	\caption{Connected similarity graph of a toy dataset. The color of the points represent the ground truth. }
+	\label{fig:connected_example}
+\end{figure}
+In this case, the graph possesses exactly $1$ connected component, as it is fully connected. Thus, the eigenspace of $0$ is of dimension $1$ and is spanned by $(1,\ldots,1) \in \R^n$, and it seems we cannot use this information to cluster the data.
+However, in practice, SC is done exactly like described, even for these datasets. How does it work ? \\
+There are multiple lines of reasoning trying to explain the efficacy of SC. We will only present one, see \cite{tutorial} for more details and other approaches.
+\paragraph{Perturbation theory approach} 
+Perturbation theory studies the question of how eigenvalues and
+eigenvectors of a matrix $A$ change if we add a small perturbation
+$H$, that is we consider the perturbed matrix $\tilde A := A + H$.
+Most perturbation theorems state that a certain distance between
+eigenvalues or eigenvectors of $A$ and $\tilde A$ is bounded by a
+constant times a norm of $H$. The constant usually depends on which
+eigenvalue we are looking at, and how far this eigenvalue is separated
+from the rest of
+the spectrum (for a formal statement see below). 
+%
+The justification of spectral clustering is then the following: Let us
+first consider the ``ideal case'' where the between-cluster similarity
+is exactly 0. Then, as stated by \cite{con_theo}, the first $k$ eigenvectors of $L$ or $L_{rw}$ are the indicator
+vectors of the clusters. In this case, the points $y_i \in \R^k$
+constructed in the spectral clustering algorithms have the form
+$(0,\hdots,0,1,0,\hdots0)'$ where the position of the 1 indicates the
+connected component this point belongs to. In particular, all $y_i$
+belonging to the same connected component coincide. The $k$-means
+algorithm will trivially find the correct partition by placing a
+center point on each of the points $(0,\hdots,0,1,0,\hdots0)' \in
+\R^k$.
+%
+In a ``nearly ideal case'' where we still have distinct clusters, but
+the between-cluster similarity is not exactly 0, we consider the
+Laplacian matrices to be perturbed versions of the ones of the ideal
+case. Perturbation theory then tells us that the eigenvectors will be
+very close to the ideal indicator vectors. The points $y_i$ might not
+completely coincide with $(0,\hdots,0,1,0,\hdots0)'$, but do so up to
+some small error term. Hence, if the perturbations are not too large,
+then $k$-means algorithm will still separate the groups from each
+other. \\
+
+\section{Python implementation of SC}
 
 \newpage
 \begin{thebibliography}{9}

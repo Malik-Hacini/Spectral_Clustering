@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  6 JUN 2024 15:20
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2024.2.13)  6 JUN 2024 23:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -2353,60 +2353,60 @@ language=dflt;-ss05;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;"
 ;language=dflt;-ss05;+tnum;+lnum;+smcp;+pcap;mapping=tex-text;"
 
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 263.
+(Font)              scaled to size 12.0pt on input line 282.
 (Report_v0.aux)
 \openout1 = `Report_v0.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 263.
+LaTeX Font Info:    Checking defaults for OML/ntxmi/m/it on input line 282.
 LaTeX Font Info:    Trying to load font information for OML+ntxmi on input line
- 263.
+ 282.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\omlntxmi.fd
 File: omlntxmi.fd 2015/08/25 Fontinst v1.933 font definitions for OML/ntxmi.
 )
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 282.
 LaTeX Font Info:    Trying to load font information for TS1+cmr on input line 2
-63.
+82.
 
 (C:\Program Files\MiKTeX\tex/latex/base\ts1cmr.fd
 File: ts1cmr.fd 2023/04/13 v2.5m Standard LaTeX font definitions
 )
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for U/mathx/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for LMS/ntxsy/m/n on input line 282.
 LaTeX Font Info:    Trying to load font information for LMS+ntxsy on input line
- 263.
+ 282.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\lmsntxsy.fd
 File: lmsntxsy.fd 2016/07/02 Fontinst v1.933 font definitions for LMS/ntxsy.
 )
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 263.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for LMX/ntxexx/m/n on input line 282.
 LaTeX Font Info:    Trying to load font information for LMX+ntxexx on input lin
-e 263.
+e 282.
 
 (C:\Users\juioi\AppData\Roaming\MiKTeX\tex/latex/newtx\lmxntxexx.fd
 File: lmxntxexx.fd 2016/07/03 Fontinst v1.933 font definitions for LMX/ntxexx.
 )
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 263.
-LaTeX Font Info:    ... okay on input line 263.
-LaTeX Info: Command `\dddot' is already robust on input line 263.
-LaTeX Info: Command `\ddddot' is already robust on input line 263.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 282.
+LaTeX Font Info:    ... okay on input line 282.
+LaTeX Info: Command `\dddot' is already robust on input line 282.
+LaTeX Info: Command `\ddddot' is already robust on input line 282.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: hyperref package is loaded.
@@ -2457,7 +2457,7 @@ Package pdflscape Info: Auto-detected driver: dvipdfm (xetex) on input line 98.
 * \@reversemarginfalse
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
-Package hyperref Info: Link coloring ON on input line 263.
+Package hyperref Info: Link coloring ON on input line 282.
 (Report_v0.out) (Report_v0.out)
 \@outlinefile=\write7
 \openout7 = `Report_v0.out'.
@@ -2468,24 +2468,24 @@ s been generated with the most recent feature set (\pgfplotsset{compat=1.18}).
 
 \c@lstlisting=\count422
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 14.4pt on input line 269.
+(Font)              scaled to size 14.4pt on input line 288.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 24.88pt on input line 273.
+(Font)              scaled to size 24.88pt on input line 292.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 24.88pt on input line 273.
+(Font)              scaled to size 24.88pt on input line 292.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 17.28pt on input line 280.
+(Font)              scaled to size 17.28pt on input line 299.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 17.28pt on input line 280.
+(Font)              scaled to size 17.28pt on input line 299.
 File: figures/PDG_V0.pdf Graphic file (type pdf)
 <use figures/PDG_V0.pdf>
 [1
 
 ]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 10.95pt on input line 285.
+(Font)              scaled to size 10.95pt on input line 304.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 10.95pt on input line 285.
+(Font)              scaled to size 10.95pt on input line 304.
  (Report_v0.toc
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
 (Font)              scaled to size 12.0pt on input line 2.
@@ -2545,49 +2545,49 @@ File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
 File: figures/Fig1.png Graphic file (type bmp)
 <figures/Fig1.png>
 
-Overfull \hbox (14.6946pt too wide) in paragraph at lines 290--300
+Overfull \hbox (14.6946pt too wide) in paragraph at lines 309--319
 \TU/TeXGyreTermesX(0)/m/n/12 arbitrary chosen criteria, often used to personali
 ze advertisement. To perform clustering, algorithms
  []
 
 
-Overfull \hbox (1.23993pt too wide) in paragraph at lines 290--300
+Overfull \hbox (1.23993pt too wide) in paragraph at lines 309--319
 \TU/TeXGyreTermesX(0)/m/n/12 are built using mathematical tools from probabilit
 y theory, statistics, linear algebra and functional
  []
 
 
-Overfull \hbox (0.9669pt too wide) in paragraph at lines 290--300
+Overfull \hbox (0.9669pt too wide) in paragraph at lines 309--319
 \TU/TeXGyreTermesX(0)/m/n/12 A classic approach is the $\OML/ntxmi/m/it/12 k$\T
 U/TeXGyreTermesX(0)/m/n/12 -means algorithm, which aims at partitioning the dat
 a into $\OML/ntxmi/m/it/12 k$ \TU/TeXGyreTermesX(0)/m/n/12 predefined
  []
 
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/sl' will be
-(Font)              scaled to size 12.0pt on input line 300.
+(Font)              scaled to size 12.0pt on input line 319.
 [1]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 12.0pt on input line 307.
+(Font)              scaled to size 12.0pt on input line 326.
 
-Overfull \hbox (4.73093pt too wide) in paragraph at lines 307--311
+Overfull \hbox (4.73093pt too wide) in paragraph at lines 326--330
 \TU/TeXGyreTermesX(0)/m/n/12 LAAS-CNRS is a french research lab of the \TU/TeXG
 yreTermesX(0)/m/it/12 Centre National de la Recherche Scientifique \TU/TeXGyreT
 ermesX(0)/m/n/12 (CNRS),
  []
 
 
-Overfull \hbox (15.35997pt too wide) in paragraph at lines 307--311
+Overfull \hbox (15.35997pt too wide) in paragraph at lines 326--330
 \TU/TeXGyreTermesX(0)/m/n/12 transports, production, services, security and def
 ense, energy management, healthcare, environment
  []
 
 [2]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/b/n' will be
-(Font)              scaled to size 14.4pt on input line 312.
+(Font)              scaled to size 14.4pt on input line 331.
 File: figures/LAAS.jpeg Graphic file (type bmp)
 <figures/LAAS.jpeg>
 
-Overfull \hbox (3.8306pt too wide) in paragraph at lines 313--319
+Overfull \hbox (3.8306pt too wide) in paragraph at lines 332--338
 \TU/TeXGyreTermesX(0)/m/it/12 spatiales \TU/TeXGyreTermesX(0)/m/n/12 (Laborator
 y of automatics and it’s spatial applications). Indeed, it is located in Toulou
 se,
@@ -2596,42 +2596,42 @@ se,
 File: figures/LAAS_Departments.png Graphic file (type bmp)
 <figures/LAAS_Departments.png>
 
-Overfull \hbox (2.36694pt too wide) in paragraph at lines 321--328
+Overfull \hbox (2.36694pt too wide) in paragraph at lines 340--347
 \TU/TeXGyreTermesX(0)/m/n/12 LAAS is the home of 6 research departments made up
  of 26 teams dedicated to their 4 disciplinary
  []
 
 
-Overfull \hbox (4.62794pt too wide) in paragraph at lines 329--331
+Overfull \hbox (4.62794pt too wide) in paragraph at lines 348--350
 \TU/TeXGyreTermesX(0)/m/n/12 research through 4 strategic axes: Ambient intelli
 gence, Living (biology, environment, medicine),
  []
 
 
-Overfull \hbox (8.6176pt too wide) in paragraph at lines 329--331
+Overfull \hbox (8.6176pt too wide) in paragraph at lines 348--350
 \TU/TeXGyreTermesX(0)/m/n/12 Space and Energy. Examples include LAAS’ mathemati
 cians teaming up with robotics researchers
  []
 
 
-Overfull \hbox (0.22258pt too wide) in paragraph at lines 333--334
+Overfull \hbox (0.22258pt too wide) in paragraph at lines 352--353
 \TU/TeXGyreTermesX(0)/m/n/12 communication systems. The team is mostly made up 
 of experts in networks and communication,
  []
 
 [3] [4]
-Underfull \hbox (badness 10000) in paragraph at lines 359--362
+Underfull \hbox (badness 10000) in paragraph at lines 378--381
 
  []
 
 
-Overfull \hbox (9.82791pt too wide) in paragraph at lines 363--365
+Overfull \hbox (9.82791pt too wide) in paragraph at lines 382--384
 []\TU/TeXGyreTermesX(0)/m/n/12 The end goal is to detect clusters in the set, s
 o the graph should represent the local neighborhood
  []
 
 
-Overfull \hbox (21.01622pt too wide) in paragraph at lines 363--365
+Overfull \hbox (21.01622pt too wide) in paragraph at lines 382--384
 \TU/TeXGyreTermesX(0)/m/n/12 function $\OML/ntxmi/m/it/12 d\U/matha/m/n/12 p\OM
 L/ntxmi/m/it/12 x[]; x[]\U/matha/m/n/12 q ^^P \OML/ntxmi/m/it/12 exp\U/matha/m/
 n/12 p[]q$\TU/TeXGyreTermesX(0)/m/n/12 , where the parameter σ controls the wid
@@ -2639,12 +2639,12 @@ th of the neighborhoods.
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 363--365
+Underfull \hbox (badness 10000) in paragraph at lines 382--384
 
  []
 
 
-Overfull \hbox (12.21361pt too wide) in paragraph at lines 366--368
+Overfull \hbox (12.21361pt too wide) in paragraph at lines 385--387
 \TU/TeXGyreTermesX(0)/m/n/12 function/graph influences the spectral clustering 
 result. However, the SARA team studies clustering
  []
@@ -2653,39 +2653,83 @@ File: figures/simgraph_example.png Graphic file (type bmp)
 <figures/simgraph_example.png>
 [5]
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 8.8pt on input line 397.
-LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 8.8pt on input line 397.
+(Font)              scaled to size 8.8pt on input line 398.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 397.
+(Font)              scaled to size 10.0pt on input line 398.
 
 
 LaTeX Font Warning: Font shape `U/stmry/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 397.
+(Font)              size <5> substituted on input line 398.
 
 
 LaTeX Font Warning: Font shape `U/lasy/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 397.
+(Font)              size <5> substituted on input line 398.
 
 
 LaTeX Font Warning: Font shape `U/matha/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 397.
+(Font)              size <5> substituted on input line 398.
 
 
 LaTeX Font Warning: Font shape `U/mathb/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 397.
+(Font)              size <5> substituted on input line 398.
 
 
 LaTeX Font Warning: Font shape `U/mathx/m/n' in size <5.5> not available
-(Font)              size <5> substituted on input line 397.
+(Font)              size <5> substituted on input line 398.
 
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/n' will be
-(Font)              scaled to size 7.3pt on input line 397.
+(Font)              scaled to size 7.3pt on input line 398.
 LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
-(Font)              scaled to size 7.3pt on input line 397.
+(Font)              scaled to size 8.8pt on input line 416.
+LaTeX Font Info:    Font shape `TU/TeXGyreTermesX(0)/m/it' will be
+(Font)              scaled to size 7.3pt on input line 416.
+[6]
+! Undefined control sequence.
+<recently read> \Lun 
+                     
+l.436 ...k$ with  $A_i = \{j | \; y_j \in C_i\}$.}
+                                                  
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+
+LaTeX Font Warning: Font shape `U/stmry/b/n' undefined
+(Font)              using `U/stmry/m/n' instead on input line 436.
+
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <8.8> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 436.
+LaTeX Font Info:    Font shape `U/lasy/b/n' in size <6.6> not available
+(Font)              Font shape `U/lasy/m/n' tried instead on input line 436.
+
+Underfull \hbox (badness 10000) in paragraph at lines 436--436
+[]\TU/lmtt/m/n/12 Cluster the points $\U/matha/m/n/12 p\OML/ntxmi/m/it/12 y[]\U
+/matha/m/n/12 q[]$ \TU/lmtt/m/n/12 in $\U/ntxsym/m/n/12 R[]$ \TU/lmtt/m/n/12 wi
+th the $\OML/ntxmi/m/it/12 k$\TU/lmtt/m/n/12 -means algorithm into
+ []
+
+
+Overfull \hbox (24.79999pt too wide) in paragraph at lines 436--437
+[][]
+ []
+
 File: figures/clustering_example.png Graphic file (type bmp)
 <figures/clustering_example.png>
-[6] [7] [8] (Report_v0.aux)
+[7]
+File: figures/connected_example.png Graphic file (type bmp)
+<figures/connected_example.png>
+
+
+LaTeX Warning: Citation `con_theo' on page 8 undefined on input line 477.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 465--496
+
+ []
+
+[8] [9] [10] (Report_v0.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2020/03/25>
@@ -2696,18 +2740,27 @@ LaTeX Font Warning: Size substitutions with differences
 (Font)              up to 0.5pt have occurred.
 
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package rerunfilecheck Info: File `Report_v0.out' has not changed.
-(rerunfilecheck)             Checksum: 01F18C88D1977266E19C1D9BE5CEB901;1525.
+
+LaTeX Warning: There were undefined references.
+
+
+Package rerunfilecheck Warning: File `Report_v0.out' has changed.
+(rerunfilecheck)                Rerun to get outlines right
+(rerunfilecheck)                or use package `bookmark'.
+
+Package rerunfilecheck Info: Checksums for `Report_v0.out':
+(rerunfilecheck)             Before: 01F18C88D1977266E19C1D9BE5CEB901;1525
+(rerunfilecheck)             After:  229A00C8D17A46E82343B82363ACFCB3;1713.
  ) 
 Here is how much of TeX's memory you used:
- 50428 strings out of 409673
- 1092049 string characters out of 5778967
+ 50500 strings out of 409673
+ 1093441 string characters out of 5778967
  1933630 words of memory out of 5000000
- 71633 multiletter control sequences out of 15000+600000
- 596064 words of font info for 160 fonts, out of 8000000 for 9000
+ 71691 multiletter control sequences out of 15000+600000
+ 608149 words of font info for 186 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  84i,12n,117p,1098b,804s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Report_v0.pdf (9 pages).
+Output written on Report_v0.pdf (11 pages).

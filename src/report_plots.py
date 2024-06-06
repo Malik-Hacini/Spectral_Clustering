@@ -121,4 +121,10 @@ def clustering_example():
     plot_simgraph(data,matrix,labels=labels)
 
 
-clustering_example()
+def connected_example():
+    data,labels,name=load_data_n_labels('connected_example')
+    labels_spectral,matrix=spectral_clustering(data,n_clusters=2,k_neighbors=4,return_eigvals=False,return_matrix=True)
+    plot_simgraph(data,matrix,labels=labels)
+
+
+connected_example()
