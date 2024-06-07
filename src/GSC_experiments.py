@@ -113,7 +113,9 @@ def test_unsupervised_gsc(l,name):
     save_plot(plt,f'{name}_{l}',dataset_name=name)
 
 
-'''
+
+N=500
+
 means=[(0,0),(1.15,1.15)]
 n_clusters=len(means)
 distrib=[0.5,0.5]
@@ -121,11 +123,14 @@ sigmas_x=[1/3,1/3]
 sigmas_y=[1/3,1/3]
 p_list=[0,0]
 covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
-data,labels=GMM(2,100,means,covs,distrib)'''
 gsc_params=(1,1,0.99)
-data,labels,name=load_data_n_labels('gsc_test')
+data,labels=GMM(n_clusters,N,means,covs,distrib)  
 
-
-labels_spectral,vals=spectral_clustering(data,k_neighbors=6,n_eig=3,laplacian='g_rw',gsc_params=gsc_params,
-                                                    sigma=1,n_clusters=2
+labels_spectral,vals,matrix=spectral_clustering(data,k_neighbors=6,n_eig=3,laplacian='g_rw',
+                                                    sigma=1,n_clusters=2,return_matrix=True
                                                     )
+
+
+name=f'circ_{N}_sym'
+plt=plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l='Ouais')
+save_plot(plt,name)

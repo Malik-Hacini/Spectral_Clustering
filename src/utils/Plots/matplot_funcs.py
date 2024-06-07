@@ -138,7 +138,6 @@ def plot_sc_graph(data,labels,labels_spectral,matrix):
     ax2.scatter(x,y,c=labels.astype(float),edgecolors='gray')
     plt.show()
 
-
 def plot_fig1(data,labels_clustering,labels_kmeans):
     """Plots the clustering of 2D data against the ground truth of the data.
     
@@ -200,7 +199,7 @@ def plot_sc_graph_eigengap(data,labels,labels_spectral,matrix,vals,l,directed=Fa
     ax3.locator_params(axis="x", integer=True)
     ax3.get_yaxis().set_visible(False)
     ax3.scatter(X,vals)
-
+   
     
     return plt
 
@@ -211,3 +210,53 @@ def plot_gapcurve(steps,gaps,titles):
     plt.yticks()
     plt.legend()
     return plt
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+'''def plot_eigengap_comparison(vals, steps):
+    X = np.arange(1, len(vals[0]) + 1, 1)
+    colors = ['blue', 'purple', 'red', 'green','yellow','black']
+    
+    plt.locator_params(axis="x", integer=True, tight=True)
+    plt.locator_params(axis="y", tight=True, nbins=4)
+    
+    for i, (val, step) in enumerate(zip(vals, steps)):
+        plt.scatter(X, val, color=colors[i], label=str(steps[i]))
+    
+    plt.legend()
+    plt.show()'''
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+def plot_eigengap_comparison(vals, steps):
+    X = np.arange(1, len(vals[0]) + 1, 1)
+    colors = ['blue', 'purple', 'red', 'green']
+    
+    if len(vals) > len(colors):
+        raise ValueError("Not enough colors for the number of value sets provided.")
+    
+    # Find the maximum value among the third elements in each list
+    max_third_value = max(val[2] for val in vals)
+    
+    plt.locator_params(axis="x", integer=True, tight=True)
+    plt.locator_params(axis="y", tight=True, nbins=4)
+    
+    for i, (val, step) in enumerate(zip(vals, steps)):
+        plt.scatter(X, val, color=colors[i], label=f'Step {step}')
+    
+    # Set x-axis limits to cover all indices
+    plt.xlim(1, len(vals[0]))
+    # Set y-axis limit to slightly exceed the maximum third value
+    plt.ylim(0, max_third_value)  # Adding 1 for a bit of padding
+
+    plt.xlabel('Index')
+    plt.ylabel('Values')
+    plt.legend()
+    plt.show()
+
+
+
+
+

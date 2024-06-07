@@ -184,6 +184,11 @@
 \end{array}}%fonction avec ensembles de départ, d'arrivée et transformation, sans nom
 
 
+%%%%Tables%%%%
+\usepackage{adjustbox}
+\usepackage{booktabs}
+
+
 
 %%%%%Bibliographie%%%%%
 
@@ -302,9 +307,29 @@
 \end{titlepage}
 
 \begin{abstract}
-	Placeholder
+	During my internship at LAAS-CNRS in Toulouse, I focused on exploring and implementing Spectral Clustering algorithms. This report begins with an introduction to the laboratory and outlines the objectives of my internship. I then delve into the technical aspects, starting with an overview of the fundamental theory behind Spectral Clustering. Following this, I describe my implementation of the algorithm in Python and detail the experiments conducted on synthetic datasets to evaluate its performance.
+	
+	The report further introduces Generalized Spectral Clustering (GSC), a novel framework developed at LAAS. I explain the theoretical ideas and improvements offered by GSC over traditional Spectral Clustering methods. To test and demonstrate the efficacy of GSC, I present experiments performed on both synthetic and real-life datasets.
+	
+	Overall, this report provides a comprehensive analysis of Spectral Clustering techniques, from basic theory to practical implementation and experimentation, culminating in an exploration of the advanced Generalized Spectral Clustering framework.
+	
+
 \end{abstract}
+\newpage
+\section*{Thanks}
+I would like to express my heartfelt gratitude to everyone who supported me during my internship at LAAS-CNRS. Firstly, I am deeply thankful to my supervisor, Matthieu Jonckheere, for his unwavering support and guidance. His willingness to allow me to work independently while providing insightful guidelines made this internship a truly enriching experience. I am particularly grateful for the opportunity he gave me to explore a field I am passionate about, which has been incredibly rewarding.
+
+I also sincerely thank Ernesto Garcia, Ph.D. student, whose office I shared. Ernesto was always there to patiently answer my questions, offer valuable insights, and share his experiences about the world of academic research and its challenges. His support and willingness to help made a significant difference in my learning journey.
+
+Additionally, I would like to thank Jérome Monnier, Pascal Noble, Aude Rondepierre, and Lucie Baudoin for connecting me with Matthieu and providing me with this valuable opportunity. Your belief in my potential and your efforts to facilitate this internship have been crucial.
+
+I am also deeply grateful to my sponsor teacher, Jean Marc Hok, who gave me the opportunity to write this report in English. This experience allowed me to fully immerse myself in the academic world, enhancing my understanding and skills in scientific writing.
+
+Lastly, I wish to extend my sincere thanks to "La Prépa des INP," my school, for giving me the opportunity to undertake this internship.
+
+\newpage
 \tableofcontents
+\newpage
 \section{Introduction}
 Clustering data is crucial in various fields as it allows us to identify patterns, group similar entities together and derive meaningful insights from large datasets. In virtually every
 scientific field dealing with empirical data, people attempt to get a first impression on their data by
@@ -364,7 +389,7 @@ In practice, these $3$ steps intertwined a lot : I understood the algorithms mor
 \section{The theory of Spectral Clustering}
 The first task I was given was to understand the theory of classical spectral clustering by reading \cite[A tutorial on Spectral Clustering]{tutorial}, the most famous introductory article on the subject. SC has been heavily studied for the past $3$ decades, and this article does a great job at introducing the theory and giving practical advice on the algorithm. Later on, I would have to establish specific experiments myself, thus a superficial understanding would not be enough and I had to deeply understand the mechanisms of the algorithm. The theory of SC is mostly built using graph theory and linear algebra. It is then interpreted by the theory of Markov processes on graphs. I was already familiar most of the mathematical material required, up to some advanced linear algebra results like the Perron-Frobenius theorem. I also had to deepen my understanding of the Markov chain approach to random walks to get a better feel for the inner mechanisms of GSC.
 It took me $4$ days to understand the basics and start working on my first implementation of SC, but I refined my understanding day by day afterwards.
-\subsection{Technical explanation}
+\subsection{Technical explanation} \label{sec-theory}
 Since I will later present the results of my experiments, a technical explanation on the basics of spectral clustering will be useful. For more details, see \cite{tutorial}.
 Let $S$ be a set of $N$ data points $x_1,x_2, \ldots ,x_N$ in $\R^n$.
 \subsubsection{Similarity graphs}
@@ -474,7 +499,7 @@ the spectrum (for a formal statement see below).
 %
 The justification of spectral clustering is then the following: Let us
 first consider the ``ideal case'' where the between-cluster similarity
-is exactly 0. Then, as stated by \cite{con_theo}, the first $k$ eigenvectors of $L$ or $L_{rw}$ are the indicator
+is exactly 0. Then, as stated by \ref{con_theo}, the first $k$ eigenvectors of $L$ or $L_{rw}$ are the indicator
 vectors of the clusters. In this case, the points $y_i \in \R^k$
 constructed in the spectral clustering algorithms have the form
 $(0,\hdots,0,1,0,\hdots0)'$ where the position of the 1 indicates the
@@ -493,10 +518,284 @@ completely coincide with $(0,\hdots,0,1,0,\hdots0)'$, but do so up to
 some small error term. Hence, if the perturbations are not too large,
 then $k$-means algorithm will still separate the groups from each
 other. \\
-
+\paragraph{The eigengap heuristic}
+In the ideal case of disconnected clusters, we know the multiplicity of the eigenvalue $0$ to be the number of connected components, thus of clusters in this framework. However, in more complex scenarios, $0$ will only have a multiplicity of $1$. But in theory at least, we can still use the spectra of the graph laplacian to detect the correct number of clusters. Indeed, according to perturbation theory, for a set with $k$ clusters, it's $k$ first eigenvalues (in ascending order) should be very close to $0$, and the next one further away from it. Thus, we should be able to see a "gap" in the spectra after the $k$ first eigenvalues. The quantity $\lvert \lambda_{k+1} - \lambda_k \rvert$ is thuscalled the eigengap. \\
+In practice, this heuristic is hard to use : we do not have much control over the spectra of the graph laplacians apart from the eigenvalue $0$, and do not know much about the parameters that influence this eigengap.\\ Identifying these parameters and trying to improve the eigengap was one of the main focus of the experiments \ref{sec-exp} conducted during this internship.
 \section{Python implementation of SC}
+There already exists multiple Python implementations of SC, the most notable being the one used in the \cite[scikit learn]{scikit} package. However, this implementation has limited customization and does not include the GSC framework. Thus, I had to implement SC from scratch on my own. This was done using only standard Python libaries such as NumPy and SciPy. The code was split in $2$ main modules : one being responsible for the creation and management of similarity graphs and their laplacians, and the other being in charge of the actual clustering. On top of that, I added a tool for building datasets. It consists of an interactive matplotlib window where one can place points in $2$D space in real time, and assign them colors that will serve as the ground truth label of the dataset. This tool was crucial, as it made running experiments on synthetic data way easier and faster.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/dataset_builder}
+	\caption{The dataset builder.}
+	\label{fig:dataset_builder}
+\end{figure}
+I also included the GSC framework in the library, detailed in \ref{sec-gsc}. This implementation had $2$ major goals : being highly customizable (every parameter of the clustering can be freely chosen), to easily conduct experiments, but also being usable in an unsupervised way. \\
+The only information needed to run SC on a dataset is the number of clusters. Every other parameter, if not given, is chosen automatically. For details, see \ref{app-unsupervised}. \\
+I have then compiled the library into an installable open-source Python package named GSCpy. Using it requires no particular knowledge on SC, and the dataset builder is included. For details, see the \cite[GSCpy github repository]{github}.
+\section{Spectral Clustering Experiments} \label{sec-exp}
 
+Before diving into the theory of GSC and the experiments, I conducted several experiments on classical SC to assert the good behavior of the algorithms and weigh the impact of certain parameters.
+\subsection{Basic Experiments}
+\subsubsection{Circles and Moons}
+The most basic spectral clustering example are the circles and moons dataset. These datasets fail to be clustered correctly by $k$-means, as the clusters do not lie in disjoint convex sets. However, spectral clustering is powerful enough to correctly cluster these datasets, as the clusters form disconnected components in the graph. This shows the philosophical advantage that SC has : it doesn't care about the dataset's geometry.
+
+\begin{figure}[H]
+	\begin{subfigure}{.6\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Fig1}
+		\caption{Circles}
+	\end{subfigure}
+	\begin{subfigure}{.6\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/Fig2}
+		\caption{Moons}
+	\end{subfigure}
+	\caption{Comparison between $k$-means and spectral clustering on toy datasets}
+\end{figure}
+
+
+Here, we know the correct number of clusters because we can visualize the dataset, which is not the case for real datasets as they are highly dimensional. However, as predicted by the theory, the spectra of the graph laplacian is helpful.
+
+
+\begin{figure}[H]
+	\captionsetup{justification=centering}
+	\centering
+	\includegraphics[width=1.1\linewidth]{figures/Fig_E1_circles}
+	\caption{First eigenvalues of laplacians for the clustering of the circles dataset. \\ Left to right : $L$, $L_{sym}$, $L_{rw}$}
+	\label{fig:fige1circles}
+\end{figure}
+
+Every laplacian has a great gap in it's eigenvalues after 2 of them, meaning the graph contains exactly 2 connected components, thus 2 clusters.
+In order to show the difference between each laplacian, we need more sophisticated datasets.
+
+\subsubsection{Gaussian Mixtures}
+Before implementing the dataset builder, which came late in the process of the internship, I had to build datasets on my own using other ways. Matthieu and Ernesto suggested that in the goal of doing qualitative comparison between different methods, using $2$-dimensional gauussian mixture datasets would be a good starting point. 
+
+\paragraph{Multivariate Normal Distribution} The multivariate normal distribution, also called "multivariate gaussian" is a generalization of the one-dimensional (univariate) normal distribution to higher dimensions. For any dimension $d$, it can be defined by it's PDF :
+$$\fonctionnonnommee{\R^{d}}{\R_{>0}}{x}{\frac{1}{\sqrt{(2\pi)^2 \lvert \Sigma \rvert}} e^{-\frac{1}{2}(x-\mu) \Sigma^{-1} (x-\mu)^{t}}}$$
+Where:
+\begin{itemize}
+	\item $\mu \in{R^d}$ is the mean of the distribution.
+	\item $\Sigma$ is a $d$ by $d$ square symmetric positive semi-definite matrix called the covariance matrix, because when $x$ is treated as a random vector with each of it's coordinates $x_i$ being a random variable, $\sigma_{i,j}= Cov(x_{i},x_{j})$.
+\end{itemize}
+The multivariate gaussian distribution is centered at $\mu$ and has an ellipsoidal shape defined by $\Sigma$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.4\linewidth]{figures/Binorm}
+	\caption{Level sets of a bivariate normal distribution centered at the origin. The probability of a sample landing in the blue ellipse is $0.66$.}
+	\label{fig:binorm}
+\end{figure}
+
+A linear combination of $d$-dimensional gaussians is called a gaussian mixture.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/2gm}
+	\caption{$200$ samples from a mixture of two 2-dimensional gaussians.}
+	\label{fig:2gm}
+\end{figure}
+\begin{rem} 
+	In practice, since gaussians PDF decay quickly when driving away from $\mu$, when the means are fairly spaced, the different gaussians do not really interact to form a diffrent PDF and the resulting mixture just looks like a superpostion of the respective gaussians. Thus, we do not perform the sampling with the actual PDF of the mixture, but uniformly choose between the different gaussians for each point.
+\end{rem}
+Gaussian mixtures form great toy datasets on which we can test and visualize our clustering, where a "ground truth" cluster is all of the points sampled from a particular gaussian.
+
+\begin{figure}[H]
+	\captionsetup{justification=centering}
+	\begin{subfigure}{.6\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/fig5_g1}
+		\caption{Successful clustering}
+	\end{subfigure}
+	\begin{subfigure}{.6\textwidth}
+		\centering
+		\includegraphics[width=0.9\linewidth]{figures/fig6_g2}
+		\caption{Unsuccessful clustering}
+	\end{subfigure}
+	\caption{Visualization of spectral clustering and it's $k$-nn graph on a gaussian mixture. \\ Settings : $L_{rw}$, $k=6$, $\sigma=\frac{1}{3}$ (for gaussian kernel).}
+\end{figure}
+On figure (a) we see that the $k$-nn graph correctly encodes the cluster structure of the data. It is fully connected but there is only one link between clusters, which makes for great performance of SC using $L_{rw}$. \\ \\
+On figure (b), the means of the two gaussians are closer apart, thus the clustering fails to partition the graph correctly due to the multiple links between the real clusters.
+However, increasing $k$ creates stronger links inside of the clusters, leading to better performance : 
+\begin{figure}[H] 
+	\label{unsuc}
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/fig7_g3}
+	\caption{The performance of the clustering is increased with $k=8$}
+	\label{fig:fig7g3}
+\end{figure}
+By forcing the algorithm to form $2$ clusters, we get good performance. Again, what if we didn't know the true number of clusters ? In this case, the graph is fully connected, so does the eigengap really indicates $2$ clusters ? 
+
+\begin{figure}[H]
+	\captionsetup{justification=centering}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1.1\linewidth]{figures/Fig_E4_L}
+		\caption{$L$}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1.1\linewidth]{figures/Fig_E5_L_sym}
+		\caption{$L_{sym}$}
+	\end{subfigure}
+	\begin{subfigure}{.3\textwidth}
+		\centering
+		\includegraphics[width=1.1\linewidth]{figures/Fig_E6_L_rw}
+		\caption{$L_{rw}$}
+	\end{subfigure}
+	\caption{First eigenvalues of laplacians for the graph of \ref{unsuc}.}
+\end{figure}
+These results clearly show that the connectivity of the graph has great impact of the quality of the eigengap. Both the spectra of $L$ and $L_{rw}$ give no valuable information and while $L_{sym}$ does have a "gap" after the second eigenvalue, it isn't clear enough to conclude on the true number of clusters.
+In conclusion, while the eigengap can be a useful criteria in the case of well separated datasets, when the graph is strongly connected to better the performance on harder datasets, the eigengap becomes meaningless as noise becomes too big.
+Thus, we conclude that to efficiently choose $k$, we need to connect the graph enough to ensure good performance, but not too much to the point where the eigengap is useless, otherwise we will be unable to know the correct number of clusters. The practical implementation of this reasoning is detailed in \ref{app-unsupervised}.
+
+\section{Generalized Spectral Clustering} \label{sec-gsc}
+We have already underlined the theoretical limitations of spectral clustering in \ref{sec-theory}. Most importantly, in the classical process, we always lose the directionality information of the graph. This is what \cite[Jonckheere et al.]{GSC} tried to fix in their new framework : Generalized Spectral Clustering. The goal is to build a spectral clustering framework that would work on directed and undirected graphs. However, for this to work, we need a symmetric and real-valued graph Laplacian with a full set of real eigenvalues.\\ The bulk of the work is centered around the random walk interpretation of spectral clustering (See \cite{tutorial} for more details).A random walk on a graph is a stochastic process which randomly jumps from node to node.
+We will see below that spectral clustering can be interpreted as trying to find a partition of the graph
+such that the random walk stays long within the same cluster and seldom jumps between clusters.
+Intuitively this makes sense, as when the intra-cluster links are stronger than the inter-cluster links, the random walk does not have
+many opportunities to jump between clusters.
+This leads to an expression of the spectral clustering problem as the relaxation of a functional of the graph, called \textit{generalized Dirichlet energy}. 
+They are then able to build two new "generalized" laplacians, $L_{G}$ and $L_{G_{rw}}$. \\
+In the case of a directed graph, these laplacians coincide with the standard $L$ and $L_{rw}$, hence the adjective "generalized". \\
+
+\section{GSC Experiments}
+The GSC framework has potential to improve SC, especially in the case of unbalanced data.\\
+Jonckheere et al. have conducted experiments on GSC and found promising results. I was thus asked to pursue these experiments to try and better understand the behavior of GSC.
+\subsection{Extensive study of the eigengap for SC and GSC}
+\subsubsection{Method}
+$k$ is not the only parameter with an impact on the eigengap. In this section we investigate characteristics of synthetic $2$-d datasets to assess their impact on the eigengap. In theory, the GSC framework involves new parameters $(t,\gamma,\alpha)$ used to build the generalized laplacians $L_{G}$ and $L_{G_{rw}}$. For this study, we fix $(t,\gamma,\alpha)$=$(3,0.7,0.9)$ for every dataset. To simplify the study, we first consider the case of $2$ clusters. We investigate $3$ features of the datasets:
+\begin{itemize}
+	\item Geometry of clusters
+	\item $N$-symmetry
+	\item Total number of points.
+\end{itemize}
+The big picture idea is to detect if clusters that "look alike" lead to better eigengaps, and if GSC improves them.
+"Geometry of clusters" refers to the shape of the clusters. $2$ clusters are $N$-symmetric if they have the same number of points. We also call them 'balanced'.
+To test these criteria, we generate multiple datasets and cluster them using every standard laplacian ($L$,$L_{sym}$,$L_{rw}$) and the generalized laplacians $L_G$ and $L_{G_{rw}}$. We make sure to separate these clusters well, to isolate the effect of our criteria on the eigengap. We are then able to choose $k$ efficiently by hand as the datasets are on the easier side. In practice, the standard laplacians return nearly identical results regarding performance of clustering and eigengap, thus we choose to only report $L_{rw}$ results and compare them to the generalized laplacians.
+\subsubsection{Results}
+\paragraph{Geometry of clusters.}
+To correctly isolate the effect of the geometry of clusters, we build $N$-symmetric and $D$-symmeytric datasets. We start by a dataset with $2$ circular clusters to serve as reference.
+We get the best results with $L_{G_{rw}}$.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/base_circles_g_rw}
+	\label{fig:base_circles}
+	\caption{$k$ = 4, $L_{G_{rw}}$. A great eigengap is observed.}
+\end{figure}
+As shown by the next experiment, changing the shape of one cluster doesn't change these results :
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/uneven_blobs_g_rw}
+	\label{fig:uneven_blobs}
+	\caption{$k$ = 4, $L_{G_{rw}}$. An eigengap of the same quality is observed.}
+\end{figure}
+
+Other experiments allow us to conclude that the shape of the clusters has no significant impact on the performance of the clustering and the quality of the eigengap.
+These results were to be expected : spectral clustering looks for the connected components of a $k$-nn graph. This graph does not contain the information of the shape of the clusters : in the adjacency matrix, a circular cluster will appear the same as an highly complex non-convex one. The underlying geometry of the subset of $\R^N$ a cluster belongs to is not taken into account when forming the graph. This is an advantage spectral clustering has over $k$-means, which looks for convex clusters in $\R^N$.\\
+For the sake of simplicity and without loss of generality, we thus only consider circular clusters for our experiments on $N$-symmetry and the total number of points.
+\paragraph{$N$-symmetry}
+The \ref{fig:base_circles} dataset serves as a good example for $N$-symmetric clusters. The eigengap clearly indicates $2$ clusters.
+This isn't true when the clusters are unabalanced.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/4x_asym_blobs_rw}
+	\label{fig:mid_asym_blobs_rw}
+	\caption{$k$ = 4, $L_{rw}$. There is $4$ times more points in the yellow cluster, the eigengap is worse.}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.6\linewidth]{figures/mid_asym_blobs_rw}
+	\label{fig:4x_asym_blobs_rw}
+	\caption{$k$ = 4, $L_{rw}$. There is $5$ times more points in the yellow cluster, the eigengap is practically unusable.}
+\end{figure}
+The more unbalanced the clusters are, the worse the eigengap. We conclude that for heavily unbalanced data, we can not safely rely on the spectra of the classical graph laplacians to detect the correct number of clusters.
+GSC helps greatly for this matter.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/mid_asym_blobs_g_rw}
+	\label{fig:mid_asym_blobs_g_rw}
+	\caption{$k$ = 4, $L_{G_{rw}}$. Even with the data being heavily unbalanced, the eigengap is clear.}
+\end{figure}
+We can conclude that GSC leads to a better eigengap than classical SC on unbalanced data, which gives hope for the performance of a potentially fully unsupervised GSC pipeline, where the number of clusters is automatically detected by the algorithm.
+\paragraph{Total number of points}
+Most real datasets have a very high number of points, ranging from thousands to millions. Thus, in the hope of building a fully unsupervised GSC pipeline,asserting good eigengaps on large datasets is crucial.
+Fortunately, experiments on synthetic datasets show that in general, more points lead to a better eigengap.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/circ_100_sym}
+	\label{fig:circ_100_sym}
+	\caption{$N=100$,$k$ = 4, $L_{G_{rw}}$. Points generated from a mixture of $2$ gaussians.}
+\end{figure}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{figures/circ_500_sym}
+	\label{fig:circ_500_sym}
+	\caption{$N=500$, $k$ = 4, $L_{G_{rw}}$. The eigengap is significantly better than with $100$ points. }
+\end{figure}
+These results hold for more and more points, although the rate of the upgrade in quality slows down over time.
+\subsection{Real datasets}
+SC and GSC is ultimately intended to be used for real datasets. Thus, I was asked to benchmark the algorithms on $10$ datasets from the \cite[UCI ML repository]{UCI} .
+
+\subsubsection{Normalized Mutual Information (NMI)}
+These datasets are high dimensional and to correctly assert performance of the clustering, we need a pertinent quantitative metric.
+The NMI facilitates comparisons between two different ways of partitioning a dataset, yielding a value that ranges from 0 to 1. A higher value indicates a greater degree of similarity between partitions. As an external metric, the NMI necessitates the availability of class labels for computations, implying that the ground truth is required when employing this metric.
+The calculation of the NMI between two partitions A and B is executed according to the following equation :
+$$NMI\left(A,B\right)=\frac{2*I(A,B)}{[H\left(A\right)+H(B)]}$$
+
+Where $I(A,B)$ is the mutual information and $H$ the entropy. 
+In practice, $A$ is the set of predicted labels and $B$ the ground truth labels of the dataset. \\ NMI can fail to correctly assess the performance of the clustering when the number of clusters predicted and the ground truth number of clusters do not match. However, this won't be the case in our experiments, since we will force the clustering to build the right number of clusters.
+Other evaluation metrics such as the adjusted Rand Index (ARI) exist, but we limited ourselves to NMI for these experiments as it already is very well suited for comparison purposes.
+\subsection{Method and results}
+We compare the $5$ graph laplacians : $L$, $L_{sym}$,$L_{rw}$,$L_{G}$ and $L_{G_{rw}} $. We construct a $k$-nn graph using the optimal connectivity parameter $k$ computed by \cite[Jonckheere et.al]{GSC} for each set. In the following results table, $N$ is the number of samples and $d$ their dimension.
+
+\newcolumntype{L}[1]{>{\raggedright\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{C}[1]{>{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\newcolumntype{R}[1]{>{\raggedleft\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+\renewcommand{\arraystretch}{1}
+\setlength{\tabcolsep}{3pt}
+%--
+\begin{table*}[h]
+	\small\centering
+	\vspace{-3mm}
+	\caption{Clustering performance (NMI) on UCI datasets with optimal parameters in brackets.}
+	\label{tab_NMI_one}
+	\vspace{-3mm}
+	\sc
+	\vskip 0.15in
+	\begin{adjustbox}{width=0.6\textwidth,center}
+		\begin{tabular}{L{25mm}R{8mm}R{5mm}R{5mm}||ccc||cc}
+			\toprule
+			Dataset & $N$ & $d$ & $k$ & $L$ & $L_{sym}$ & $L_{rw}$  & $L_{G}$ & $L_{G_{rw}}$ \\
+			\midrule
+			\midrule
+			{Iris} & 150 & 3 & 4 &  80.58& 80.58& 74.98\\
+			{Glass} & 214 & 9 & 6 & 38.59& 38.92&  38.95 \\
+			{Wine} & 178 & 13 & 3 & 86.33& 86.33& 83.66\\
+			{WBDC} & 569 & 30 & 2 & 67.73& 69.47& 68.54 \\
+			{Control chart} & 600 & 60 & 6 & 81.17& 81.17& 82.94 \\
+			{Parkinson} & 185 & 22 & 2 & 21.96& 19.13& 28.89 \\
+			{Vertebral} & 310 & 6 & 3 & 39.26& 39.26&  52.06  \\
+			{Breast Tissue} & 106 & 9 & 6 & 54.03& 54.43& 54.04  \\
+			{Seeds} & 210 & 7 & 3 & 73.90& 73.90& 76.29 \\
+			{Image Seg.} & 2310 & 19 & 7 & 67.06& 67.41 & 67.42\\
+			{Yeast} & 1484 & 8 & 10 & 30.58& 31.11& 31.37	\\
+			\midrule
+			Average & -- & -- & -- & 58.29& 58.34& 59.92 \\
+			\bottomrule
+			%
+		\end{tabular}
+	\end{adjustbox}
+	\vskip -0.1in
+\end{table*}
+
+TODO
 \newpage
+\appendix
+\section{Unsupervised SC and GSC} \label{app-unsupervised}
+TODO
+\newpage
+
 \begin{thebibliography}{9}
 \bibitem{tutorial}Von Luxburg, U. A tutorial on spectral clustering. Statistics and
 computing, 17(4):395–416, 2007.
@@ -509,7 +808,13 @@ Dheeru, D. and Karra Taniskidou.UCI repository of machine learning databases \te
 Harry Sevi, Matthieu Jonckheere, and Argyris Kalogeratos.
 Generalized spectral clustering for directed and undirected graphs,
 2022.
+
+\bibitem{github}
+\href{https://github.com/Malik-Hacini/GSCpy}{GSCpy : Generalized Spectral Clustering in Python.}
+\bibitem{scikit} 
+Scikit-learn: Machine Learning in Python, Pedregosa et al., JMLR 12, pp. 2825-2830, 2011.
 \end{thebibliography}
 
 \end{document}
+
 

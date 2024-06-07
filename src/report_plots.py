@@ -127,4 +127,27 @@ def connected_example():
     plot_simgraph(data,matrix,labels=labels)
 
 
-connected_example()
+def eigvals_comparison():
+    steps=[100,200,500]
+
+    means=[(0,0),(1.15,1.15)]
+    n_clusters=len(means)
+    distrib=[0.5,0.5]
+    sigmas_x=[1/3,1/3]
+    sigmas_y=[1/3,1/3]
+    p_list=[0,0]
+    covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(means))]
+    gsc_params=(1,1,0.99)
+
+    values=[]
+    for step in steps:
+        data,labels=GMM(n_clusters,step,means,covs,distrib)  
+
+        labels_spectral,vals,matrix=spectral_clustering(data,k_neighbors=6,n_eig=3,laplacian='g_rw',
+                                                           sigma=1,n_clusters=2,return_matrix=True)
+        values.append(list(vals))
+        
+    plot_eigengap_comparison(values,steps)
+
+
+eigvals_comparison()

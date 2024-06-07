@@ -123,7 +123,11 @@ N not invertible ??? For g_rw (ISSUE WITH v, 0s popping up) (done IG (weirdass f
 
 Report :
  7-9 : Explanation of symmetry importance + perturbation approach to sc (done)
- 10 - 12 : Implementation.
- 13 - 16 : Basic Experiments
- 17 - 18 ; GSC
- 19 - ?? : GSC EXPERIMENTS
+ 9 - 10 : Implementation.
+ 11 - 14 : Basic Experiments
+ 14 - 15 ; GSC
+ 15 - ?? : GSC EXPERIMENTSS
+
+ appendix :
+ A : unsupervised
+ 
