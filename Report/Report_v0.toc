@@ -1,33 +1,34 @@
 \babel@toc {nil}{}\relax 
 \contentsline {section}{\numberline {1}Introduction}{4}{section.1}%
-\contentsline {section}{\numberline {2}An overview of LAAS-CNRS}{5}{section.2}%
-\contentsline {subsection}{\numberline {2.1}Foundation}{5}{subsection.2.1}%
+\contentsline {section}{\numberline {2}An overview of LAAS-CNRS}{6}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Foundation}{6}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Lab organization and philosophy}{6}{subsection.2.2}%
-\contentsline {subsection}{\numberline {2.3}SARA}{6}{subsection.2.3}%
-\contentsline {section}{\numberline {3}Internship's details }{7}{section.3}%
-\contentsline {section}{\numberline {4}The theory of Spectral Clustering}{7}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Technical explanation}{7}{subsection.4.1}%
-\contentsline {subsubsection}{\numberline {4.1.1}Similarity graphs}{8}{subsubsection.4.1.1}%
-\contentsline {subsubsection}{\numberline {4.1.2}Graph laplacians}{9}{subsubsection.4.1.2}%
-\contentsline {paragraph}{The importance of directionality}{10}{section*.8}%
-\contentsline {paragraph}{The case of disconnected clusters}{11}{section*.9}%
-\contentsline {paragraph}{Perturbation theory approach}{11}{section*.11}%
-\contentsline {paragraph}{The eigengap heuristic}{12}{section*.12}%
-\contentsline {section}{\numberline {5}Python implementation of SC}{12}{section.5}%
-\contentsline {section}{\numberline {6}Spectral Clustering Experiments}{13}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Basic Experiments}{13}{subsection.6.1}%
-\contentsline {subsubsection}{\numberline {6.1.1}Circles and Moons}{13}{subsubsection.6.1.1}%
-\contentsline {subsubsection}{\numberline {6.1.2}Gaussian Mixtures}{14}{subsubsection.6.1.2}%
-\contentsline {paragraph}{Multivariate Normal Distribution}{14}{section*.16}%
-\contentsline {section}{\numberline {7}Generalized Spectral Clustering}{17}{section.7}%
-\contentsline {section}{\numberline {8}GSC Experiments}{18}{section.8}%
-\contentsline {subsection}{\numberline {8.1}Extensive study of the eigengap for SC and GSC}{18}{subsection.8.1}%
-\contentsline {subsubsection}{\numberline {8.1.1}Method}{18}{subsubsection.8.1.1}%
-\contentsline {subsubsection}{\numberline {8.1.2}Results}{18}{subsubsection.8.1.2}%
-\contentsline {paragraph}{Geometry of clusters.}{18}{section*.22}%
-\contentsline {paragraph}{$N$-symmetry}{19}{section*.25}%
-\contentsline {paragraph}{Total number of points}{21}{section*.29}%
-\contentsline {subsection}{\numberline {8.2}Real datasets}{22}{subsection.8.2}%
-\contentsline {subsubsection}{\numberline {8.2.1}Normalized Mutual Information (NMI)}{22}{subsubsection.8.2.1}%
-\contentsline {subsection}{\numberline {8.3}Method and results}{22}{subsection.8.3}%
-\contentsline {section}{\numberline {A}Unsupervised SC and GSC}{23}{appendix.A}%
+\contentsline {subsection}{\numberline {2.3}SARA}{7}{subsection.2.3}%
+\contentsline {section}{\numberline {3}Internship's Details}{7}{section.3}%
+\contentsline {section}{\numberline {4}The Theory of Spectral Clustering}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Technical Explanation}{8}{subsection.4.1}%
+\contentsline {subsubsection}{\numberline {4.1.1}Similarity Graphs}{8}{subsubsection.4.1.1}%
+\contentsline {subsubsection}{\numberline {4.1.2}Graph Laplacians}{9}{subsubsection.4.1.2}%
+\contentsline {paragraph}{The Importance of Directionality}{11}{section*.8}%
+\contentsline {paragraph}{The Case of Disconnected Clusters}{11}{section*.9}%
+\contentsline {paragraph}{Perturbation Theory Approach}{12}{section*.11}%
+\contentsline {paragraph}{The Eigengap Heuristic}{12}{section*.12}%
+\contentsline {section}{\numberline {5}Python Implementation of SC}{13}{section.5}%
+\contentsline {section}{\numberline {6}Spectral Clustering Experiments}{14}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Basic Experiments}{14}{subsection.6.1}%
+\contentsline {subsubsection}{\numberline {6.1.1}Circles and Moons}{14}{subsubsection.6.1.1}%
+\contentsline {subsubsection}{\numberline {6.1.2}Gaussian Mixtures}{15}{subsubsection.6.1.2}%
+\contentsline {paragraph}{Multivariate Normal Distribution}{15}{section*.16}%
+\contentsline {section}{\numberline {7}Generalized Spectral Clustering}{19}{section.7}%
+\contentsline {section}{\numberline {8}GSC Experiments}{19}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Extensive study of the eigengap for SC and GSC}{19}{subsection.8.1}%
+\contentsline {subsubsection}{\numberline {8.1.1}Method}{19}{subsubsection.8.1.1}%
+\contentsline {subsubsection}{\numberline {8.1.2}Results}{20}{subsubsection.8.1.2}%
+\contentsline {paragraph}{Geometry of clusters.}{20}{section*.22}%
+\contentsline {paragraph}{$N$-symmetry}{21}{section*.25}%
+\contentsline {paragraph}{Total number of points}{22}{section*.29}%
+\contentsline {subsection}{\numberline {8.2}Real datasets}{23}{subsection.8.2}%
+\contentsline {subsubsection}{\numberline {8.2.1}Normalized Mutual Information (NMI)}{23}{subsubsection.8.2.1}%
+\contentsline {subsection}{\numberline {8.3}Method and results}{23}{subsection.8.3}%
+\contentsline {section}{\numberline {9}Conclusion}{25}{section.9}%
+\contentsline {section}{\numberline {A}Unsupervised SC and GSC}{26}{appendix.A}%

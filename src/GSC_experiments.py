@@ -126,7 +126,7 @@ covs=[bivariate_cov_m(sigmas_x[i],sigmas_y[i],p_list[i]) for i in range(len(mean
 gsc_params=(1,1,0.99)
 data,labels=GMM(n_clusters,N,means,covs,distrib)  
 
-labels_spectral,vals,matrix=spectral_clustering(data,k_neighbors=6,n_eig=3,laplacian='g_rw',
+labels_spectral,vals,matrix=spectral_clustering(data,k_neighbors=6,n_eig=3,laplacian='rw',
                                                     sigma=1,n_clusters=2,return_matrix=True
                                                     )
 

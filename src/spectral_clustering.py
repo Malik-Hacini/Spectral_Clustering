@@ -38,6 +38,7 @@ def kmeans(data,k,use_minibatch=False):
 
     return est.labels_
 
+
 def cluster(n_clusters,n_eig,laplacian_matrix,use_minibatch,print_progress=True):
     vals,u_full=eigenvectors(n_eig,*laplacian_matrix)
     
@@ -50,6 +51,7 @@ def cluster(n_clusters,n_eig,laplacian_matrix,use_minibatch,print_progress=True)
     labels_unord=kmeans(u,n_clusters,use_minibatch)
 
     return vals,labels_unord
+
 
 def eigenvectors(i,a,b=None):
     """Computes the first i eigenvals and eigenvecs of a symmetric matrix for the generalized problem
@@ -72,6 +74,7 @@ def eigenvectors(i,a,b=None):
         vals,vecs=vals.real,vecs.real
     return vals,vecs
 
+
 def ch_index(data,clustering_labels):
     labels_unique=list(set(clustering_labels))
     N=len(data)
@@ -84,6 +87,7 @@ def ch_index(data,clustering_labels):
     
     return ch
 
+
 def unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch):
    ch_list,vals_list,labels_list=[],[],[]
 
@@ -95,7 +99,10 @@ def unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch)
        ch_list.append(ch_index(data,labels_unord))
    argmax=np.argmax(ch_list)
    return vals_list[argmax],labels_list[argmax]
-       
+
+
+
+
 def spectral_clustering(data,n_clusters,k_neighbors=None,n_eig=None,laplacian='rw',
                         g_method='knn',sym_method=None,sigma=1,gsc_params=None,
                         use_minibatch=True,return_labels=True,return_eigvals=True,return_matrix=False,

@@ -1,6 +1,6 @@
 from sklearn.cluster import KMeans
 import numpy as np
-
+import numba
 
 def labels_to_ints(labels):
     labels_unique=list(set(labels))
@@ -8,9 +8,10 @@ def labels_to_ints(labels):
             labels[i]=labels_unique.index(label)
     return len(labels_unique),np.array(labels)
 
+
 def reorder_labels(centers,labels):
     ordered_labels=[]
-    centers_norm=[np.linalg.norm(center) for center in centers]
+    centers_norm=np.array([np.linalg.norm(center) for center in centers])
     clusters_order=np.argsort(centers_norm)
     
     for label in labels:
@@ -18,8 +19,6 @@ def reorder_labels(centers,labels):
         ordered_labels.append(idx)
     
     return np.array(ordered_labels)
-
-
 
 def infer_cluster_labels(n_clusters, actual_labels,labels_spectral):
     """
@@ -56,6 +55,7 @@ def infer_cluster_labels(n_clusters, actual_labels,labels_spectral):
         #print('Cluster: {}, label: {}'.format(i, np.argmax(counts)))
         
     return inferred_labels  
+
 
 def infer_data_labels(labels_spectral, cluster_labels):
     """

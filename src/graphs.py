@@ -1,6 +1,9 @@
 import numpy as np
 import time
+import numba
+from numba import  int64, float64, types, deferred_type
 
+@numba.njit
 def full_kernel(N,nodes,similarity):
      matrix=np.zeros((N,N))
      for i in range(N):
@@ -11,7 +14,7 @@ def full_kernel(N,nodes,similarity):
     
      return matrix + matrix.T
 
-
+@numba.njit
 def knn(k: int, nodes, similarity):
     """Constructs a k-nearest neighbor graph of the given nodes (n-dimensional points) using the similarity function given.
     
@@ -25,16 +28,14 @@ def knn(k: int, nodes, similarity):
     N = len(nodes)
     matrix = np.zeros((N, N))
 
-    #start=time.time()
+
     distances=np.zeros((N,N))
-    # Calculate distances
+    #Calculate distances
     for i in range(N):
         for j in range(i+1, N):
             distances[i, j] = similarity.gaussian(nodes[i], nodes[j])
-        #print(f"Node {i+1}/{N} distances computed. ")
     distances=distances+distances.T
 
-    #print(f"distances computed in {time.time()-start} s. ")
     
     # Find k-nearest neighbors
     for i in range(N):
@@ -42,11 +43,11 @@ def knn(k: int, nodes, similarity):
         for j in knn_indices:
             if j != i:
                 matrix[i, j] = 1
-        #print(f"Node {i+1}/{N} neighbors computed.")
+       
 
     return matrix
 
-
+@numba.njit
 def knn_gaussian(k: int, N, nodes, similarity):
         """Constructs a k-nearest neighbor graph of the given nodes (n-dimensional points) using the gaussian similarity function.
         The graph is weighted : W(i,j)=0 if j isn't in the k-nearest neighbors of i and W(i,j)=gaussian(i,j) else.
@@ -62,26 +63,26 @@ def knn_gaussian(k: int, N, nodes, similarity):
         N = len(nodes)
         matrix = np.zeros((N, N))
 
-        #start=time.time()
+    
         distances=np.zeros((N,N))
         # Calculate distances
         for i in range(N):
             for j in range(i+1, N):
                 distances[i, j] = similarity.gaussian(nodes[i], nodes[j])
-            #print(f"Node {i+1}/{N} distances computed. ")
+        
         distances=distances+distances.T
 
-    #print(f"distances computed in {time.time()-start} s. ")
-        
+
         # Find k-nearest neighbors
         for i in range(N):
             knn_indices = np.argpartition(distances[i], -k)[-k:]
             for j in knn_indices:
                 if j != i:
                     matrix[i, j] = distances[i,j]
-            #print(f"Node {i+1}/{N} neighbors computed.")
 
         return matrix
+
+
 def symmetrize(matrix,method):
         """Symmetrizes knn matrix using different methods.
         Inputs :
@@ -107,6 +108,9 @@ def symmetrize(matrix,method):
         return matrix
 
 
+
+
+@numba.experimental.jitclass([('sigma', float64)])
 class Similarity:
     """Used to store different similarity functions between n-dimensional points."""
     def __init__(self,sigma=None):
@@ -121,6 +125,7 @@ class Similarity:
         '''Returns the gaussian kernel of standard deviation sigma between two n-dimensional points x1 and x2.'''
         return np.exp(-(self.euclidean(x1,x2)**2)/(2*(self.sigma**2)))
     
+
 
 class Graph:
     """Similarity graphs based on a dataset of n-dimensional vectors"""
@@ -146,7 +151,7 @@ class Graph:
             self.m=full_kernel(self.N,self.nodes,self.similarity)
         self.degree_m=np.diag([sum(self.m[i]) for i in range(self.N)])
 
-
+    
     def laplacian(self,choice='un_norm',gsc_params=None):
         """Constructs the chosen graph laplacian based on the graph matrix W."""
         L=np.subtract(self.degree_m, self.m)

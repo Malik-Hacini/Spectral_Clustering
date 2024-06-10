@@ -4,7 +4,7 @@ import networkx as nx
 import os
 
 
-def save_plot(plt,name,path='Results/Saved_plots',dataset_name=None,show=True):
+def save_plot(plt,name,path='Results/Saved_plots',dataset_name=None,show=True,adjust=True):
     fig = plt.gcf()
     if dataset_name is not None:
         path=f'{path}/{dataset_name}'
@@ -12,7 +12,8 @@ def save_plot(plt,name,path='Results/Saved_plots',dataset_name=None,show=True):
             os.mkdir(path)
     
     #fig.set_size_inches(14.40, 8.10)
-    plt.subplots_adjust(left=0.005,bottom=0.323,right=0.995,top=0.683,hspace=0.2,wspace = 0)
+    if adjust:
+        plt.subplots_adjust(left=0.005,bottom=0.323,right=0.995,top=0.683,hspace=0.2,wspace = 0)
     plt.savefig(f"{path}/{name}.png",dpi=300)
     print("Plot saved successfully.")
     if show:
@@ -68,15 +69,29 @@ def plot_all_clustering_vs_gt(data,labels,titles):
 
     plt.show()
 
-def plot_eigenvalues(values,titles):
-    X=np.arange(1,len(values[0])+1,1)
-    fig, axs=plt.subplots(nrows=1,ncols=len(values))
-    for i,ax in enumerate(axs.flat):
-        ax.locator_params(axis="x", integer=True, tight=True)
-        ax.locator_params(axis="y", tight=True,nbins=4)
-        ax.scatter(X,values[i])
+def plot_eigenvalues(values, titles, uci=False):
+    if not uci:
+        fig, axs = plt.subplots(nrows=1, ncols=len(values))
+    else:
+        fig, axs = plt.subplots(nrows=2, ncols=5)
+    
+    for i, ax in enumerate(axs.flat):
+        X = np.arange(1, len(values[i]) + 1, 1)
         
-    plt.show()
+        # Plot all points in blue
+        ax.scatter(X, values[i], color='blue')
+        
+        # Highlight the third to last and second to last points in red
+        if len(values[i]) > 2:
+            ax.scatter(X[-2], values[i][-2], color='red')
+            ax.scatter(X[-1], values[i][-1], color='red')
+        
+        ax.set_xticks([])
+        ax.set_yticks([])
+        ax.set_title(titles[i + 1])
+    
+    fig.suptitle(titles[0])
+    return plt
 
 def boxplot(Y,title):
     plt.suptitle(title)
