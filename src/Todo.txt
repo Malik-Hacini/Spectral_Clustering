@@ -131,3 +131,16 @@ Report :
  appendix :
  A : unsupervised
  
+
+ 12/06
+
+ REFACTOR :
+ - print_progress (done)
+ - Comments (done)
+ - make dataset builder usable (done)
+ - error handling (spectral clustering (done), dataset builder)
+ - package
+
+
+ 13/06
+ Package

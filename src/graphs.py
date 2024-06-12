@@ -84,7 +84,7 @@ def knn_gaussian(k: int, N, nodes, similarity):
 
 
 def symmetrize(matrix,method):
-        """Symmetrizes knn matrix using different methods.
+        """Symmetrizes k-nn matrix using different methods.
         Inputs :
             matrix (ndarray): the matrix to symmetrize (must be real valued)
             method (string): the method used, must be in ['mean','and','or']
@@ -95,15 +95,6 @@ def symmetrize(matrix,method):
             return matrix
         if method=='mean' or method=='or':
             return (1/2)*(matrix+matrix.T)
-        
-        "PROBLEM ON AND ???"
-        if method=='and':
-            for i in range(matrix.shape[0]):
-                 for j in range(i+1):
-                      if matrix[i,j]!=matrix[j,i]:
-                           matrix[i,j]=0
-                           matrix[j,i]=0
-
 
         return matrix
 

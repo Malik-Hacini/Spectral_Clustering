@@ -103,10 +103,10 @@ def unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch)
 
 
 
-def spectral_clustering(data,n_clusters,k_neighbors=None,n_eig=None,laplacian='rw',
+def spectral_clustering(data,n_clusters,k_neighbors=None,n_eig=None,laplacian='g_rw',
                         g_method='knn',sym_method=None,sigma=1,gsc_params=None,
                         use_minibatch=True,return_labels=True,return_eigvals=True,return_matrix=False,
-                        max_it=5,labels_given=np.array([None])):
+                        max_it=5,labels_given=np.array([None]),print_progress=False):
     """Performs spectral clustering on a dataset of n-dimensional points.
 
     Inputs :
@@ -134,18 +134,19 @@ def spectral_clustering(data,n_clusters,k_neighbors=None,n_eig=None,laplacian='r
     if n_eig==None: n_eig=N
     if k_neighbors==None: k_neighbors=int(np.floor(np.log(N)))
     if sym_method is None and laplacian not in ['g','g_rw']: sym_method='mean'
-    print("Building dataset graph...")
+
+    if print_progress: print("Building dataset graph...")
     graph=Graph(data,k_neighbors,g_method,sym_method,sigma)
     dir_status=['directed','undirected'][int(issymmetric(graph.m))]
-    print(f"Dataset's {dir_status} graph built. ")
+    if print_progress: print(f"Dataset's {dir_status} graph built. ")
     
-    print("Performing spectral embedding on the data.")
+    if print_progress: print("Performing spectral embedding on the data.")
 
 
     if laplacian in ['g','g_rw'] and gsc_params is None:
             vals,labels_unord=unsupervised_gsc(data,n_eig,graph,laplacian,max_it,n_clusters,use_minibatch)
     else:
-        vals,labels_unord=cluster(n_clusters,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch)
+        vals,labels_unord=cluster(n_clusters,n_eig,graph.laplacian(laplacian,gsc_params),use_minibatch,print_progress=print_progress)
  
     
     if np.all(labels_given)==None:
